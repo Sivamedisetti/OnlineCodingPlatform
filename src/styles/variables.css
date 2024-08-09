@@ -1,0 +1,28 @@
+/* src/styles/variables.css */
+
+:root {
+    /* Primary Colors */
+    --color-primary-blue: #007bff;
+    --color-primary-green: #28a745;
+  
+    /* Secondary Colors */
+    --color-secondary-light-blue: #6c757d;
+    --color-secondary-gray: #f8f9fa;
+  
+    /* Background Colors */
+    --color-background-light: #ffffff;
+    --color-background-dark: #343a40;
+  
+    /* Text Colors */
+    --color-text-primary: #212529;
+    --color-text-secondary: #6c757d;
+  
+    /* Accent Colors */
+    --color-accent-yellow: #ffc107;
+    --color-accent-red: #dc3545;
+  
+    /* UI Elements */
+    --color-border: #dee2e6;
+    --color-shadow: rgba(0, 0, 0, 0.1);
+  }
+  

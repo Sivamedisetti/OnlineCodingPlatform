@@ -1,0 +1,46 @@
+/* src/components/CodingPlayground/EditorStyle.css */
+.editor-container {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    border: 2px solid var(--color-primary-blue); /* Using Primary Blue */
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px var(--color-shadow); /* Using Shadow Color */
+  }
+  
+  button.execute-btn {
+    background-color: var(--color-primary-green); /* Using Primary Green */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+  }
+  
+  button.execute-btn:hover {
+    background-color: #218838; /* Darker shade of Primary Green */
+  }
+  
+  .output-container {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid var(--color-border); /* Using Border Color */
+    border-radius: 8px;
+    background-color: var(--color-secondary-gray); /* Using Secondary Gray */
+  }
+  
+  .output-container h2 {
+    margin-top: 0;
+  }
+  
+  pre {
+    white-space: pre-wrap;
+    background-color: var(--color-background-dark); /* Using Background Dark */
+    color: var(--color-background-light); /* Light Text Color for contrast */
+    padding: 10px;
+    border-radius: 5px;
+  }
+  
