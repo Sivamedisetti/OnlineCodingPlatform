@@ -43,4 +43,35 @@
     padding: 10px;
     border-radius: 5px;
   }
+  .input-container {
+    margin-top: 20px;
+    padding: 10px;
+    border: 1px solid var(--color-border); /* Using Border Color */
+    border-radius: 8px;
+    background-color: var(--color-secondary-gray); /* Using Secondary Gray */
+  }
+  
+  .input-container h2 {
+    margin-top: 0;
+    font-size: 18px;
+    color:  /* Using Primary Blue for the heading */
+  }
+  
+  .input-container textarea {
+    width: 90%;
+    height: 100px; /* Adjust height as needed */
+    padding: 10px;
+    border: 1px solid var(--color-border); /* Using Border Color */
+    border-radius: 5px;
+    background-color: var(--color-background-dark); /* Using Background Dark */
+    color: var(--color-background-light); /* Light Text Color for contrast */
+    font-size: 14px;
+    resize: vertical; /* Allows the user to resize vertically */
+  }
+  
+  .input-container textarea::placeholder {
+    color: var(--color-background-light); /* Placeholder text color */
+    opacity: 0.7; /* Slightly faded placeholder text */
+  }
+  
   

@@ -16,7 +16,7 @@ function CodeEditor({ code, setCode }) {
       <Editor
         height="70vh"
         width="100%" // Adjust to fill the container width
-        language="cpp"
+        language="python"
         value={code}
         onChange={(value) => setCode(value)}
         options={editorOptions}
