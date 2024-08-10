@@ -1,7 +1,7 @@
 import { Editor } from '@monaco-editor/react';
 import './EditorStyle.css';
 
-function CodeEditor({ code, setCode }) {
+function CodeEditor({ code, setCode,codelang }) {
   const editorOptions = {
     selectOnLineNumbers: true,
     fontSize: 16,
@@ -16,7 +16,7 @@ function CodeEditor({ code, setCode }) {
       <Editor
         height="70vh"
         width="100%" // Adjust to fill the container width
-        language="python"
+        language={codelang}
         value={code}
         onChange={(value) => setCode(value)}
         options={editorOptions}

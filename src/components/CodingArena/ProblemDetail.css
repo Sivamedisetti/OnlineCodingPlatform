@@ -1,0 +1,51 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.problem-detail {
+    min-height: 100svh;
+    width: 100%;
+
+    display: flex;
+    flex-wrap: wrap;
+    border: 1px solid;
+    border-radius: 5px;
+
+}
+.problem-detail-left {
+    width: 40%;
+    border: 1px solid;
+    border-radius: 5px;
+}
+.problem-detail-right {
+    width: 60%;
+    border: 1px solid;
+    border-radius: 5px;
+
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+.problem-detail-right-top {
+    height: 60%;
+    width: 100%;
+    border: 1px solid;
+}
+
+.problem-detail-right-bottom {
+    height: 40%;
+    width: 100%;
+    border: 1px solid;
+}
+
+.input-container {
+    width: 100%;
+    height: 50%;
+    margin: 0;
+}
+.editor-container {
+    height: 100%;
+}

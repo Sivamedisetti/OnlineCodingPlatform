@@ -6,6 +6,15 @@ import "./ArenaStyle.css";
 import axios from "axios";
 import App from "../../App";
 import DataTable from 'react-data-table-component';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+
+// import ProblemDetail from "./ProblemDetail";
+
+var myIdObj = {
+  id: "awdsfhj0"
+}
+
 
 function Arena() {
   const columns = [
@@ -15,6 +24,22 @@ function Arena() {
     { name: 'URL', selector: row => row.URL, sortable: true },
   ];
   
+  
+
+  const navigate = useNavigate();
+function changeId(val) {
+  // Update the id property of the myIdObj object
+  myIdObj.id = val;
+
+  // Store the updated object in sessionStorage (serialized to JSON)
+  sessionStorage.setItem('obj', JSON.stringify(myIdObj));
+
+  // Use React Router's useNavigate hook for navigation
+  navigate('/ProblemDetail');
+}
+
+  
+
   
   const [selectedProblem, setSelectedProblem] = useState(null);
   const [view, setView] = useState("list"); // 'list', 'detail', 'upload';
@@ -35,9 +60,12 @@ function Arena() {
           // console.log(ele.key + " " + ele._id);
         })
         
+         
         res.data.map(ele => {
           // console.log(ele.URL)
-          ele.URL = <a className="Success" onClick={uploadMyId(ele._id)} href={ele.URL}>Solve</a>
+          //'./ProblemDetail.js'
+          //href={ele.URL}
+          ele.URL = <a className="Success" onClick={() => changeId(ele._id)} >Solve</a>
           // console.log(ele._id);
         })
         setGetData(res.data)

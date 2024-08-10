@@ -9,8 +9,8 @@ function Playground() {
   const [output, setOutput] = useState('');
   const [executionTime, setExecutionTime] = useState(0);
   const [data, setData] = useState({
-    "language": "python",
-    "version": "3.10.0",
+    "language": "",
+    "version": "",
     "files": [
       {
         "name": "my_cool_code.js",
@@ -24,9 +24,20 @@ function Playground() {
     "compile_memory_limit": -1,
     "run_memory_limit": -1
   });
-
+  const [codelang , setCodelang] = useState('python');
+  const handleChange = (e) => {
+    setCodelang(e.target.value);
+  }
+  const versions = {
+    python: '3.10.0',
+    cpp: '10.2.0',
+    c: '10.2.0',
+    java: '15.0.2'
+  };
   const executeCode = () => {
     data.files[0].content = code;
+    data.language = codelang;
+    data.version = versions[codelang];
     // Join the input lines into a single string with spaces, or handle as required by your execution environment
     data.stdin = input; // Or input.split("\n").join(" ") if space-separated values are required
     
@@ -44,7 +55,13 @@ function Playground() {
   return (
     <div>
       <h1>Coding Playground</h1>
-      <CodeEditor code={code} setCode={setCode} />
+      <select onChange={handleChange}>
+        <option value="python">python</option>
+        <option value="c">c</option>
+        <option value="cpp">cpp</option>
+        <option value="java">java</option>
+      </select>
+      <CodeEditor code={code} setCode={setCode} codelang={codelang}/>
       <div className='input-container'>
         <h2>Custom Input</h2>
         <textarea 
