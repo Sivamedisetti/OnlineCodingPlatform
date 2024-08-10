@@ -16,6 +16,7 @@ function App() {
           <Route path="/playground" element={<Playground />} />
           <Route path="/arena" element={<Arena />} />
           <Route path="/battleground" element={<Battleground />} />
+          {/* <Route path="/battleground" element={<Battleground />} /> */}
         </Routes>
       </div>
     </Router>

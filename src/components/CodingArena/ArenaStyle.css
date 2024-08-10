@@ -78,4 +78,26 @@
   .upload-problem button:hover {
     background-color: #218838; /* Darker shade of Primary Green */
   }
-  
+  .parent{
+    width:300px;
+    height:200px;
+    border:1px solid black;
+  }
+  .Question_Name{
+    color:red;
+    font-weight: 600;
+  }
+  .Topic_difficulty{
+    color:green;
+  }
+  .Success{
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    background-color: green;
+    color:white;
+    border-radius: 5px;
+    width:50px !important;
+    height:25px !important;
+    text-decoration: none;
+  }
