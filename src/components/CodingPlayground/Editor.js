@@ -10,7 +10,7 @@ function CodeEditor({ code, setCode }) {
     scrollBeyondLastLine: false,
     theme: "vs-dark",
   };
-
+  // console.log(code)
   return (
     <div className="editor-container">
       <Editor

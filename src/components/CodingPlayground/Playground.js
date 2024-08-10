@@ -5,13 +5,34 @@ import './EditorStyle.css'; // Import CSS for consistent styling
 
 function Playground() {
   const [code, setCode] = useState('// Write your code here');
+  const [Input, setInput] = useState([]);
+
   const [output, setOutput] = useState('');
   const [executionTime, setExecutionTime] = useState(0);
-
+  const [Data, setData] = useState({
+    "language": "python",
+    "version": "3.10.0",
+    "files": [
+      {
+        "name": "my_cool_code.js",
+        "content": code
+      }
+    ],
+    "stdin":"",
+    "args": ["1", "2", "3"],
+    "compile_timeout": 10000,
+    "run_timeout": 3000,
+    "compile_memory_limit": -1,
+    "run_memory_limit": -1
+  });
   const executeCode = () => {
-    axios.post('/api/execute', { code })
+    Data.files[0].content = code;
+    Data.stdin = Input;
+    // console.log(Data)
+    axios.post('https://emkc.org/api/v2/piston/execute',  Data)
       .then(response => {
-        setOutput(response.data.output);
+        console.log(response)
+        setOutput(response.data.run.output);
         setExecutionTime(response.data.executionTime);
       })
       .catch(error => {
@@ -29,6 +50,7 @@ function Playground() {
         <pre>{output}</pre>
         <p>Execution Time: {executionTime}ms</p>
       </div>
+      <input type="text" onChange={(event) => {}}/>
     </div>
   );
 }
