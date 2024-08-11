@@ -1,25 +1,25 @@
 import { Editor } from '@monaco-editor/react';
 import './EditorStyle.css';
 
-function CodeEditor({ code, setCode,codelang }) {
+function CodeEditor({ code, setCode, codelang }) {
   const editorOptions = {
     selectOnLineNumbers: true,
     fontSize: 16,
     minimap: { enabled: false },
     lineNumbers: "on",
     scrollBeyondLastLine: false,
-    theme: "vs-dark",
   };
-  // console.log(code)
+
   return (
     <div className="editor-container">
       <Editor
         height="70vh"
-        width="100%" // Adjust to fill the container width
+        width="100%" 
         language={codelang}
         value={code}
         onChange={(value) => setCode(value)}
         options={editorOptions}
+        theme="vs-dark" 
       />
     </div>
   );

@@ -1,28 +1,40 @@
-/* src/components/Navbar.css */
 .navbar {
-    background-color: var(--color-primary-blue); /* Using Primary Blue */
-    padding: 10px 20px;
-    box-shadow: 0 2px 5px var(--color-shadow); /* Using Shadow Color */
-  }
-  
-  .navbar ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: flex;
-  }
-  
-  .navbar li {
-    margin-right: 20px;
-  }
-  
-  .navbar a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-  }
-  
-  .navbar a:hover {
-    text-decoration: underline;
-  }
-  
+  background-color: var(--color-primary-blue);
+  padding: 15px 30px;
+  box-shadow: 0 4px 8px var(--color-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.navbar ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  gap: 30px;
+}
+
+.navbar li {
+  margin: 0;
+}
+
+.navbar a {
+  color: var(--color-background-light);
+  text-decoration: none;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease, background-color 0.3s ease;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.navbar a:hover {
+  color: var(--color-background-light);
+  background-color: var(--color-secondary-light-blue);
+}
+
+.navbar a.active {
+  color: var(--color-background-light);
+  background-color: var(--color-accent-yellow); /* Updated to Accent Yellow for better contrast */
+}

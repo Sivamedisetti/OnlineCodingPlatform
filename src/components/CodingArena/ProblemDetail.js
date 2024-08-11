@@ -1,27 +1,41 @@
-import React, { useState } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import ReactDOM from "react-dom/client";
-import "./ProblemDetail.css";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Editor from "../CodingPlayground/Editor";
 import "../CodingPlayground/EditorStyle.css";
-import axios from "axios";
-
-// import './ArenaStyle.css';
-
-// import myIdObj from './Arena';
-// console.log();
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-var myObj = sessionStorage.getItem("id");
+import "./ProblemDetail.css";
 
 export default function ProblemDetail(props) {
   const [code, setCode] = useState("# Your code starts here...");
-  const [input, setInput] = useState(""); // Store the multiline input as a string
+  const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [executionTime, setExecutionTime] = useState(0);
+  const [problem, setProblem] = useState(null);
+
+  useEffect(() => {
+    // Retrieve problem ID from local storage
+    const obj = sessionStorage.getItem("obj");
+    console.log(obj.id);
+    const ob = JSON.parse(obj);
+    // console.log(ob);
+
+    if (obj) {
+      axios
+        .get(`http://localhost:8000/get_problemdata/${ob.id}`)
+        .then((response) => {
+          setProblem(response.data);
+          console.log(response.data);
+        })
+        .catch((error) => {
+          console.error("Error fetching problem details:", error);
+        });
+    } else {
+      console.error("Problem ID not found in local storage.");
+    }
+  }, []);
+
   const [data, setData] = useState({
-    language: "python",
-    version: "3.10.0",
+    language: "",
+    version: "",
     files: [
       {
         name: "my_cool_code.js",
@@ -36,10 +50,23 @@ export default function ProblemDetail(props) {
     run_memory_limit: -1,
   });
 
+  const [codelang , setCodelang] = useState('python');
+  const handleChange = (e) => {
+    setCodelang(e.target.value);
+  }
+  const versions = {
+    python: '3.10.0',
+    cpp: '10.2.0',
+    c: '10.2.0',
+    java: '15.0.2'
+  };
+
+
   const executeCode = () => {
     data.files[0].content = code;
-    // Join the input lines into a single string with spaces, or handle as required by your execution environment
-    data.stdin = input; // Or input.split("\n").join(" ") if space-separated values are required
+    data.language = codelang;
+    data.version = versions[codelang];
+    data.stdin = input; 
 
     axios
       .post("https://emkc.org/api/v2/piston/execute", data)
@@ -48,17 +75,31 @@ export default function ProblemDetail(props) {
         setOutput(response.data.run.output);
         setExecutionTime(response.data.run.time);
       })
-      .catch((error) => {
-        setOutput(`Error: ${error.message}`);
-      });
   };
+
   return (
     <>
       <div className="problem-detail">
-        <div className="problem-detail-left"></div>
+        <div className="problem-detail-left">
+          {problem ? (
+            <>
+              <h1>{problem.Question_Name}</h1>
+              <p>{problem.disc}</p>
+              {/* Display additional problem details as needed */}
+            </>
+          ) : (
+            <p>Loading problem details...</p>
+          )}
+        </div>
         <div className="problem-detail-right">
           <div className="problem-detail-right-top">
-            <Editor code={code} setCode={setCode} />
+          <select onChange={handleChange}>
+            <option value="python">python</option>
+            <option value="c">c</option>
+            <option value="cpp">cpp</option>
+            <option value="java">java</option>
+          </select>
+            <Editor code={code} setCode={setCode} codelang={codelang}/>
           </div>
           <div className="problem-detail-right-bottom">
             <div className="input-container">

@@ -16,9 +16,9 @@ const Questions_table = new mongoose.Schema({
     Type : {
         type : String,
     },
-    Youtube_link :{
+    disc:{
         type : String,
-    } 
+    }
 });
 
 const Questions_Table = mongoose.model("Questions_table",Questions_table);

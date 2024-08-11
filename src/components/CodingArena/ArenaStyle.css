@@ -1,103 +1,109 @@
-/* src/components/CodingArena/ArenaStyle.css */
 .arena-container {
-    padding: 20px;
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-  
-  .view-buttons {
-    margin-top: 20px;
-  }
-  
-  .view-buttons button {
-    background-color: var(--color-primary-blue); /* Using Primary Blue */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-right: 10px;
-  }
-  
-  .view-buttons button:hover {
-    background-color: #0056b3; /* Darker shade of Primary Blue */
-  }
-  
-  .problem-list ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .problem-list li {
-    margin-bottom: 10px;
-  }
-  
-  .problem-list a {
-    text-decoration: none;
-    color: var(--color-primary-blue); /* Using Primary Blue */
-  }
-  
-  .problem-list a:hover {
-    text-decoration: underline;
-  }
-  
-  .problem-detail {
-    margin-top: 20px;
-  }
-  
-  .upload-problem {
-    margin-top: 20px;
-  }
-  
-  .upload-problem form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .upload-problem label {
-    margin-bottom: 10px;
-  }
-  
-  .upload-problem input, .upload-problem textarea {
-    padding: 10px;
-    border: 1px solid var(--color-border); /* Using Border Color */
-    border-radius: 5px;
-  }
-  
-  .upload-problem button {
-    background-color: var(--color-primary-green); /* Using Primary Green */
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .upload-problem button:hover {
-    background-color: #218838; /* Darker shade of Primary Green */
-  }
-  .parent{
-    width:300px;
-    height:200px;
-    border:1px solid black;
-  }
-  .Question_Name{
-    color:red;
-    font-weight: 600;
-  }
-  .Topic_difficulty{
-    color:green;
-  }
-  .Success{
-    display: flex !important;
-    justify-content: center;
-    align-items: center;
-    background-color: green;
-    color:white;
-    border-radius: 5px;
-    width:50px !important;
-    height:25px !important;
-    text-decoration: none;
-  }
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.view-buttons {
+  margin-top: 20px;
+}
+
+.view-buttons button {
+  background-color: var(--color-primary-blue);
+  color: var(--color-background-light);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-right: 10px;
+}
+
+.view-buttons button:hover {
+  background-color: var(--color-primary-blue);
+  opacity: 0.9; /* Slightly darker on hover */
+}
+
+.problem-list ul {
+  list-style: none;
+  padding: 0;
+}
+
+.problem-list li {
+  margin-bottom: 10px;
+}
+
+.problem-list a {
+  text-decoration: none;
+  color: var(--color-primary-blue);
+}
+
+.problem-list a:hover {
+  text-decoration: underline;
+}
+
+.problem-detail {
+  margin-top: 20px;
+}
+
+.upload-problem {
+  margin-top: 20px;
+}
+
+.upload-problem form {
+  display: flex;
+  flex-direction: column;
+}
+
+.upload-problem label {
+  margin-bottom: 10px;
+}
+
+.upload-problem input,
+.upload-problem textarea {
+  padding: 10px;
+  border: 1px solid var(--color-border);
+  border-radius: 5px;
+}
+
+.upload-problem button {
+  background-color: var(--color-primary-green);
+  color: var(--color-background-light);
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.upload-problem button:hover {
+  background-color: var(--color-primary-green);
+  opacity: 0.9; /* Slightly darker on hover */
+}
+
+.parent {
+  width: 300px;
+  height: 200px;
+  border: 1px solid var(--color-border);
+}
+
+.Question_Name {
+  color: var(--color-accent-red);
+  font-weight: 600;
+}
+
+.Topic_difficulty {
+  color: var(--color-primary-green);
+}
+
+.Success {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--color-primary-green);
+  color: var(--color-background-light);
+  border-radius: 5px;
+  width: 50px !important;
+  height: 25px !important;
+  text-align: center;
+}

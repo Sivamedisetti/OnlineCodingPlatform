@@ -4,7 +4,9 @@ import Navbar from './components/Navbar';
 import Playground from './components/CodingPlayground/Playground';
 import Arena from './components/CodingArena/Arena';
 import Battleground from './components/CodingBattleground/Battleground';
-import './styles/variables.css'; // Import variables.css for color variables
+import './styles/variables.css'; 
+import './App.css'
+
 import ProblemDetail from './components/CodingArena/ProblemDetail';
 import UploadProblem from './components/CodingArena/UploadProblem';
 
@@ -22,7 +24,6 @@ function App() {
           <Route path="/battleground" element={<Battleground />} />
           <Route path="/problemDetail" element={<ProblemDetail />} />
           <Route path="/uploadProblem" element = {<UploadProblem />} />
-          {/* <Route path="/battleground" element={<Battleground />} /> */}
         </Routes>
       </div>
     </Router>
@@ -31,11 +32,13 @@ function App() {
 
 function Home() {
   return (
-    <div>
-      <h1>Welcome to CodeForge</h1>
+    <div className="home-container">
+      <h1>
+        <span className="outline">Welcome</span> to CodeForge
+      </h1>
       <p>Select a section from the navigation bar to get started.</p>
-    </div>
-  );
+    </div>
+  );
 }
 
 export default App;

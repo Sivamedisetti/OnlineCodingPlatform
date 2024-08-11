@@ -5,12 +5,10 @@ import ProblemDetail from "./ProblemDetail";
 import UploadProblem from "./UploadProblem";
 import "./ArenaStyle.css";
 import axios from "axios";
-import App from "../../App";
 import DataTable from 'react-data-table-component';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
 
-// import ProblemDetail from "./ProblemDetail";
 
 
 
@@ -32,13 +30,13 @@ function Arena() {
 
   const navigate = useNavigate();
   function changeId(val) {
-    // Update the id property of the myIdObj object
+    
     myIdObj.id = val;
     
-    // Store the updated object in sessionStorage (serialized to JSON)
+   
     sessionStorage.setItem('obj', JSON.stringify(myIdObj));
     
-    // Use React Router's useNavigate hook for navigation
+   
     navigate('/ProblemDetail');
   }
 
@@ -51,7 +49,7 @@ function Arena() {
   const APICalling = () => {
     console.log("working");
     axios
-      .get("http://localhost:9000/get_codesheet")
+      .get("http://localhost:8000/get_codesheet")
       .then((res) => {
         // console.log(res.data[0]._id);
 
@@ -61,7 +59,7 @@ function Arena() {
         
         res.data.map((ele, key) => {
           ele.key = key + 1
-          // console.log(ele.key + " " + ele._id);
+          
         })
 
 
@@ -69,8 +67,9 @@ function Arena() {
           // console.log(ele.URL)
           //'./ProblemDetail.js'
           //href={ele.URL}
-          ele.URL = <a className="Success" onClick={() => changeId(ele._id)} >Solve</a>
+          // ele.URL = <a className="Success" onClick={() => changeId(ele._id)} >Solve</a>
           // console.log(ele._id);
+          ele.URL = <a className="Success" onClick={() => changeId(ele._id)} onMouseEnter={(e) => { e.target.style.cursor = 'pointer'; }} >Solve</a>
         })
         setGetData(res.data)
         console.log(res.data);
@@ -85,39 +84,13 @@ function Arena() {
       APICalling();
   }, []);
 
-    // window.onload = APICalling();
-  // APICalling();
+  
   return (
     <div className="arena-container">
       <h1>Coding Arena</h1>
       {view === "list" && <ProblemList onSelectProblem={setSelectedProblem} />}
-      {view === "detail" && selectedProblem && (
-        <ProblemDetail problem={selectedProblem} />
-      )}
       {view === "upload" && <UploadProblem />}
-      <div className="view-buttons">
-        {/* <button onClick={APICalling}>Problem List</button> */}
-        {/* <button onClick={() => setView("upload")}>Upload Problem</button> */}
-      </div>
-      {/* <div className="parent">
-        <div className="Question_Name">{GetData.Question_Name}</div>
-        <div className="Topic_difficulty">{GetData.Topic_difficulty}</div>
-        
-      </div> */}
-      {/* {GetData ? (
-        GetData.map((ele, key) => {
-          return (
-            <div className="parent" onClick={() => console.log(ele._id)}>
-              <div className="Question_Name">{ele.Question_Name}</div>
-              <div className="Topic_difficulty">{ele.Topic_difficulty}</div>
-              <div className="Topic_difficulty">{ele.Type}</div>
-              <a href={ele.URL} target="_blank" className="Topic_difficulty">Click</a>
-            </div>
-          );
-        })
-      ) : (
-        <></>
-      )} */}
+
       <DataTable columns={columns} data={GetData} />
     </div>
   );
