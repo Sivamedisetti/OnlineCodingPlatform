@@ -3,8 +3,8 @@
     width: 100%;
     max-width: 1000px;
     margin: 0 auto;
-    border: 2px solid var(--color-primary-blue); /* Using Primary Blue */
-    border-radius: 8px;
+    border: 2px solid var(--color-border);
+    border-radius: 0px;
     overflow: hidden;
     box-shadow: 0 4px 10px var(--color-shadow); /* Using Shadow Color */
   }
@@ -44,7 +44,7 @@
     border-radius: 5px;
   }
   .input-container {
-    margin-top: 20px;
+    margin-top: 10px;
     padding: 10px;
     border: 1px solid var(--color-border); /* Using Border Color */
     border-radius: 8px;
@@ -52,19 +52,18 @@
   }
   
   .input-container h2 {
-    margin-top: 0;
+    margin-top: 10px;
     font-size: 18px;
-    color:  /* Using Primary Blue for the heading */
   }
   
   .input-container textarea {
-    width: 90%;
+    width: 95%;
     height: 100px; /* Adjust height as needed */
     padding: 10px;
     border: 1px solid var(--color-border); /* Using Border Color */
-    border-radius: 5px;
+    /* border-radius: 5px; */
     background-color: var(--color-background-dark); /* Using Background Dark */
-    color: var(--color-background-light); /* Light Text Color for contrast */
+    /* color: var(--color-background-light); Light Text Color for contrast */
     font-size: 14px;
     resize: vertical; /* Allows the user to resize vertically */
   }
