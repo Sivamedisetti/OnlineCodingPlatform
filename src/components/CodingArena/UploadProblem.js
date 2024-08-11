@@ -26,7 +26,7 @@ function UploadProblem() {
       <h2>Upload New Problem</h2>
       <form onSubmit={handleSubmit}>
         <label>
-          Title:
+          Title: &nbsp; &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <input type="text" value={title} onChange={(e) => setTitle(e.target.value)} required />
         </label>
         <label>

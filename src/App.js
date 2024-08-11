@@ -6,6 +6,7 @@ import Arena from './components/CodingArena/Arena';
 import Battleground from './components/CodingBattleground/Battleground';
 import './styles/variables.css'; // Import variables.css for color variables
 import ProblemDetail from './components/CodingArena/ProblemDetail';
+import UploadProblem from './components/CodingArena/UploadProblem';
 
 // console.log(typeof Arena);
 
@@ -20,6 +21,7 @@ function App() {
           <Route path="/arena" element={<Arena />} />
           <Route path="/battleground" element={<Battleground />} />
           <Route path="/problemDetail" element={<ProblemDetail />} />
+          <Route path="/uploadProblem" element = {<UploadProblem />} />
           {/* <Route path="/battleground" element={<Battleground />} /> */}
         </Routes>
       </div>

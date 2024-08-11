@@ -18,6 +18,10 @@
     cursor: pointer;
     font-size: 16px;
     margin-top: 10px;
+
+     position: absolute;
+     top: 29px;
+     left: 50%;
   }
   
   button.execute-btn:hover {
@@ -54,6 +58,7 @@
   .input-container h2 {
     margin-top: 10px;
     font-size: 18px;
+    color:  /* Using Primary Blue for the heading */
   }
   
   .input-container textarea {

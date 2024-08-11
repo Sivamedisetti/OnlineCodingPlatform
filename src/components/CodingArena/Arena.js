@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState }  from "react";
+import { useEffect } from "react";
 import ProblemList from "./ProblemList";
 import ProblemDetail from "./ProblemDetail";
 import UploadProblem from "./UploadProblem";
@@ -11,6 +12,9 @@ import { useNavigate } from 'react-router-dom';
 
 // import ProblemDetail from "./ProblemDetail";
 
+
+
+
 var myIdObj = {
   id: "awdsfhj0"
 }
@@ -18,28 +22,28 @@ var myIdObj = {
 
 function Arena() {
   const columns = [
-    { name: 'S.No', selector: row => row.key, sortable: true, width:"80px" },
-    { name: 'Question Name', selector: row => row.Question_Name, sortable: true,width:"400px" },
-    { name: 'Difficulty', selector: row => row.Topic_difficulty, sortable: true,width:"150px" },
+    { name: 'S.No', selector: row => row.key, sortable: true, width: "80px" },
+    { name: 'Question Name', selector: row => row.Question_Name, sortable: true, width: "400px" },
+    { name: 'Difficulty', selector: row => row.Topic_difficulty, sortable: true, width: "150px" },
     { name: 'URL', selector: row => row.URL, sortable: true },
   ];
-  
-  
+
+
 
   const navigate = useNavigate();
-function changeId(val) {
-  // Update the id property of the myIdObj object
-  myIdObj.id = val;
+  function changeId(val) {
+    // Update the id property of the myIdObj object
+    myIdObj.id = val;
+    
+    // Store the updated object in sessionStorage (serialized to JSON)
+    sessionStorage.setItem('obj', JSON.stringify(myIdObj));
+    
+    // Use React Router's useNavigate hook for navigation
+    navigate('/ProblemDetail');
+  }
 
-  // Store the updated object in sessionStorage (serialized to JSON)
-  sessionStorage.setItem('obj', JSON.stringify(myIdObj));
-
-  // Use React Router's useNavigate hook for navigation
-  navigate('/ProblemDetail');
-}
 
   
-
   
   const [selectedProblem, setSelectedProblem] = useState(null);
   const [view, setView] = useState("list"); // 'list', 'detail', 'upload';
@@ -54,13 +58,13 @@ function changeId(val) {
         // var myvar = JSON.parse(res);
         // console.log("MyOutput: " + myvar);
 
-
-        res.data.map((ele,key) =>{
+        
+        res.data.map((ele, key) => {
           ele.key = key + 1
           // console.log(ele.key + " " + ele._id);
         })
-        
-         
+
+
         res.data.map(ele => {
           // console.log(ele.URL)
           //'./ProblemDetail.js'
@@ -74,7 +78,15 @@ function changeId(val) {
       .catch((err) => {
         console.log(err);
       });
-  };
+    };
+    
+
+    useEffect(() => {
+      APICalling();
+  }, []);
+
+    // window.onload = APICalling();
+  // APICalling();
   return (
     <div className="arena-container">
       <h1>Coding Arena</h1>
@@ -84,8 +96,8 @@ function changeId(val) {
       )}
       {view === "upload" && <UploadProblem />}
       <div className="view-buttons">
-        <button onClick={APICalling}>Problem List</button>
-        <button onClick={() => setView("upload")}>Upload Problem</button>
+        {/* <button onClick={APICalling}>Problem List</button> */}
+        {/* <button onClick={() => setView("upload")}>Upload Problem</button> */}
       </div>
       {/* <div className="parent">
         <div className="Question_Name">{GetData.Question_Name}</div>
@@ -106,7 +118,7 @@ function changeId(val) {
       ) : (
         <></>
       )} */}
-       <DataTable columns={columns} data={GetData} />
+      <DataTable columns={columns} data={GetData} />
     </div>
   );
 }
