@@ -4,7 +4,7 @@ import axios from 'axios';
 import './EditorStyle.css'; // Import CSS for consistent styling
 
 function Playground() {
-  const [code, setCode] = useState('# Write your code here sta ');
+  const [code, setCode] = useState('# Your code starts here.. ');
   const [input, setInput] = useState('');  // Store the multiline input as a string
   const [output, setOutput] = useState('');
   const [executionTime, setExecutionTime] = useState(0);
