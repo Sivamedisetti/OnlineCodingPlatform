@@ -15,7 +15,7 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 var myObj = sessionStorage.getItem("id");
 
 export default function ProblemDetail(props) {
-  const [code, setCode] = useState("# Write your code here sta ");
+  const [code, setCode] = useState("# Your code starts here...");
   const [input, setInput] = useState(""); // Store the multiline input as a string
   const [output, setOutput] = useState("");
   const [executionTime, setExecutionTime] = useState(0);
