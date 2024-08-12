@@ -8,22 +8,26 @@ function Playground() {
   const [input, setInput] = useState('');  // Store the multiline input as a string
   const [output, setOutput] = useState('');
   const [executionTime, setExecutionTime] = useState(0);
-  const [data, setData] = useState({
-    "language": "",
-    "version": "",
-    "files": [
+  const [compiletime , setCompiletime] = useState(0);
+  const [runtime , setRuntime] = useState(0);
+ 
+  const data = {
+    language: "",
+    version: "",
+    files: [
       {
-        "name": "my_cool_code.js",
-        "content": code
-      }
+        name: "my_cool_code.js",
+        content: code,
+      },
     ],
-    "stdin": "",
-    "args": ["1", "2", "3"],
-    "compile_timeout": 10000,
-    "run_timeout": 3000,
-    "compile_memory_limit": -1,
-    "run_memory_limit": -1
-  });
+    stdin: "",
+    args: ["1", "2", "3"],
+    compile_timeout: 0,
+    run_timeout: 0,
+    compile_memory_limit: -1,
+    run_memory_limit: -1,
+  };
+  // console.log(data)
   const [codelang , setCodelang] = useState('python');
   const handleChange = (e) => {
     setCodelang(e.target.value);
@@ -35,17 +39,22 @@ function Playground() {
     java: '15.0.2'
   };
   const executeCode = () => {
+    setCompiletime(30000);
+    setRuntime(5000);
     data.files[0].content = code;
     data.language = codelang;
     data.version = versions[codelang];
-    // Join the input lines into a single string with spaces, or handle as required by your execution environment
-    data.stdin = input; // Or input.split("\n").join(" ") if space-separated values are required
-    
-    axios.post('https://emkc.org/api/v2/piston/execute', data)
+    data.stdin = input;
+    data.compile_timeout = compiletime;
+    data.run_timeout = runtime;
+    // console.log(data)
+
+    const start = Date.now();
+    axios.post('https://emkc.org/api/v2/piston/execute', data , {timeout: 3*(runtime + compiletime)})
       .then(response => {
-        console.log(response);
-        setOutput(response.data.run.output);
-        setExecutionTime(response.data.run.time);
+        const end = Date.now();
+        setOutput(response.data.run.output || 'TimeLimit Exceed');
+        setExecutionTime((end - start));
       })
       .catch(error => {
         setOutput(`Error: ${error.message}`);

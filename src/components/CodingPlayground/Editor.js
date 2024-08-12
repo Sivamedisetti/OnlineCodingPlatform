@@ -13,7 +13,7 @@ function CodeEditor({ code, setCode, codelang }) {
   return (
     <div className="editor-container">
       <Editor
-        height="70vh"
+        height="80vh"
         width="100%" 
         language={codelang}
         value={code}

@@ -2,6 +2,7 @@
 .editor-container {
     width: 100%;
     max-width: 1000px;
+    height: 100%;
     margin: 0 auto;
     border: 2px solid var(--color-border);
     border-radius: 0px;
@@ -9,30 +10,11 @@
     box-shadow: 0 4px 10px var(--color-shadow); 
   }
   
-  button.execute-btn {
-    background-color: var(--color-primary-green); 
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    margin-top: 10px;
-
-     position: absolute;
-     top: 29px;
-     left: 50%;
-  }
-  
-  button.execute-btn:hover {
-    background-color: #218838; 
-  }
-  
   .output-container {
     margin-top: 20px;
     padding: 10px;
     border: 1px solid var(--color-border); 
-    border-radius: 8px;
+    /* border-radius: 8px; */
     background-color: var(--color-secondary-gray); 
   }
   
@@ -52,7 +34,6 @@
     margin-top: 10px;
     padding: 10px;
     border: 1px solid var(--color-border); 
-    border-radius: 8px;
     background-color: var(--color-secondary-gray); 
   }
   

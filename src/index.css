@@ -12,7 +12,7 @@ body {
   color: var(--color-text-primary);
 }
 .main-content {
-  padding: 20px;
+  padding: 10px;
 }
 
 /* Other global styles */
