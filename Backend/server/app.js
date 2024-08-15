@@ -14,10 +14,13 @@ var { Questions_Table } = require("./bin/models");
 var app = express();
 
 //mongodb connection
-mongoose.connect("mongodb+srv://root:admin@dsp.51ylmqg.mongodb.net/", {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+mongoose.connect(
+  "mongodb+srv://ajaykantiboyina:Ajay1441@cluster0.vleuyp5.mongodb.net/",
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  }
+);
 
 const db = mongoose.connection;
 
@@ -45,10 +48,35 @@ app.get("/get_codesheet", function (req, res) {
     .then((data) => res.send(data))
     .catch((err) => console.log(err));
 });
-app.post("/ ", function (req, res) {
-  Questions_Table.find({ _id: req.body.id })
-    .then((data) => res.send(data))
-    .catch((err) => console.log(err));
+
+app.post("/post_problem", function (req, res) {
+  console.log(res);
+  const newProblem = new Questions_Table({
+    title: req.body.title,
+    description: req.body.description,
+    sample_input: req.body.sample_input,
+    sample_output: req.body.sample_output,
+    constraints: req.body.constraints,
+    test_cases: req.body.test_cases,
+    URL: req.body.URL,
+    Topic_difficulty: req.body.Topic_difficulty,
+  });
+
+  newProblem
+    .save()
+    .then((data) => {
+      res.status(201).send(data);
+    })
+    .catch((err) => {
+      if (err.code === 11000) {
+        // Duplicate key error
+        res
+          .status(400)
+          .send({ error: "A problem with this title already exists" });
+      } else {
+        res.status(500).send({ error: "Server error" });
+      }
+    });
 });
 
 app.get("/get_problemdata/:id", function (req, res) {

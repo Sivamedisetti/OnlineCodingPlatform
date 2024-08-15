@@ -1,23 +1,41 @@
+const { type } = require('@testing-library/user-event/dist/type');
 const mongoose = require('mongoose');
 
 const Questions_table = new mongoose.Schema({
-    S_NO : {
+    test_cases : {
         type :String,
+        // required : true
     },
-    Question_Name : { 
-        type: String 
+    title : { 
+        type: String,
+         unique :true,
+        // required: true,
+
     },
     Topic_difficulty :{
-        type: String
+        type: String,
+        // required: true,
+
     },
     URL :{ 
         type : String,
+        // required : true,
     },
-    Type : {
+    description:{
         type : String,
+        // required : true,
     },
-    disc:{
-        type : String,
+    constraints:{
+        type: Number,
+        // required : true,
+    },
+    sample_input:{
+        type:String,
+        // required : true,
+    },
+    sample_output:{
+        type:String,
+        // required : true    
     }
 });
 

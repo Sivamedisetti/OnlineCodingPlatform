@@ -9,8 +9,7 @@ export default function ProblemDetail(props) {
   const [output, setOutput] = useState("");
   const [problem, setProblem] = useState(null);
   const [executionTime, setExecutionTime] = useState(0);
-  const [compiletime, setCompiletime] = useState(0);
-  const [runtime, setRuntime] = useState(0);
+  
 
   useEffect(() => {
     // Retrieve problem ID from local storage
@@ -45,8 +44,8 @@ export default function ProblemDetail(props) {
     ],
     stdin: "",
     args: ["1", "2", "3"],
-    compile_timeout: 0,
-    run_timeout: 0,
+    compile_timeout: 30000,
+    run_timeout: 5000,
     compile_memory_limit: -1,
     run_memory_limit: -1,
   };
@@ -63,17 +62,13 @@ export default function ProblemDetail(props) {
   };
 
   const executeCode = () => {
-    setCompiletime(30000);
-    setRuntime(5000);
     data.files[0].content = code;
     data.language = codelang;
     data.version = versions[codelang];
     data.stdin = input;
-    data.compile_timeout = compiletime;
-    data.run_timeout = runtime;
 
     const start = Date.now();
-    axios.post('https://emkc.org/api/v2/piston/execute', data , {timeout: 3*(runtime + compiletime)})
+    axios.post('https://emkc.org/api/v2/piston/execute', data , {timeout: 5*problem.constraints})
       .then(response => {
         const end = Date.now();
         setOutput(response.data.run.output || 'TimeLimit Exceed');
@@ -90,9 +85,11 @@ export default function ProblemDetail(props) {
         <div className="problem-detail-left">
           {problem ? (
             <>
-              <h1>{problem.Question_Name}</h1>
-              <p>{problem.disc}</p>
-              {/* Additional problem details can be displayed here */}
+              <h1>{problem.title}</h1>
+              <p>{problem.description}</p> <br/> <h4>Example</h4>
+              <p>{problem.sample_input}</p> <br/>
+              <p>{problem.sample_output}</p> <br/>
+              <h5>Execution Time : {problem.constraints}ms</h5>
             </>
           ) : (
             <p>Loading problem details...</p>
