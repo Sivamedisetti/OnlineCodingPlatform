@@ -4,13 +4,10 @@ import Navbar from './components/Navbar';
 import Playground from './components/CodingPlayground/Playground';
 import Arena from './components/CodingArena/Arena';
 import Battleground from './components/CodingBattleground/Battleground';
-import './styles/variables.css'; 
-import './App.css'
-
 import ProblemDetail from './components/CodingArena/ProblemDetail';
 import UploadProblem from './components/CodingArena/UploadProblem';
-
-// console.log(typeof Arena);
+import './styles/variables.css'; 
+import './App.css';
 
 function App() {
   return (
@@ -23,7 +20,7 @@ function App() {
           <Route path="/arena" element={<Arena />} />
           <Route path="/battleground" element={<Battleground />} />
           <Route path="/problemDetail" element={<ProblemDetail />} />
-          <Route path="/uploadProblem" element = {<UploadProblem />} />
+          <Route path="/uploadProblem" element={<UploadProblem />} />
         </Routes>
       </div>
     </Router>
@@ -33,12 +30,18 @@ function App() {
 function Home() {
   return (
     <div className="home-container">
-      <h1>
-        <span className="outline">Welcome</span> to CodeForge
-      </h1>
-      <p>Select a section from the navigation bar to get started.</p>
-    </div>
-  );
+      <div className="welcome-section">
+        <h1>
+          <span className="outline">Welcome</span> to CodeForge
+        </h1>
+        <p className="welcome-text">Select a section from the navigation bar to get started.</p>
+        <div className="cta-buttons">
+          <a href="/playground" className="cta-btn">Start Coding</a>
+          <a href="/arena" className="cta-btn">Explore Arena</a>
+        </div>
+      </div>
+    </div>
+  );
 }
 
 export default App;

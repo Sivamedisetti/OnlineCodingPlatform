@@ -1,0 +1,83 @@
+.upload-problem {
+    margin-top: 20px;
+    background-color: var(--color-background-light);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px var(--color-shadow);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  
+  .upload-problem h2 {
+    color: var(--color-primary-blue);
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .upload-problem form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 20px;
+  }
+  
+  .upload-problem label {
+    display: flex;
+    flex-direction: column;
+    font-weight: 600;
+    color: var(--color-text-primary);
+  }
+  
+  .upload-problem input,
+  .upload-problem textarea {
+    padding: 10px;
+    border: 1px solid var(--color-border);
+    border-radius: 5px;
+    background-color: var(--color-background-light);
+    color: var(--color-text-primary);
+    margin-top: 5px;
+    transition: border-color 0.3s ease-in-out;
+  }
+  
+  .upload-problem input:focus,
+  .upload-problem textarea:focus {
+    border-color: var(--color-primary-blue);
+    outline: none;
+  }
+  
+  .upload-problem button {
+    background-color: var(--color-primary-blue);
+    color: var(--color-background-light);
+    width: 100%;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s ease;
+    grid-column: span 2;
+    margin-top: 10px;
+  }
+  
+  .upload-problem button:hover {
+    background-color: var(--color-primary-green);
+    opacity: 0.9;
+  }
+  
+  .upload-problem textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+  
+  @media (max-width: 768px) {
+    .upload-problem form {
+      grid-template-columns: 1fr;
+    }
+  
+    .upload-problem button {
+      grid-column: 1;
+    }
+    .upload-problem bottom::after{
+      background-color: var(--color-primary-green);
+    }
+  }
+  

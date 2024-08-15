@@ -8,18 +8,20 @@ function CodeEditor({ code, setCode, codelang }) {
     minimap: { enabled: false },
     lineNumbers: "on",
     scrollBeyondLastLine: false,
+    readOnly: false,
+    wordWrap: "on",   
   };
 
   return (
     <div className="editor-container">
       <Editor
-        height="80vh"
-        width="100%" 
+        height="60vh"
+        width="100%"
         language={codelang}
         value={code}
         onChange={(value) => setCode(value)}
         options={editorOptions}
-        theme="vs-dark" 
+        theme="vs-dark"
       />
     </div>
   );
