@@ -63,7 +63,7 @@ function Playground() {
 
   return (
     <div>
-      <h1>Coding Playground</h1>
+      {/* <h1>Coding Playground</h1> */}
       <select onChange={handleChange}>
         <option value="python">python</option>
         <option value="c">c</option>
