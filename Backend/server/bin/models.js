@@ -4,27 +4,38 @@ const mongoose = require('mongoose');
 const Questions_table = new mongoose.Schema({
     test_cases : {
         type :String,
+        // required : true
     },
     title : { 
-        type: String 
+        type: String,
+         unique :true,
+        // required: true,
+
     },
     Topic_difficulty :{
-        type: String
+        type: String,
+        // required: true,
+
     },
     URL :{ 
         type : String,
+        // required : true,
     },
     description:{
         type : String,
+        // required : true,
     },
     constraints:{
         type: Number,
+        // required : true,
     },
     sample_input:{
         type:String,
+        // required : true,
     },
     sample_output:{
         type:String,
+        // required : true    
     }
 });
 
