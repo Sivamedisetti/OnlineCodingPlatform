@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Playground from './components/CodingPlayground/Playground';
 import Arena from './components/CodingArena/Arena';
-import Battleground from './components/CodingBattleground/Battleground';
 import ProblemDetail from './components/CodingArena/ProblemDetail';
 import UploadProblem from './components/CodingArena/UploadProblem';
 import './styles/variables.css'; 
@@ -18,7 +17,6 @@ function App() {
           <Route path="/" element={<Home />} />
           <Route path="/playground" element={<Playground />} />
           <Route path="/arena" element={<Arena />} />
-          <Route path="/battleground" element={<Battleground />} />
           <Route path="/problemDetail" element={<ProblemDetail />} />
           <Route path="/uploadProblem" element={<UploadProblem />} />
         </Routes>

@@ -20,7 +20,13 @@ function Navbar() {
         <span className="navbar-toggle" onClick={toggleMenu}>
           ☰
         </span>
-        <h1 className="navbar-title">CodeForge</h1>
+        <Link
+          to="/"
+          className="navbar-tittle"
+          onClick={() => handleLinkClick("/")}
+        >
+          <h1>CodeForge</h1>
+        </Link>
       </div>
       <ul className={`nav-links ${isOpen ? "open" : ""}`}>
         <li>

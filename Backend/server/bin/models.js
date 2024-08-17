@@ -8,7 +8,7 @@ const Questions_table = new mongoose.Schema({
     },
     title : { 
         type: String,
-         unique :true,
+        //  unique :true,
         // required: true,
 
     },

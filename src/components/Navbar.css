@@ -15,10 +15,13 @@
   align-items: center;
 }
 
-.navbar-title {
+.navbar-tittle{
   color: var(--color-background-light);
-  font-size: 1.5rem;
+  font-size: 1.1rem;
+  font-family:'Courier New', Courier, monospace;
   font-weight: 600;
+
+  text-decoration: none;
   margin-left: 10px;
 }
 
@@ -68,6 +71,9 @@
   .navbar-toggle {
     display: block;
   }
+  .navbar-tittle{
+    font-size: large;
+  }
 
   .nav-links {
     display: none;
@@ -90,6 +96,7 @@
     padding: 15px;
     text-align: center;
     width: 100%;
+    font-family: 'Courier New', Courier, monospace;
     box-sizing: border-box;
   }
 
