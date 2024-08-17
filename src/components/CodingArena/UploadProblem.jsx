@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import "./UploadProblem.css";
 
 function UploadProblem() {
@@ -28,7 +30,13 @@ function UploadProblem() {
     axios
       .post("http://localhost:8000/post_problem", ProblemDetails)
       .then((response) => {
-        alert("Problem uploaded successfully!");
+        if (response.status === 201) {
+          // alert(response.status);
+          toast.success("Problem uploaded successfully!", {
+            position: "top-center",
+          });
+        }
+        
         setTitle("");
         setDescription("");
         setConstraints("");
@@ -40,7 +48,10 @@ function UploadProblem() {
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          alert("A problem with this title already exists!");
+          // 
+          toast.error("A problem with this title already exists!", {
+            position: "top-center",
+          });
         } else {
           console.error("Error uploading problem:", error);
         }
@@ -113,6 +124,18 @@ function UploadProblem() {
         </label>
         <button onClick={handleSubmit}>Upload Problem</button>
       </form>
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        />
     </div>
   );
 }

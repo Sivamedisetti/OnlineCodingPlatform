@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import ProblemList from "./ProblemList";
 import ProblemDetail from "./ProblemDetail";
 import UploadProblem from "./UploadProblem";
 import "./ArenaStyle.css";
@@ -61,8 +60,6 @@ function Arena() {
   return (
     <div className="arena-container">
       <h1>Coding Arena</h1>
-      {view === "list" && <ProblemList onSelectProblem={setSelectedProblem} />}
-      {view === "upload" && <UploadProblem />}
       <DataTable columns={columns} data={GetData} />
     </div>
   );
