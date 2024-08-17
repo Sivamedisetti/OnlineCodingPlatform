@@ -50,7 +50,7 @@ function UploadProblem() {
         if (error.response && error.response.status === 400) {
           // 
           toast.error("A problem with this title already exists!", {
-            position: "top-center",
+            // position: "top-center",
           });
         } else {
           console.error("Error uploading problem:", error);
