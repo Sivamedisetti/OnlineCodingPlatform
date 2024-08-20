@@ -31,7 +31,6 @@ function UploadProblem() {
       .post("http://localhost:8000/post_problem", ProblemDetails)
       .then((response) => {
         if (response.status === 201) {
-          // alert(response.status);
           toast.success("Problem uploaded successfully!", {
             position: "top-center",
           });
@@ -49,7 +48,7 @@ function UploadProblem() {
       .catch((error) => {
         if (error.response && error.response.status === 400) {
           // 
-          toast.error("A problem with this title already exists!", {
+          toast.error("This problem already exists!", {
             // position: "top-center",
           });
         } else {
@@ -122,9 +121,10 @@ function UploadProblem() {
             placeholder='e.g., input: "output"'
           />
         </label>
-        <button onClick={handleSubmit}>Upload Problem</button>
+        <button className="btn" onClick={handleSubmit}>Upload Problem</button>
       </form>
       <ToastContainer
+        icon="../public/images/icon.jpg"
         position="top-center"
         autoClose={2000}
         hideProgressBar={false}
