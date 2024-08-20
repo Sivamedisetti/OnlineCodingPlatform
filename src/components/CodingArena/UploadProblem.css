@@ -46,7 +46,7 @@
     outline: none;
   }
   
-  .upload-problem button {
+  .upload-problem .btn {
     background-color: var(--color-primary-blue);
     color: var(--color-background-light);
     width: 100%;
@@ -60,7 +60,7 @@
     margin-top: 10px;
   }
   
-  .upload-problem button:hover {
+  .upload-problem .btn:hover {
     background-color: var(--color-primary-green);
     opacity: 0.9;
   }
@@ -75,10 +75,10 @@
       grid-template-columns: 1fr;
     }
   
-    .upload-problem button {
+    .upload-problem .btn{
       grid-column: 1;
     }
-    .upload-problem bottom::after{
+    .upload-problem .btn::after{
       background-color: var(--color-primary-green);
     }
   }

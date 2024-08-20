@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import ProblemDetail from "./ProblemDetail";
-import UploadProblem from "./UploadProblem";
 import "./ArenaStyle.css";
 import axios from "axios";
 import DataTable from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
+// import io from "socket.io-client";
 
 var myIdObj = {
   id: "awdsfhj0"
@@ -18,6 +17,8 @@ function Arena() {
     { name: 'URL', selector: row => row.URL, sortable: true },
   ];
 
+// const socket= io("http://192.168.25.95:8000")
+
   const navigate = useNavigate();
 
   function changeId(val) {
@@ -26,8 +27,8 @@ function Arena() {
     navigate('/ProblemDetail');
   }
 
-  const [selectedProblem, setSelectedProblem] = useState(null);
-  const [view, setView] = useState("list");
+  // const [selectedProblem, setSelectedProblem] = useState(null);
+  // const [view, setView] = useState("list");
   const [GetData, setGetData] = useState(undefined);
 
   const APICalling = () => {
@@ -55,7 +56,12 @@ function Arena() {
 
   useEffect(() => {
     APICalling();
-  }, []);
+    // socket.on("newPost" , (newPost) => {
+      // console.log(newPost)
+      // setGetData((prevData) => [...prevData, newPost]);
+    // })
+    // return {APICalling}
+  },[]);
 
   return (
     <div className="arena-container">
