@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Playground from './components/CodingPlayground/Playground';
 import Arena from './components/CodingArena/Arena';
@@ -34,8 +34,8 @@ function Home() {
         </h1>
         <p className="welcome-text">Select a section from the navigation bar to get started.</p>
         <div className="cta-buttons">
-          <a href="/playground" className="cta-btn">Start Coding</a>
-          <a href="/arena" className="cta-btn">Explore Arena</a>
+          <Link to="/playground" className="cta-btn">Start Coding</Link>
+          <Link to="/arena" className="cta-btn">Explore Arena</Link>
         </div>
       </div>
     </div>
