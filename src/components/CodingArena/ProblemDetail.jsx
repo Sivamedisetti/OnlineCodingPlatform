@@ -20,7 +20,7 @@ export default function ProblemDetail(props) {
 
     if (obj) {
       axios
-        .get(`http://localhost:8000/get_problemdata/${ob.id}`)
+        .get(`https://onlinecodingplatform.onrender.com/get_problemdata/${ob.id}`)
         .then((response) => {
           setProblem(response.data);
           console.log(response.data);
