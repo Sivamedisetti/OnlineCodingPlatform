@@ -8,26 +8,26 @@ const BodyParser = require("body-parser");
 var nodemailer = require("nodemailer");
 
 const http = require("http");
-const SocketId = require("socket.io");
+// const SocketId = require("socket.io");
 
 const cors = require("cors");
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
 var { Questions_Table } = require("./bin/models");
-const { Socket } = require("socket.io-client");
+// const { Socket } = require("socket.io-client");
 var app = express();
 
 app.use(cors());
 
 const server = http.createServer(app);
 
-const io = SocketId(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-    credentials: true,
-  },
-})
+// const io = SocketId(server, {
+//   cors: {
+//     origin: "*",
+//     methods: ["GET", "POST"],
+//     credentials: true,
+//   },
+// })
 
 //mongodb connection
 mongoose.connect(
