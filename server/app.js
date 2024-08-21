@@ -21,13 +21,13 @@ app.use(cors());
 
 const server = http.createServer(app);
 
-const io = SocketId(server, {
-  cors: {
-    origin: "*",
-    methods: ["GET", "POST"],
-    credentials: true,
-  },
-})
+// const io = SocketId(server, {
+//   cors: {
+//     origin: "*",
+//     methods: ["GET", "POST"],
+//     credentials: true,
+//   },
+// })
 
 //mongodb connection
 mongoose.connect(
