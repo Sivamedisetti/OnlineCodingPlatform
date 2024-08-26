@@ -32,7 +32,7 @@ function Home() {
         <h1>
           <span className="outline">Welcome</span> to CodeForge
         </h1>
-        <p className="welcome-text">Select a section from the navigation bar to get started.</p>
+        {/* <p className="welcome-text">Select a section from the navigation bar to get started.</p> */}
         <div className="cta-buttons">
           <a href="/playground" className="cta-btn">Start Coding</a>
           <a href="/arena" className="cta-btn">Explore Arena</a>
