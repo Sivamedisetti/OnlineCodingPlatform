@@ -66,7 +66,8 @@ function Arena() {
   return (
     <div className="arena-container">
       <h1>Coding Arena</h1>
-      <DataTable columns={columns} data={GetData} />
+      <DataTable columns={columns} data={GetData} noDataComponent={<div>Loading...</div>}/>
+      
     </div>
   );
 }
