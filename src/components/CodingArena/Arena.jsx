@@ -16,9 +16,7 @@ function Arena() {
     { name: 'Difficulty', selector: row => row.Topic_difficulty, sortable: true, width: "150px" },
     { name: 'URL', selector: row => row.URL, sortable: true },
   ];
-
-// const socket= io("http://192.168.25.95:8000")
-
+  
   const navigate = useNavigate();
 
   function changeId(val) {
@@ -66,9 +64,11 @@ function Arena() {
   return (
     <div className="arena-container">
       <h1>Coding Arena</h1>
-      <DataTable columns={columns} data={GetData} />
+      <DataTable columns={columns} data={GetData}/>
     </div>
   );
 }
 
 export default Arena;
+
+

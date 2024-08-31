@@ -7,7 +7,7 @@
   background-color: var(--color-background-light);
   border-radius: 10px;
   box-shadow: 0 2px 10px var(--color-shadow);
-  overflow:;
+  overflow:0;
 }
 
 .arena-container h1 {
