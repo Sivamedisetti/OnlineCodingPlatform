@@ -3,6 +3,7 @@ import "./ArenaStyle.css";
 import axios from "axios";
 import DataTable from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
+import spin from './spin.gif'
 // import io from "socket.io-client";
 
 var myIdObj = {
@@ -16,7 +17,7 @@ function Arena() {
     { name: 'Difficulty', selector: row => row.Topic_difficulty, sortable: true, width: "150px" },
     { name: 'URL', selector: row => row.URL, sortable: true },
   ];
-  
+
   const navigate = useNavigate();
 
   function changeId(val) {
@@ -64,7 +65,7 @@ function Arena() {
   return (
     <div className="arena-container">
       <h1>Coding Arena</h1>
-      <DataTable columns={columns} data={GetData}/>
+      <DataTable columns={columns} data={GetData} noDataComponent={<img src={spin} />}/>
     </div>
   );
 }
