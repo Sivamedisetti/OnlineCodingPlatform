@@ -3,6 +3,7 @@ import "./ArenaStyle.css";
 import axios from "axios";
 import DataTable from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
+import spin from './spin.gif'
 // import io from "socket.io-client";
 
 var myIdObj = {
@@ -66,7 +67,7 @@ function Arena() {
   return (
     <div className="arena-container">
       <h1>Coding Arena</h1>
-      <DataTable columns={columns} data={GetData} noDataComponent={<div>Loading...</div>}/>
+      <DataTable columns={columns} data={GetData} noDataComponent={<img src={spin} />}/>
       
     </div>
   );
