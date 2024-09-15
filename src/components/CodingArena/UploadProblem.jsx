@@ -28,7 +28,7 @@ function UploadProblem() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/post_problem", ProblemDetails)
+      .post("https://onlinecodingplatform.onrender.com/post_problem", ProblemDetails)
       .then((response) => {
         if (response.status === 201) {
           toast.success("Problem uploaded successfully!", {
