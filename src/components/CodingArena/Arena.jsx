@@ -3,7 +3,8 @@ import "./ArenaStyle.css";
 import axios from "axios";
 import DataTable from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
-import spin from './spin.gif'
+
+import Loading from './Loading.gif'
 // import io from "socket.io-client";
 
 var myIdObj = {
@@ -17,8 +18,6 @@ function Arena() {
     { name: 'Difficulty', selector: row => row.Topic_difficulty, sortable: true, width: "150px" },
     { name: 'URL', selector: row => row.URL, sortable: true },
   ];
-
-// const socket= io("http://192.168.25.95:8000")
 
   const navigate = useNavigate();
 
@@ -67,10 +66,11 @@ function Arena() {
   return (
     <div className="arena-container">
       <h1>Coding Arena</h1>
-      <DataTable columns={columns} data={GetData} noDataComponent={<img src={spin} />}/>
-      
+      <DataTable columns={columns} data={GetData} noDataComponent={<img src={Loading} />}/>
     </div>
   );
 }
 
 export default Arena;
+
+
