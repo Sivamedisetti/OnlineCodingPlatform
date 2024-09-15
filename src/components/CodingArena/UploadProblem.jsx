@@ -28,7 +28,7 @@ function UploadProblem() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://onlinecodingplatform.onrender.com/post_problem", ProblemDetails)
+      .post("http://localhost:8000/post_problem", ProblemDetails)
       .then((response) => {
         if (response.status === 201) {
           toast.success("Problem uploaded successfully!", {
@@ -51,9 +51,8 @@ function UploadProblem() {
           toast.error("This problem already exists!", {
             // position: "top-center",
           });
-        } else {
-          console.error("Error uploading problem:", error);
         }
+        else if(error.response.status === 500) toast.error("Please Fill the required details.");
       });
   };
 
