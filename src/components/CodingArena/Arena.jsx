@@ -3,6 +3,7 @@ import "./ArenaStyle.css";
 import axios from "axios";
 import DataTable from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
+
 import Loading from './Loading.gif'
 // import io from "socket.io-client";
 
