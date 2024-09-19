@@ -4,11 +4,11 @@ const mongoose = require('mongoose');
 const Questions_table = new mongoose.Schema({
     test_cases : {
         type :String,
-        required : true
+        // required : true
     },
     title : { 
         type: String,
-        // unique :true,
+        unique :true,
         required: true,
 
     },
