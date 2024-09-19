@@ -52,7 +52,10 @@ function UploadProblem() {
             // position: "top-center",
           });
         }
-        else if(error.response.status === 500) toast.error("Please Fill the required details.");
+        else if(error.response.status === 500) {
+          console.log(error);
+          toast.error("Please Fill the required details.");
+        }
       });
   };
 

@@ -29,6 +29,9 @@ app.get("/get_codesheet", function (req, res) {
     .catch((err) => console.log(err));
 });
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
 app.post("/post_problem", function (req, res) {
   const newProblem = new Questions_Table({
     title: req.body.title,
@@ -53,6 +56,7 @@ app.post("/post_problem", function (req, res) {
           .status(400)
           .send({ error: "A problem with this title already exists" });
       } else {
+        console.log(err);
         res.status(500).send({ error: "Server error" });
       }
     });
