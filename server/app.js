@@ -9,7 +9,7 @@ app.use(cors());
 const server = http.createServer(app);
 
 mongoose.connect(
-  "mongodb+srv://ajaykantiboyina:Ajay@6203@cluster0.vleuyp5.mongodb.net/",
+  "mongodb+srv://ajaykantiboyina:Ajay%406203@cluster0.vleuyp5.mongodb.net/",
   {
     useNewUrlParser: true,
     useUnifiedTopology: true,
