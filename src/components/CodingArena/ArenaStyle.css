@@ -1,8 +1,7 @@
-/* Remove borders from DataTable rows */git
+/* src/components/ArenaStyle.css */
 
 .arena-container {
   padding: 20px;
- 
   max-width: 1200px;
   margin: 0 auto;
   background-color: var(--color-background-light);
@@ -14,7 +13,6 @@
 .arena-container h1 {
   color: var(--color-primary-blue);
   text-align: center;
-  background-color:var(--color-shadow);
   margin-bottom: 20px;
   font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
   font-size: 2rem;
@@ -48,6 +46,7 @@
   padding: 0;
   list-style: none;
 }
+
 .problem-list li {
   margin-bottom: 10px;
   font-family: 'Roboto', sans-serif; /* Adjust font family as needed */
