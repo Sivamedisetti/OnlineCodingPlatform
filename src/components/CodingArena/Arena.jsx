@@ -56,11 +56,6 @@ function Arena() {
 
   useEffect(() => {
     APICalling();
-    // socket.on("newPost" , (newPost) => {
-      // console.log(newPost)
-      // setGetData((prevData) => [...prevData, newPost]);
-    // })
-    // return {APICalling}
   },[]);
 
   return (

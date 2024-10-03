@@ -9,7 +9,7 @@ function CodeEditor({ code, setCode, codelang }) {
     lineNumbers: "on",
     scrollBeyondLastLine: false,
     readOnly: false,
-    wordWrap: "on",   
+    wordWrap: "on" 
   };
 
   return (

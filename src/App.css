@@ -51,5 +51,6 @@
 }
 
 .cta-btn:hover {
-  background-color: var(--color-secondary-light-blue);
+  background-color: var(--color-background-light);
+  color: var(--color-primary-blue);
 }
