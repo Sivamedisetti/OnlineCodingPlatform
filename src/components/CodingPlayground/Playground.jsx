@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import CodeEditor from './Editor'; // Correctly import your CodeEditor component
 import axios from 'axios';
 import './EditorStyle.css'; // Import CSS for consistent styling
+import CustomDropdown from './DropDown';
 
 function Playground() {
   const [code, setCode] = useState('# Your code starts here.. ');
@@ -62,14 +63,9 @@ function Playground() {
   };
 
   return (
-    <div>
+    <div className='compiler'>
       {/* <h1>Coding Playground</h1> */}
-      <select onChange={handleChange}>
-        <option value="python">python</option>
-        <option value="c">c</option>
-        <option value="cpp">cpp</option>
-        <option value="java">java</option>
-      </select>
+      <CustomDropdown codelang={codelang} setCodelang={setCodelang} />
       <CodeEditor code={code} setCode={setCode} codelang={codelang}/>
       <div className='input-container'>
         <h2>Custom Input</h2>

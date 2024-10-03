@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Editor from "../CodingPlayground/Editor";
+import CodeEditor from "../CodingPlayground/Editor";
 import "./ProblemDetail.css";
+import CustomDropdown from "../CodingPlayground/DropDown";
 
 export default function ProblemDetail(props) {
   const [code, setCode] = useState("#Enter your code here...");
@@ -49,7 +50,7 @@ export default function ProblemDetail(props) {
     compile_memory_limit: -1,
     run_memory_limit: -1,
   };
-
+ 
   const [codelang, setCodelang] = useState("python");
   const handleChange = (e) => {
     setCodelang(e.target.value);
@@ -91,20 +92,17 @@ export default function ProblemDetail(props) {
               <p>{problem.sample_output}</p> <br/>
               <h5>Execution Time : {problem.constraints}ms</h5>
             </>
-          ) : (
+            ) : (
             <p>Loading problem details...</p>
           )}
         </div>
 
         <div className="problem-detail-right">
           <div className="problem-detail-right-top">
-            <select onChange={handleChange} value={codelang}>
-              <option value="python">Python</option>
-              <option value="c">C</option>
-              <option value="cpp">C++</option>
-              <option value="java">Java</option>
-            </select>
-            <Editor code={code} setCode={setCode} codelang={codelang} />
+              <div className="compiler-top-header">
+                <CustomDropdown codelang={codelang} setCodelang={setCodelang} />  
+              </div>
+                <CodeEditor code={code} setCode={setCode} codelang={codelang}/>
           </div>
 
           <button className="execute-btn" onClick={executeCode}>
@@ -135,3 +133,6 @@ export default function ProblemDetail(props) {
     </>
   );
 }
+
+
+

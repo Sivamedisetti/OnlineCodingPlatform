@@ -5,8 +5,7 @@
   max-width: 1000px;
   height: 60vh;
   margin: 0 auto;
-  border: 1px solid var(--color-border);
-  border-radius: 8px;
+
   overflow: hidden;
   box-shadow: 0 4px 10px var(--color-shadow); 
   background-color: var(--color-background-light);
@@ -26,6 +25,18 @@
   font-size: 20px;
   color: var(--color-primary-blue);
 }
+.editor-container,
+.input-container,
+.output-container {
+  box-sizing: border-box;
+}
+
+.input-container textarea:focus {
+  outline: none;
+  border: 1px solid var(--color-primary-blue);
+  box-shadow: 0 0 5px var(--color-primary-blue);
+}
+
 
 pre {
   white-space: pre-wrap;
@@ -85,4 +96,23 @@ pre {
 
 .execute-btn:hover {
   background-color: var(--color-primary-blue-dark);
+}
+.execute-btn:focus {
+  outline: 2px solid var(--color-primary-blue);
+}
+
+
+@media (max-width: 768px) {
+  .editor-container,
+  .input-container,
+  .output-container {
+    width: 95%;
+    margin: 10px auto;
+  }
+
+  .input-container textarea,
+  pre {
+    font-size: 12px; /* Smaller font size for mobile */
+    height: 100px; /* Adjust height */
+  }
 }

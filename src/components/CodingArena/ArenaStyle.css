@@ -14,10 +14,10 @@
   color: var(--color-primary-blue);
   background-color: var(--color-shadow);
   text-align: center;
+  font-family: "Nunito", sans-serif;
   margin-bottom: 20px;
-  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 2rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .view-buttons {
