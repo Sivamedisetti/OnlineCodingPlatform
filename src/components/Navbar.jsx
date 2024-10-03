@@ -4,17 +4,16 @@ import "./Navbar.css";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [activeLink, setActiveLink] = useState('/');
-  
+  const [activeLink, setActiveLink] = useState("/");
+
   const navigate = useNavigate();
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
-  // Combined click handler
   const handleLinkClick = (path) => {
     setIsOpen(false); // Close the menu
-    setActiveLink(path); // Set the active link
     navigate(path); // Navigate to the selected path
+    setActiveLink(path); // Update the active link
   };
 
   return (
@@ -35,16 +34,16 @@ function Navbar() {
         <li>
           <Link
             to="/arena"
-            className={`nav-link ${activeLink === '/arena' ? 'active' : ''}`}
+            className={`nav-link ${activeLink === "/arena" ? "active" : ""}`}
             onClick={() => handleLinkClick("/arena")}
           >
-            Problems
+            Coding Arena
           </Link>
         </li>
         <li>
           <Link
             to="/playground"
-            className={`nav-link ${activeLink === '/playground' ? 'active' : ''}`}
+            className={`nav-link ${activeLink === "/playground" ? "active" : ""}`}
             onClick={() => handleLinkClick("/playground")}
           >
             Compiler
@@ -53,7 +52,7 @@ function Navbar() {
         <li>
           <Link
             to="/uploadProblem"
-            className={`nav-link ${activeLink === '/uploadProblem' ? 'active' : ''}`}
+            className={`nav-link ${activeLink === "/uploadProblem" ? "active" : ""}`}
             onClick={() => handleLinkClick("/uploadProblem")}
           >
             Upload Problem

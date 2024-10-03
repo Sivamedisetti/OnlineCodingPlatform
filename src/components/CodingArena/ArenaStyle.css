@@ -1,4 +1,4 @@
-/* Remove borders from DataTable rows */git
+/* src/components/ArenaStyle.css */
 
 .arena-container {
   padding: 20px;
@@ -12,10 +12,10 @@
 
 .arena-container h1 {
   color: var(--color-primary-blue);
+  background-color: var(--color-shadow);
   text-align: center;
-  background-color:var(--color-shadow);
   margin-bottom: 20px;
-  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   font-size: 2rem;
   font-weight: 700;
 }
@@ -47,6 +47,7 @@
   padding: 0;
   list-style: none;
 }
+
 .problem-list li {
   margin-bottom: 10px;
   font-family: 'Roboto', sans-serif; /* Adjust font family as needed */

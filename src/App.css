@@ -40,7 +40,6 @@
 .cta-btn {
   display: inline-block;
   padding: 10px 20px;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   font-size: 1rem;
   font-weight: 600;
   text-decoration: none;
@@ -52,6 +51,6 @@
 }
 
 .cta-btn:hover {
-  color: var(--color-secondary-light-blue);
   background-color: var(--color-background-light);
+  color: var(--color-primary-blue);
 }

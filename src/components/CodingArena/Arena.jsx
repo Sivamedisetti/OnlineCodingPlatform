@@ -5,6 +5,8 @@ import DataTable from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
 
 import Loading from './Loading.gif'
+// import io from "socket.io-client";
+
 var myIdObj = {
   id: "awdsfhj0"
 };
