@@ -45,8 +45,8 @@ export default function ProblemDetail(props) {
     ],
     stdin: "",
     args: ["1", "2", "3"],
-    compile_timeout: 30000,
-    run_timeout: 5000,
+    compile_timeout: 600000,
+    run_timeout: 600000,
     compile_memory_limit: -1,
     run_memory_limit: -1,
   };
@@ -69,11 +69,11 @@ export default function ProblemDetail(props) {
     data.stdin = input;
 
     const start = Date.now();
-    axios.post('https://emkc.org/api/v2/piston/execute', data , {timeout: 5*problem.constraints})
+    axios.post('https://emkc.org/api/v2/piston/execute', data , /*{timeout: 5*problem.constraints}*/)
       .then(response => {
         const end = Date.now();
         setOutput(response.data.run.output || 'TimeLimit Exceed');
-        setExecutionTime((end - start));
+        setExecutionTime((end - start)/1000);
       })
       .catch(error => {
         setOutput(`Error: ${error.message}`);
@@ -90,7 +90,7 @@ export default function ProblemDetail(props) {
               <p>{problem.description}</p> <br/> <h4>Example</h4>
               <p>{problem.sample_input}</p> <br/>
               <p>{problem.sample_output}</p> <br/>
-              <h5>Execution Time : {problem.constraints}ms</h5>
+              <h5>Execution Time : {problem.constraints / 1000}s</h5>
             </>
             ) : (
             <p>Loading problem details...</p>
@@ -124,7 +124,7 @@ export default function ProblemDetail(props) {
               <pre>{output}</pre>
 
               {executionTime !== undefined && (
-                <p>Execution Time: {executionTime}ms</p>
+                <p>Execution Time: {executionTime}s</p>
               )}
             </div>
           </div>
