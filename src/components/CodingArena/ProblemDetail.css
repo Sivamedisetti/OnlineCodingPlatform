@@ -49,11 +49,19 @@
 .compiler-top-header{
   display: flex;
   align-items: center;
-  justify-content:first;
+  justify-content:space-between;
   background-color: var(--color-shadow);
   height: 50px;
   padding: 0;
   margin: 0%;
+
+}
+.dropdown{
+  margin-left: 5.5PX;
+
+}
+.settings-icon{
+  margin-right: 20PX;
 }
 .problem-detail-right-top {
   display: flex;
