@@ -9,8 +9,6 @@ function Playground() {
   const [input, setInput] = useState('');  // Store the multiline input as a string
   const [output, setOutput] = useState('');
   const [executionTime, setExecutionTime] = useState(0);
-  const [compiletime , setCompiletime] = useState(0);
-  const [runtime , setRuntime] = useState(0);
  
   const data = {
     language: "",
@@ -23,8 +21,8 @@ function Playground() {
     ],
     stdin: "",
     args: ["1", "2", "3"],
-    compile_timeout: 0,
-    run_timeout: 0,
+    compile_timeout: 600000,
+    run_timeout: 600000,
     compile_memory_limit: -1,
     run_memory_limit: -1,
   };
@@ -40,22 +38,18 @@ function Playground() {
     java: '15.0.2'
   };
   const executeCode = () => {
-    setCompiletime(30000);
-    setRuntime(5000);
     data.files[0].content = code;
     data.language = codelang;
     data.version = versions[codelang];
     data.stdin = input;
-    data.compile_timeout = compiletime;
-    data.run_timeout = runtime;
     // console.log(data)
 
     const start = Date.now();
-    axios.post('https://emkc.org/api/v2/piston/execute', data , {timeout: 3*(runtime + compiletime)})
+    axios.post('https://emkc.org/api/v2/piston/execute', data , /*{timeout: 3*(runtime + compiletime)}*/)
       .then(response => {
         const end = Date.now();
         setOutput(response.data.run.output || 'TimeLimit Exceed');
-        setExecutionTime((end - start));
+        setExecutionTime((end - start)/1000);
       })
       .catch(error => {
         setOutput(`Error: ${error.message}`);
@@ -79,7 +73,7 @@ function Playground() {
       <div className="output-container">
         <h2>Output</h2>
         <pre>{output}</pre>
-        <p>Execution Time: {executionTime}ms</p>
+        <p>Execution Time: {executionTime}s</p>
       </div>
     </div>
   );
