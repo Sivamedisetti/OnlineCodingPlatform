@@ -9,24 +9,25 @@ function Signup() {
     email: "",
     password: ""
   });
-  const handleChange = evt => {
-    const value = evt.target.value;
-    setState({
-      ...state,
-      [evt.target.name]: value
-    });
+
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
-  const handleOnSubmit = evt => {
+  const handleOnSubmit = async (evt) => {
     evt.preventDefault();
 
     const { username, email, password } = state;
-    console.log(state);
 
     if (!username || !email || !password) {
-      toast.error('All fields are required!', { position: 'top-center' });
+      toast.error("All fields are required!");
       return;
     }
+
 
     axios.post('https://onlinecodingplatform.onrender.com/signup', state)
       .then((response) => {
@@ -48,6 +49,7 @@ function Signup() {
           password: ""
         });
       });
+    }
   };
 
   return (
@@ -63,6 +65,7 @@ function Signup() {
             onChange={handleChange}
             placeholder="Name"
             className="input"
+            required
           />
           <input
             type="email"
@@ -71,6 +74,7 @@ function Signup() {
             onChange={handleChange}
             placeholder="Email"
             className="input"
+            required
           />
           <input
             type="password"
@@ -79,19 +83,16 @@ function Signup() {
             onChange={handleChange}
             placeholder="Password"
             className="input"
+            required
           />
-          <button className="button">Sign Up</button>
+          <button type="submit" className="button">Sign Up</button>
         </form>
-
       </div>
 
       <ToastContainer
         position="top-center"
         autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
         closeOnClick
-        rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
