@@ -1,10 +1,10 @@
 .dropdown-btn {
-    color: #ffffff;
+    /* color: #ffffff; */
     padding: 10px;
     font-size: 16px;
     border: none;
     cursor: pointer;
-    /* width: 2000px !important; */
+    background-color: #0187fc;
   }
   button.dropdown-btn {
     width: 200px;
@@ -17,7 +17,7 @@
   .dropdown-content {
     display: block;
     position: absolute;
-    background-color: #1c79d6;
+    background-color:  #0187fc;
     box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
     width: 100px;
@@ -33,7 +33,7 @@
   }
   
   .dropdown-content a:hover {
-    background-color: #1f76d3;
+    background-color:  #0187fc;
   }
   
   .dropdown-content {

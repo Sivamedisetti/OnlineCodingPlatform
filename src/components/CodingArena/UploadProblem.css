@@ -1,17 +1,17 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat:400,800");
 .upload-problem {
     margin: 0 auto;
     margin-top: 40px;
-    background-color: var(--color-background-light);
+    background-color: #ffffff;;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 2px 10px var(--color-shadow);
     max-width: 800px;
+    font-family: "Montserrat", sans-serif;
   }
   
   .upload-problem h2 {
-    color: var(--color-primary-blue);
     text-align: center;
-    font-family:sans-serif;
     margin-bottom: 20px;
   }
   
@@ -24,7 +24,6 @@
   .upload-problem label {
     display: flex;
     flex-direction: column;
-    font-family:Verdana, Geneva, Tahoma, sans-serif;
     font-weight: 600;
     color: var(--color-text-primary);
   }

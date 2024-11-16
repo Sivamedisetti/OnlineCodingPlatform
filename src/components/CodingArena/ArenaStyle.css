@@ -14,7 +14,6 @@
   color: var(--color-primary-blue);
   background-color: var(--color-shadow);
   text-align: center;
-  font-family: "Nunito", sans-serif;
   margin-bottom: 20px;
   font-size: 2rem;
   font-weight: 600;
@@ -50,7 +49,6 @@
 
 .problem-list li {
   margin-bottom: 10px;
-  font-family: 'Roboto', sans-serif; /* Adjust font family as needed */
   font-size: 16px; /* Adjust font size */
 }
 

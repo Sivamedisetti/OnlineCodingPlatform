@@ -79,7 +79,7 @@ function UploadProblem() {
             value={Topic_difficulty}
             onChange={(e) => setTopic_difficulty(e.target.value)}
             required
-            placeholder="e.g: Easy"
+            placeholder="E.g: Easy"
           />
         </label>
         <label>
@@ -96,7 +96,7 @@ function UploadProblem() {
             value={constraints}
             onChange={(e) => setConstraints(e.target.value)}
             required
-            placeholder="e.g., Time limit in ms"
+            placeholder="E.g., Time limit in ms"
           />
         </label>
         <label>
