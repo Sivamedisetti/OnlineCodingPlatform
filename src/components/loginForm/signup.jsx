@@ -28,18 +28,15 @@ function Signup() {
       return;
     }
 
-
     axios.post('https://onlinecodingplatform.onrender.com/signup', state)
       .then((response) => {
-        toast.success(`${username} registered successfully`)
+        toast.success(`${username} registered successfully`);
       })
       .catch((err) => {
-        if(err.response?.status === 400)
-        {
-          toast.error(`The username ("${username}") already exists.`)
-        }
-        else{
-          toast.error(`unable to register.Please try again`)
+        if (err.response?.status === 400) {
+          toast.error(`The username ("${username}") already exists.`);
+        } else {
+          toast.error(`Unable to register. Please try again.`);
         }
       })
       .finally(() => {
@@ -49,15 +46,14 @@ function Signup() {
           password: ""
         });
       });
-    }
-  };
+  }; 
 
   return (
     <>
       <div className="form-container sign-up-container">
         <form onSubmit={handleOnSubmit} className="form">
           <h1 className="h1">Create Account</h1>
-          
+
           <input
             type="text"
             name="username"
