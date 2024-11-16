@@ -124,7 +124,6 @@ function UploadProblem() {
         <button className="btn" onClick={handleSubmit}>Upload Problem</button>
       </form>
       <ToastContainer
-        icon="../public/images/icon.jpg"
         position="top-center"
         autoClose={2000}
         hideProgressBar={false}
