@@ -28,27 +28,26 @@ function Signup() {
       return;
     }
 
-    try 
-    {
-      const response = await axios.post("http://localhost:8000/signup", state);
-      if (response.status === 200 || response.status === 201) {
-        toast.success(`${username} registered successfully`);
-      }
-    } 
-    catch (err) 
-    {
-      if (err.response?.status === 400) {
-        toast.error(`The username ("${username}") already exists.`);
-      }
-      else {
-        toast.error("Unable to register. Please try again.");
-      }
-    } 
-    finally {
-      setState({
-        username: "",
-        email: "",
-        password: "",
+
+    axios.post('https://onlinecodingplatform.onrender.com/signup', state)
+      .then((response) => {
+        toast.success(`${username} registered successfully`)
+      })
+      .catch((err) => {
+        if(err.response?.status === 400)
+        {
+          toast.error(`The username ("${username}") already exists.`)
+        }
+        else{
+          toast.error(`unable to register.Please try again`)
+        }
+      })
+      .finally(() => {
+        setState({
+          username: "",
+          email: "",
+          password: ""
+        });
       });
     }
   };

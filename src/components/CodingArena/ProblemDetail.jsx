@@ -3,6 +3,7 @@ import axios from "axios";
 import CodeEditor from "../CodingPlayground/Editor";
 import "./ProblemDetail.css";
 import CustomDropdown from "../CodingPlayground/DropDown";
+import { FaGear } from "react-icons/fa6";
 
 export default function ProblemDetail(props) {
   const [code, setCode] = useState("#Enter your code here...");
@@ -100,7 +101,12 @@ export default function ProblemDetail(props) {
         <div className="problem-detail-right">
           <div className="problem-detail-right-top">
               <div className="compiler-top-header">
-                <CustomDropdown codelang={codelang} setCodelang={setCodelang} />  
+                <div className="dropDown">
+                  <CustomDropdown codelang={codelang} setCodelang={setCodelang} />
+                </div>
+                <div className="settings-icon">
+                  <FaGear  className="gear-icon"/> 
+                </div>
               </div>
                 <CodeEditor code={code} setCode={setCode} codelang={codelang}/>
           </div>
