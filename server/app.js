@@ -23,7 +23,7 @@ db.once("open", function () {
 });
 
 //get and post calls
-app.get("/get_codesheet", function (req, res) {
+app.get("/getcodesheet", function (req, res) {
   Questions_Table.find()
     .then((data) => res.send(data))
     .catch((err) => console.log(err));
