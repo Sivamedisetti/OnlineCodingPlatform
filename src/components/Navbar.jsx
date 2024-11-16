@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
 
-function Navbar() {
+function Navbar({ onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
 
@@ -56,6 +56,15 @@ function Navbar() {
             onClick={() => handleLinkClick("/uploadProblem")}
           >
             Upload Problem
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/login"
+            className={`nav-link ${activeLink === "/login" ? "active" : ""}`}
+            onClick={onLogout}
+          >
+            logout
           </Link>
         </li>
       </ul>

@@ -1,8 +1,11 @@
 var express = require("express");
 const mongoose = require("mongoose");
 const http = require("http");
+const bcrypt = require('bcryptjs')
 const cors = require("cors");
 var { Questions_Table } = require("./bin/models");
+const { register } = require("./bin/models");
+
 
 var app = express();
 app.use(cors());
@@ -31,6 +34,39 @@ app.get("/get_codesheet", function (req, res) {
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+app.post('/signup', async function(req, res) {
+  try {
+    const { username, password, email } = req.body;
+    const hashed_password = await bcrypt.hash(password, 10);
+    const newUser = new register({
+      username,
+      email,
+      password: hashed_password,
+    });
+
+    await newUser.save();
+    res.status(201).json({ message: "User registered successfully!" });
+  } 
+  catch (err) {
+    res.status(500).json({ error: "Failed to register user. Please try again." });
+  }
+});
+
+
+app.post('/login', async function (req , res){
+  const {username , password} = req.body;
+  const user = await register.findOne({username});
+
+  if(user)
+  {
+    const match = await bcrypt.compare(password , user.password);
+    if(match) res.status(200).json({message: 'navigate to Home'});
+    else res.status(400).json({message: 'Invalid Password'});
+  }
+  else res.status(404).json({message: "User Not Found"});
+});
+
 
 app.post("/post_problem", function (req, res) {
   const newProblem = new Questions_Table({
