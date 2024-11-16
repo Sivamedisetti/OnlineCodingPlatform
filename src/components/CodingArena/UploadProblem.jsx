@@ -74,13 +74,16 @@ function UploadProblem() {
         </label>
         <label>
           Topic Difficulty:
-          <input
-            type="text"
+          <select 
+            name="difficulty" 
+            id="tag"
             value={Topic_difficulty}
             onChange={(e) => setTopic_difficulty(e.target.value)}
-            required
-            placeholder="e.g: Easy"
-          />
+          >
+            <option value="Easy">Easy</option>
+            <option value="Medium">Medium</option>
+            <option value="Hard">Hard</option>
+          </select>
         </label>
         <label>
           Description:
@@ -126,7 +129,6 @@ function UploadProblem() {
         <button className="btn" onClick={handleSubmit}>Upload Problem</button>
       </form>
       <ToastContainer
-        icon="../public/images/icon.jpg"
         position="top-center"
         autoClose={2000}
         hideProgressBar={false}
