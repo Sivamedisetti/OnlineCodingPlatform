@@ -1,6 +1,21 @@
 const { type } = require('@testing-library/user-event');
 const mongoose = require('mongoose');
 
+const Register = new mongoose.Schema({
+    username: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    password: {
+        type: String,
+        required: true
+    }
+});
+
 const Questions_table = new mongoose.Schema({
     test_cases : {
         type :String,
@@ -40,4 +55,5 @@ const Questions_table = new mongoose.Schema({
 });
 
 const Questions_Table = mongoose.model("Questions_table",Questions_table);
-module.exports = {Questions_Table};
+const register = mongoose.model('Register', Register);
+module.exports = {Questions_Table , register};
