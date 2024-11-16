@@ -18,8 +18,6 @@
 
 .problem-detail-left {
   flex: 1;
-  font-family: 'Inter', sans-serif;
-  /* font-family: 'Roboto', sans-serif; */
   border: 1px solid var(--color-border);
   border-radius: 8px;
   padding: 20px;
@@ -43,17 +41,24 @@
   flex: 2;
   display: flex;
   flex-direction: column;
-  font-family: 'Inter', sans-serif;
   gap: 20px;
 }
 .compiler-top-header{
   display: flex;
   align-items: center;
-  justify-content:first;
+  justify-content:space-between;
   background-color: var(--color-shadow);
   height: 50px;
   padding: 0;
   margin: 0%;
+
+}
+.dropdown{
+  margin-left: 5.5PX;
+
+}
+.settings-icon{
+  margin-right: 20PX;
 }
 .problem-detail-right-top {
   display: flex;
@@ -82,7 +87,6 @@
 
 .execute-btn {
   background-color: var(--color-primary-blue);
-  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -141,11 +145,14 @@ pre {
 }
 /* Style for the dropdown button */
 .dropdown-btn {
-  background-color: #519dea;
+  background-color:  #0187fc;
+  width: 100px;
   color: #ffffff;
   padding: 10px;
   font-size: 16px;
+  border-radius: 10px;
   border: none;
+  font-family: "Montserrat", sans-serif;
   cursor: pointer;
 }
 
@@ -159,7 +166,7 @@ pre {
 .dropdown-content {
   display: none;
   position: absolute;
-  background-color: #8fb1d4;
+  background-color: #2990f0cd;
   box-shadow: 0px 8px 16px rgba(0, 0, 0, 0.2);
   min-width: 160px;
   z-index: 1;

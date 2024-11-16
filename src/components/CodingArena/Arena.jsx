@@ -33,7 +33,7 @@ function Arena() {
 
   const APICalling = () => {
     axios
-      .get("https://onlinecodingplatform.onrender.com/get_codesheet")
+      .get("http://localhost:8000/getcodesheet")
       .then((res) => {
         res.data.forEach((ele, key) => {
           ele.key = key + 1;

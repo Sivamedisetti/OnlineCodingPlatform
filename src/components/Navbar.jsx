@@ -19,25 +19,14 @@ function Navbar({ onLogout }) {
   return (
     <nav className="navbar">
       <div className="navbar-brand">
-        <span className="navbar-toggle" onClick={toggleMenu}>
-          ☰
-        </span>
-        <Link
-          to="/"
-          className="navbar-tittle"
-          onClick={() => handleLinkClick("/")}
-        >
-          <h1>CodeForge</h1>
-        </Link>
+        <span className="navbar-toggle" onClick={toggleMenu}>☰</span>
+        <Link to="/" className="navbar-tittle" onClick={() => handleLinkClick("/")}> <h1>CodeForge</h1> </Link>
       </div>
       <ul className={`nav-links ${isOpen ? "open" : ""}`}>
         <li>
           <Link
-            to="/arena"
-            className={`nav-link ${activeLink === "/arena" ? "active" : ""}`}
-            onClick={() => handleLinkClick("/arena")}
-          >
-            Coding Arena
+            to="/arena" className={`nav-link ${activeLink === "/arena" ? "active" : ""}`} onClick={() => handleLinkClick("/arena")}>
+            <p>Coding Arena</p>
           </Link>
         </li>
         <li>
@@ -46,7 +35,7 @@ function Navbar({ onLogout }) {
             className={`nav-link ${activeLink === "/playground" ? "active" : ""}`}
             onClick={() => handleLinkClick("/playground")}
           >
-            Compiler
+            <p>Compiler</p>
           </Link>
         </li>
         <li>
@@ -55,15 +44,11 @@ function Navbar({ onLogout }) {
             className={`nav-link ${activeLink === "/uploadProblem" ? "active" : ""}`}
             onClick={() => handleLinkClick("/uploadProblem")}
           >
-            Upload Problem
+            <p>Upload Problem</p>
           </Link>
         </li>
         <li>
-          <Link
-            to="/login"
-            className={`nav-link ${activeLink === "/login" ? "active" : ""}`}
-            onClick={onLogout}
-          >
+          <Link to="/login" className={`nav-link ${activeLink === "/login" ? "active" : ""}`} onClick={onLogout}>
             logout
           </Link>
         </li>

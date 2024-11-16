@@ -12,7 +12,7 @@ function UploadProblem() {
   const [URL, setURL] = useState("");
   const [sample_input, setSample_input] = useState("");
   const [sample_output, setSample_output] = useState("");
-  const [Topic_difficulty, setTopic_difficulty] = useState("");
+  const [Topic_difficulty, setTopic_difficulty] = useState("Easy");
 
   const ProblemDetails = {
     title,
@@ -74,12 +74,7 @@ function UploadProblem() {
         </label>
         <label>
           Topic Difficulty:
-          <select 
-            name="difficulty" 
-            id="tag"
-            value={Topic_difficulty}
-            onChange={(e) => setTopic_difficulty(e.target.value)}
-          >
+          <select className="difficulty" id="" value={Topic_difficulty} onChange={(e)=>setTopic_difficulty(e.target.value)}>
             <option value="Easy">Easy</option>
             <option value="Medium">Medium</option>
             <option value="Hard">Hard</option>
@@ -99,7 +94,7 @@ function UploadProblem() {
             value={constraints}
             onChange={(e) => setConstraints(e.target.value)}
             required
-            placeholder="e.g., Time limit in ms"
+            placeholder="E.g., Time limit in ms"
           />
         </label>
         <label>

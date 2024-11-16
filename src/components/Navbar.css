@@ -4,7 +4,7 @@
   background-color: var(--color-primary-blue);
   padding: 10px 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  font-family: "Nunito", sans-serif;
+  font-family: "Montserrat", sans-serif;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,7 +19,6 @@
 .navbar-tittle{
   color: var(--color-background-light);
   font-size: 1.1rem;
-  font-family: "Nunito", sans-serif;
   font-optical-sizing: auto;
   font: weight 200px;;
   text-decoration: none;
@@ -52,21 +51,18 @@
   font-size: 16px;
   font-weight: 600;
   padding: 10px 15px;
-  border-radius: 10px;
   transition: background-color 0.3s ease, color 0.3s ease;
   display: block;
 }
 
 .nav-link:hover {
-  color: var(--color-background-light);
+  border-radius: 7px;
   background-color: var(--color-secondary-light-blue);
 }
 
 .nav-link.active {
-  color: var(--color-background-light);
-  /* background-color: var(--color-secondary-light-blue); */
   border-radius: 0%;
-
+  background-color: var(--color-primary-blue);
   box-shadow: inset 0 -2px 0 var(--color-background-light);
 }
 
@@ -100,7 +96,6 @@
     padding: 15px;
     text-align: center;
     width: 100%;
-    /* font-family: 'Courier New', Courier, monospace; */
     box-sizing: border-box;
   }
 
@@ -108,4 +103,9 @@
   .nav-link.active {
     background-color: var(--color-secondary-light-blue);
   }
+}
+.profile_picture{
+  width: 40px;
+  height: 40px;
+  padding: 0%;
 }
