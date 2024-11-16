@@ -9,39 +9,48 @@ function Signup() {
     email: "",
     password: ""
   });
-  const handleChange = evt => {
-    const value = evt.target.value;
-    setState({
-      ...state,
-      [evt.target.name]: value
-    });
+
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+    setState((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
   };
 
-  const handleOnSubmit = evt => {
+  const handleOnSubmit = async (evt) => {
     evt.preventDefault();
 
     const { username, email, password } = state;
-    console.log(state);
 
     if (!username || !email || !password) {
-      toast.error('All fields are required!', { position: 'top-center' });
+      toast.error("All fields are required!");
       return;
     }
 
-    axios.post('https://onlinecodingplatform.onrender.com/signup', state)
-      .then((response) => {
-        toast.success(`${username} registered successfully`)
-      })
-      .catch((err) => {
-        toast.error(`unable to register.Please try again`)
-      })
-      .finally(() => {
-        setState({
-          username: "",
-          email: "",
-          password: ""
-        });
+    try 
+    {
+      const response = await axios.post("http://localhost:8000/signup", state);
+      if (response.status === 200 || response.status === 201) {
+        toast.success(`${username} registered successfully`);
+      }
+    } 
+    catch (err) 
+    {
+      if (err.response?.status === 400) {
+        toast.error(`The username ("${username}") already exists.`);
+      }
+      else {
+        toast.error("Unable to register. Please try again.");
+      }
+    } 
+    finally {
+      setState({
+        username: "",
+        email: "",
+        password: "",
       });
+    }
   };
 
   return (
@@ -57,6 +66,7 @@ function Signup() {
             onChange={handleChange}
             placeholder="Name"
             className="input"
+            required
           />
           <input
             type="email"
@@ -65,6 +75,7 @@ function Signup() {
             onChange={handleChange}
             placeholder="Email"
             className="input"
+            required
           />
           <input
             type="password"
@@ -73,19 +84,16 @@ function Signup() {
             onChange={handleChange}
             placeholder="Password"
             className="input"
+            required
           />
-          <button className="button">Sign Up</button>
+          <button type="submit" className="button">Sign Up</button>
         </form>
-
       </div>
 
       <ToastContainer
         position="top-center"
         autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
         closeOnClick
-        rtl={false}
         pauseOnFocusLoss
         draggable
         pauseOnHover
