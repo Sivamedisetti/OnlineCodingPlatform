@@ -49,8 +49,7 @@ function Signup() {
           password: ""
         });
       });
-    }
-  };
+    };
 
   return (
     <>
