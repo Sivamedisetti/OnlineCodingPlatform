@@ -33,7 +33,13 @@ function Signup() {
         toast.success(`${username} registered successfully`)
       })
       .catch((err) => {
-        toast.error(`unable to register.Please try again`)
+        if(err.response?.status === 400)
+        {
+          toast.error(`The username ("${username}") already exists.`)
+        }
+        else{
+          toast.error(`unable to register.Please try again`)
+        }
       })
       .finally(() => {
         setState({

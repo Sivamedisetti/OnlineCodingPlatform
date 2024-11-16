@@ -58,7 +58,18 @@
     grid-column: span 2;
     margin-top: 10px;
   }
-  
+  .difficulty
+  {
+    margin-top: 4px;
+    height: 37px;
+    font-family: "Montserrat", sans-serif;;
+    border-radius:6px;
+    border-color: var(--color-border);
+  }
+  .difficulty:hover{
+    border-color: var(--color-primary-blue);
+  }
+
   .upload-problem .btn:hover {
     background-color: var(--color-primary-green);
     opacity: 0.9;
