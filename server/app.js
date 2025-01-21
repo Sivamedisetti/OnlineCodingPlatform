@@ -50,7 +50,7 @@ app.post('/signup', async function(req, res) {
   } 
   catch (err) {
     if(err.code === 11000) res.status(400).json({error: "Username already exists."});
-    else res.status(500).json({ error: "Failed to register user. Please try again." });
+    else res.status(500).json({ error: "Failed to register user. Please try again."});
   }
 });
 

@@ -23,23 +23,17 @@ function Signup() {
 
     const { username, email, password } = state;
 
-    if (!username || !email || !password) {
-      toast.error("All fields are required!");
-      return;
-    }
-
-
     axios.post('https://onlinecodingplatform.onrender.com/signup', state)
       .then((response) => {
-        toast.success(`${username} registered successfully`)
+        toast.success('registered successfully')
       })
       .catch((err) => {
         if(err.response?.status === 400)
         {
-          toast.error(`The username ("${username}") already exists.`)
+          toast.error('The username already exists.')
         }
         else{
-          toast.error(`unable to register.Please try again`)
+          toast.error('unable to register.Please try again')
         }
       })
       .finally(() => {
