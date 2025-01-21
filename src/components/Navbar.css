@@ -2,6 +2,7 @@
 
 .navbar {
   background-color: var(--color-primary-blue);
+  height: 70px;
   padding: 10px 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-family: "Montserrat", sans-serif;
