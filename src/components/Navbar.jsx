@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+// import { Code2, Upload, Terminal, LogOut } from 'lucide-react';
 import "./Navbar.css";
 
 function Navbar({ onLogout }) {
@@ -44,12 +45,14 @@ function Navbar({ onLogout }) {
             className={`nav-link ${activeLink === "/uploadProblem" ? "active" : ""}`}
             onClick={() => handleLinkClick("/uploadProblem")}
           >
-            <p>Upload Problem</p>
+            {/* <Upload className="h-4 w-4" /> */}
+            <span>Upload Problem</span>
           </Link>
         </li>
         <li>
           <Link to="/login" className={`nav-link ${activeLink === "/login" ? "active" : ""}`} onClick={onLogout}>
-            logout
+            {/* <LogOut className="h-4 w-4" /> */}
+            <span>Logout</span>
           </Link>
         </li>
       </ul>
