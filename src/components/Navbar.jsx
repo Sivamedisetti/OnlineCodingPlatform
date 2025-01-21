@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Code2, Upload, Terminal, LogOut } from 'lucide-react';
+import { Upload , LogOut } from 'lucide-react';
 import "./Navbar.css";
 
 function Navbar({ onLogout }) {
