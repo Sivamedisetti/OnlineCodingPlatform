@@ -51,6 +51,7 @@ function App() {
 
 function Home() {
   return (
+    <>
     <div className="home-container">
       <div className="welcome-section">
         <h1>
@@ -62,6 +63,12 @@ function Home() {
         </div>
       </div>
     </div>
+    <footer className="footer">
+      <div className="footer-content">
+        <p>© 2025 CodeForge. All rights reserved.</p>
+      </div>
+    </footer>
+    </>
   );
 }
 
