@@ -45,13 +45,13 @@ function Navbar({ onLogout }) {
             className={`nav-link ${activeLink === "/uploadProblem" ? "active" : ""}`}
             onClick={() => handleLinkClick("/uploadProblem")}
           >
-            {/* <Upload className="h-4 w-4" /> */}
+            <Upload className="h-4 w-4" />
             <span>Upload Problem</span>
           </Link>
         </li>
         <li>
           <Link to="/login" className={`nav-link ${activeLink === "/login" ? "active" : ""}`} onClick={onLogout}>
-            {/* <LogOut className="h-4 w-4" /> */}
+            <LogOut className="h-4 w-4" />
             <span>Logout</span>
           </Link>
         </li>
