@@ -28,9 +28,7 @@ function Playground() {
   };
   // console.log(data)
   const [codelang , setCodelang] = useState('python');
-  const handleChange = (e) => {
-    setCodelang(e.target.value);
-  }
+
   const versions = {
     python: '3.10.0',
     cpp: '10.2.0',

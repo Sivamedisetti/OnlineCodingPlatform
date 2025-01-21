@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { Upload , LogOut } from 'lucide-react';
 import "./Navbar.css";
+// import {Code2, Upload , LogOut } from 'lucide-react';
 
 function Navbar({ onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -21,7 +21,9 @@ function Navbar({ onLogout }) {
     <nav className="navbar">
       <div className="navbar-brand">
         <span className="navbar-toggle" onClick={toggleMenu}>☰</span>
-        <Link to="/" className="navbar-tittle" onClick={() => handleLinkClick("/")}> <h1>CodeForge</h1> </Link>
+        <Link to="/" className="navbar-tittle" onClick={() => handleLinkClick("/")}> 
+          <h1>CodeForge</h1>
+        </Link>
       </div>
       <ul className={`nav-links ${isOpen ? "open" : ""}`}>
         <li>
@@ -45,13 +47,11 @@ function Navbar({ onLogout }) {
             className={`nav-link ${activeLink === "/uploadProblem" ? "active" : ""}`}
             onClick={() => handleLinkClick("/uploadProblem")}
           >
-            <Upload className="h-4 w-4" />
             <span>Upload Problem</span>
           </Link>
         </li>
         <li>
           <Link to="/login" className={`nav-link ${activeLink === "/login" ? "active" : ""}`} onClick={onLogout}>
-            <LogOut className="h-4 w-4" />
             <span>Logout</span>
           </Link>
         </li>
