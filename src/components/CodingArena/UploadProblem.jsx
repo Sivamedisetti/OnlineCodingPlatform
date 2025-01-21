@@ -9,7 +9,6 @@ function UploadProblem() {
   const [description, setDescription] = useState("");
   const [constraints, setConstraints] = useState("");
   const [test_cases, setTest_cases] = useState("");
-  const [URL, setURL] = useState("");
   const [sample_input, setSample_input] = useState("");
   const [sample_output, setSample_output] = useState("");
   const [Topic_difficulty, setTopic_difficulty] = useState("Easy");
@@ -19,7 +18,6 @@ function UploadProblem() {
     description,
     constraints,
     test_cases,
-    URL,
     sample_input,
     sample_output,
     Topic_difficulty,
@@ -40,14 +38,12 @@ function UploadProblem() {
         setDescription("");
         setConstraints("");
         setTest_cases("");
-        setURL("");
         setSample_input("");
         setSample_output("");
         setTopic_difficulty("");
       })
       .catch((error) => {
         if (error.response && error.response.status === 400) {
-          // 
           toast.error("This problem already exists!", {
             // position: "top-center",
           });

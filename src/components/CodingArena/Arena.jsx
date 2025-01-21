@@ -3,8 +3,9 @@ import "./ArenaStyle.css";
 import axios from "axios";
 import DataTable from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
+import { waveform } from 'ldrs'
 
-import Loading from './Loading.gif'
+waveform.register();
 
 var myIdObj = {
   id: "awdsfhj0"
@@ -60,7 +61,15 @@ function Arena() {
   return (
     <div className="arena-container">
       <h1>Coding Arena</h1>
-      <DataTable columns={columns} data={GetData} noDataComponent={<img src={Loading} />}/>
+      <DataTable columns={columns} data={GetData} noDataComponent={
+          <l-waveform
+            size="35"
+            stroke="3.5"
+            speed="1" 
+            color="#0187fc" 
+          />
+        }
+      />
     </div>
   );
 }
