@@ -14,10 +14,17 @@ function App() {
     localStorage.getItem('isAuthenticated') === 'true'
   );
 
+  const navigate = useNavigate();
+
   // Function to handle logout
   const handleLogout = () => {
+    const confirm_box = window.confirm("Are you sure you want to logout?");
+
+    if(!confirm_box) return;
+
     localStorage.removeItem('isAuthenticated');
     setIsAuthenticated(false);
+    navigate('/login')
   };
 
   return (
