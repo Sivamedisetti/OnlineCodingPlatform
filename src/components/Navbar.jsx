@@ -48,7 +48,7 @@ function Navbar({ onLogout }) {
           </Link>
         </li>
         <li>
-          <a style={{ textDecoration: 'none', cursor: 'pointer' }} className={`nav-link ${activeLink === "/" ? "active" : ""}`} onClick={onLogout}>
+          <a style={{ textDecoration: 'none', cursor: 'pointer' }} className={`nav-link ${activeLink === "" ? "active" : ""}`} onClick={onLogout}>
             <span>Logout</span>
           </a>
         </li>
