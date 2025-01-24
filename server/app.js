@@ -56,8 +56,8 @@ app.post('/signup', async function(req, res) {
 
 
 app.post('/login', async function (req , res){
-  const {username , password} = req.body;
-  const user = await register.findOne({username});
+  const {email , password} = req.body;
+  const user = await register.findOne({email});
 
   if(user)
   {
