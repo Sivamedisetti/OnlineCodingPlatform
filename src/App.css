@@ -52,8 +52,8 @@
 
 .cta-btn:hover {
   background-color: var(--color-background-light);
-  color: var(--color-primary-blue);
 }
+  color: var(--color-primary-blue);
 .footer{
   display: flex;
   justify-content: center;
