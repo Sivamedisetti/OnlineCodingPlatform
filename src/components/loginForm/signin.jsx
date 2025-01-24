@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Signin({onLogin}) {
   const [state, setState] = React.useState({
-    username: "",
+    email: "",
     password: ""
   });
   const navigate = useNavigate();
@@ -22,13 +22,14 @@ function Signin({onLogin}) {
   const handleOnSubmit = (evt) => {
     evt.preventDefault();
 
-    const { username, password } = state;
+    const { email , password } = state;
 
-    if (!username || !password) {
+    if (!email || !password) {
       toast.error('All fields are required!', { position: 'top-center' });
       return;
     }
 
+    console.log(email , password);
     axios.post("https://onlinecodingplatform.onrender.com/login", state)
       .then((response) => {
         if (response.status === 200) {
@@ -39,11 +40,11 @@ function Signin({onLogin}) {
         }
       })
       .catch((error) => {
-        toast.error("Unauthorized access! Please login again. 🔒");
+        toast.error("Unauthorized access!Try again");
       })
       .finally(() => {
         setState({
-          username: "",
+          email: "",
           password: ""
         });
       });
@@ -54,10 +55,10 @@ function Signin({onLogin}) {
       <form onSubmit={handleOnSubmit} className="form">
         <h1 className="h1">Sign in</h1>
         <input
-          type="text"
-          placeholder="Username"
-          name="username"
-          value={state.username}
+          type="email"
+          placeholder="Email"
+          name="email"
+          value={state.email}
           onChange={handleChange}
           className="input"
         />
