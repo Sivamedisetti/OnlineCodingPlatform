@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link , useNavigate } from "react-router-dom";
 import "./Navbar.css";
 // import {Code2, Upload , LogOut } from 'lucide-react';
 
@@ -8,6 +8,8 @@ function Navbar({ onLogout }) {
   const [activeLink, setActiveLink] = useState("/");
   
   const toggleMenu = () => setIsOpen(!isOpen);
+  const islogin = localStorage.getItem('isAuthenticated');
+  const navigate = useNavigate();
 
   const handleLinkClick = (path) => {
     setIsOpen(false); // Close the menu
@@ -48,8 +50,10 @@ function Navbar({ onLogout }) {
           </Link>
         </li>
         <li>
-          <a style={{ textDecoration: 'none', cursor: 'pointer' }} className={`nav-link ${activeLink === "" ? "active" : ""}`} onClick={onLogout}>
-            <span>Logout</span>
+          <a style={{ textDecoration: 'none', cursor: 'pointer' }} className={`nav-link ${activeLink === "" ? "active" : ""}`} onClick={()=> {islogin ? onLogout() : navigate('/login')}}>
+            {
+              islogin ? <span>Logout</span> : <span>Login</span>
+            }
           </a>
         </li>
       </ul>

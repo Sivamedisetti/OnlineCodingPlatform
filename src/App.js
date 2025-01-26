@@ -29,7 +29,7 @@ function App() {
 
   return (
     <>
-      {isAuthenticated && <Navbar onLogout={handleLogout} />}
+      <Navbar onLogout={handleLogout} />
       <div className="main-content">
         <Routes>
           {isAuthenticated ? (
@@ -43,11 +43,16 @@ function App() {
             </>
           ) : (
             <>
-              <Route path="/" element={<Navigate to="/login" />} />
               <Route path="/login" element={
                   <Login onLogin={ () => setIsAuthenticated(true) } />
                 }
               />
+              <Route path="/" element={<Home />} />
+              <Route path='/home' element={ <Navigate to='/'/>} />
+              <Route path="/playground" element={<Playground/>} />
+              <Route path="/arena" element={<Navigate to='/login'/>} />
+              <Route path="/problemDetail" element={<Navigate to='/login'/>} />
+              <Route path="/uploadProblem" element={<Navigate to='/login'/>} />
             </>
           )}
         </Routes>
