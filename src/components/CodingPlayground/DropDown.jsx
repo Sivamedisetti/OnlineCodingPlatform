@@ -7,8 +7,7 @@ const CustomDropdown = ({ codelang, setCodelang, setCode}) => {
     if(newLang === 'c') 
     {
       setCode(
-`// Online C compiler to run C program online
-#include <stdio.h>
+`#include <stdio.h>
 int main() {
   // Write C code here
   printf("CodeForge");
@@ -19,9 +18,9 @@ int main() {
     else if(newLang === 'java') 
     {
       setCode(
-`// Online java compiler to run java program online
-class Main {
+`class Main {
   public static void main(String[] args) {
+    // Write Java code here
     System.out.println("CodeForge");
   }
 }
@@ -30,8 +29,7 @@ class Main {
     else if(newLang === 'cpp')
     {
       setCode(
-`// Online C++ compiler to run C++ program online
-#include <iostream>
+`#include <iostream>
 int main() {
   // Write C++ code here
   std::cout << "CodeForge";
@@ -40,7 +38,7 @@ int main() {
 `);
     }
     else setCode(
-`# Enter your code here...
+`# Write python code here
 print('Hello World!')
 `);
     setCodelang(newLang); // This will update the codelang in ProblemDetail
