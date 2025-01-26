@@ -13,10 +13,10 @@ var myIdObj = {
 
 function Arena() {
   const columns = [
-    { name: 'S.No', selector: row => row.key, sortable: true, width: "80px" },
-    { name: 'Question Name', selector: row => row.title, sortable: true, width: "400px" },
+    { name: 'S.No', selector: row => row.key, sortable: false, width: "80px" },
+    { name: 'Question Name', selector: row => row.title, sortable: false, width: "400px" },
     { name: 'Difficulty', selector: row => row.Topic_difficulty, sortable: true, width: "150px" },
-    { name: 'URL', selector: row => row.URL, sortable: true },
+    { name: 'Slove', selector: row => row.URL, sortable: false },
   ];
 
   const navigate = useNavigate();

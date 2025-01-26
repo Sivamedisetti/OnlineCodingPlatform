@@ -21,8 +21,8 @@ function Playground() {
     ],
     stdin: "",
     args: ["1", "2", "3"],
-    compile_timeout: 600000,
-    run_timeout: 600000,
+    compile_timeout: 10000,
+    run_timeout: 3000,
     compile_memory_limit: -1,
     run_memory_limit: -1,
   };
@@ -42,11 +42,11 @@ function Playground() {
     data.stdin = input;
     // console.log(data)
 
-    const start = Date.now();
+    const start = Date.now(); // Upto 283 iterations
     axios.post('https://emkc.org/api/v2/piston/execute', data , /*{timeout: 3*(runtime + compiletime)}*/)
       .then(response => {
         const end = Date.now();
-        setOutput(response.data.run.output || 'TimeLimit Exceed');
+        setOutput(response.data.run.output);
         setExecutionTime((end - start)/1000);
       })
       .catch(error => {
