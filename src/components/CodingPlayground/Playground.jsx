@@ -5,7 +5,8 @@ import './EditorStyle.css'; // Import CSS for consistent styling
 import CustomDropdown from './DropDown';
 
 function Playground() {
-  const [code, setCode] = useState('# Your code starts here.. ');
+  const [code, setCode] = useState(`# Enter your code here...
+print('Hello World!')'`);
   const [input, setInput] = useState('');  // Store the multiline input as a string
   const [output, setOutput] = useState('');
   const [executionTime, setExecutionTime] = useState(0);
@@ -57,7 +58,7 @@ function Playground() {
   return (
     <div className='compiler'>
       {/* <h1>Coding Playground</h1> */}
-      <CustomDropdown codelang={codelang} setCodelang={setCodelang} />
+      <CustomDropdown codelang={codelang} setCodelang={setCodelang} setCode={setCode}/>
       <CodeEditor code={code} setCode={setCode} codelang={codelang}/>
       <div className='input-container'>
         <h2>Custom Input</h2>

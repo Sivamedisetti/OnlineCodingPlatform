@@ -1,9 +1,48 @@
 import React, { useState } from "react";
 
-const CustomDropdown = ({ codelang, setCodelang }) => {
+const CustomDropdown = ({ codelang, setCodelang, setCode}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleChange = (newLang) => {
+    if(newLang === 'c') 
+    {
+      setCode(
+`// Online C compiler to run C program online
+#include <stdio.h>
+int main() {
+  // Write C code here
+  printf("CodeForge");
+  return 0;
+}
+`);
+    }
+    else if(newLang === 'java') 
+    {
+      setCode(
+`// Online java compiler to run java program online
+class Main {
+  public static void main(String[] args) {
+    System.out.println("CodeForge");
+  }
+}
+`);
+    }
+    else if(newLang === 'cpp')
+    {
+      setCode(
+`// Online C++ compiler to run C++ program online
+#include <iostream>
+int main() {
+  // Write C++ code here
+  std::cout << "CodeForge";
+  return 0;
+}
+`);
+    }
+    else setCode(
+`# Enter your code here...
+print('Hello World!')
+`);
     setCodelang(newLang); // This will update the codelang in ProblemDetail
     setIsOpen(false); // Close the dropdown after selection
   };

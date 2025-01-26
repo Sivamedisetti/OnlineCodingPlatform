@@ -6,7 +6,8 @@ import CustomDropdown from "../CodingPlayground/DropDown";
 import { FaGear } from "react-icons/fa6";
 
 export default function ProblemDetail(props) {
-  const [code, setCode] = useState("#Enter your code here...");
+  const [code, setCode] = useState(`# Enter your code here...
+print('Hello World!')'`);
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [problem, setProblem] = useState(null);
@@ -99,7 +100,7 @@ export default function ProblemDetail(props) {
           <div className="problem-detail-right-top">
               <div className="compiler-top-header">
                 <div className="dropDown">
-                  <CustomDropdown codelang={codelang} setCodelang={setCodelang} />
+                  <CustomDropdown codelang={codelang} setCodelang={setCodelang} setCode={setCode}/>
                 </div>
                 <div className="settings-icon">
                   <FaGear  className="gear-icon"/> 
