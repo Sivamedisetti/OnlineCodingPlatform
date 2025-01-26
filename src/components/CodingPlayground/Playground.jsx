@@ -5,8 +5,8 @@ import './EditorStyle.css'; // Import CSS for consistent styling
 import CustomDropdown from './DropDown';
 
 function Playground() {
-  const [code, setCode] = useState(`# Enter your code here...
-print('Hello World!')'`);
+  const [code, setCode] = useState(`# write python code here...
+print('Hello World!')`);
   const [input, setInput] = useState('');  // Store the multiline input as a string
   const [output, setOutput] = useState('');
   const [executionTime, setExecutionTime] = useState(0);

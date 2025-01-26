@@ -64,23 +64,22 @@ function App() {
 function Home() {
   return (
     <>
-      <div className="home-container">
-        <div className="welcome-section">
-          <h1>
-            <span className="outline">Welcome</span> to CodeForge
-          </h1>
-          <div className="cta-buttons">
-            <Link to="/playground" className="cta-btn">Start Coding</Link>
-            <Link to="/arena" className="cta-btn">Explore Arena</Link>
-          </div>
+    <div className="home-container">
+      <div className="welcome-section">
+        <h1>
+          <span className="outline">Welcome</span> to CodeForge
+        </h1>
+        <div className="cta-buttons">
+          <Link to="/playground" className="cta-btn">Start Coding</Link>
+          <Link to="/arena" className="cta-btn">Explore Arena</Link>
         </div>
       </div>
-
-      <footer className="footer">
-        <div className="footer-content">
-          <p>© 2025 CodeForge. All rights reserved.</p>
-        </div>
-      </footer>
+    </div>
+    <footer className="footer">
+      <div className="footer-content">
+        <p>© 2025 CodeForge. All rights reserved.</p>
+      </div>
+    </footer>
     </>
   );
 }

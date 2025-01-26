@@ -6,8 +6,8 @@ import CustomDropdown from "../CodingPlayground/DropDown";
 import { FaGear } from "react-icons/fa6";
 
 export default function ProblemDetail(props) {
-  const [code, setCode] = useState(`# Enter your code here...
-print('Hello World!')'`);
+  const [code, setCode] = useState(`# write python code here...
+print('Hello World!')`);
   const [input, setInput] = useState("");
   const [output, setOutput] = useState("");
   const [problem, setProblem] = useState(null);
