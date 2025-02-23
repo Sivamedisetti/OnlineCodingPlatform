@@ -6,6 +6,7 @@ import Arena from './components/CodingArena/Arena';
 import ProblemDetail from './components/CodingArena/ProblemDetail';
 import UploadProblem from './components/CodingArena/UploadProblem';
 import Login from './components/loginForm/login';
+import Signin from './components/loginForm/signin';
 import './styles/variables.css';
 import './App.css';
 

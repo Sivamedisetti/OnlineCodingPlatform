@@ -2,6 +2,7 @@ import React from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
   const [state, setState] = React.useState({
@@ -9,6 +10,8 @@ function Signup() {
     email: "",
     password: ""
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -24,7 +27,7 @@ function Signup() {
     const { username, email, password } = state;
 
     axios.post('https://onlinecodingplatform.onrender.com/signup', state)
-      .then((response) => {
+      .then((response) => { 
         toast.success('registered successfully')
       })
       .catch((err) => {
