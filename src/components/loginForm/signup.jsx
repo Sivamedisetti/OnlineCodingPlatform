@@ -5,8 +5,8 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
-  // const backendAPI = 'https://onlinecodingplatform.onrender.com';
-  const backendAPI = 'http://localhost:8000';
+  const backendAPI = 'https://onlinecodingplatform.onrender.com';
+  // const backendAPI = 'http://localhost:8000';
 
   const [state, setState] = React.useState({
     username: "",

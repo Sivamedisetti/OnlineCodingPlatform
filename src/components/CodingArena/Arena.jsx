@@ -14,8 +14,8 @@ var myIdObj = {
 };
 
 function Arena() {
-  // const backendAPI = 'https://onlinecodingplatform.onrender.com';
-  const backendAPI = 'http://localhost:8000';
+  const backendAPI = 'https://onlinecodingplatform.onrender.com';
+  // const backendAPI = 'http://localhost:8000';
   const access = localStorage.getItem('access');
 
   let columns = [
