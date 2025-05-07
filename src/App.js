@@ -8,6 +8,7 @@ import UploadProblem from './components/CodingArena/UploadProblem';
 import Login from './components/loginForm/login';
 import './styles/variables.css';
 import './App.css';
+// import ProfilePage from './components/profile/profilePage';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(
@@ -23,6 +24,8 @@ function App() {
     if(!confirm_box) return;
 
     localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('username');
+    localStorage.removeItem('access');
     setIsAuthenticated(false);
     navigate('/login')
   };
@@ -30,6 +33,7 @@ function App() {
   return (
     <>
       <Navbar onLogout={handleLogout} />
+      {/* <ProfilePage/> */}
       <div className="main-content">
         <Routes>
           {isAuthenticated ? (

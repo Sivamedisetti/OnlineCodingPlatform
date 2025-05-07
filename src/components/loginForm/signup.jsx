@@ -2,13 +2,19 @@ import React from "react";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  // const backendAPI = 'https://onlinecodingplatform.onrender.com';
+  const backendAPI = 'http://localhost:8000';
+
   const [state, setState] = React.useState({
     username: "",
     email: "",
     password: ""
   });
+
+  const navigate = useNavigate();
 
   const handleChange = (evt) => {
     const { name, value } = evt.target;
@@ -23,8 +29,8 @@ function Signup() {
 
     const { username, email, password } = state;
 
-    axios.post('https://onlinecodingplatform.onrender.com/signup', state)
-      .then((response) => {
+    axios.post(`${backendAPI}/signup`, state)
+      .then((response) => { 
         toast.success('registered successfully')
       })
       .catch((err) => {
