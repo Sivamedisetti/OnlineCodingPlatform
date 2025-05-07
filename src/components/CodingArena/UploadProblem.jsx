@@ -5,6 +5,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import "./UploadProblem.css";
 
 function UploadProblem() {
+  // const backendAPI = 'https://onlinecodingplatform.onrender.com';
+  const backendAPI = 'http://localhost:8000';
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [constraints, setConstraints] = useState("");
@@ -26,7 +29,7 @@ function UploadProblem() {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post("https://onlinecodingplatform.onrender.com/post_problem", ProblemDetails)
+      .post(`${backendAPI}/post_problem`, ProblemDetails)
       .then((response) => {
         if (response.status === 201) {
           toast.success("Problem uploaded successfully!", {
@@ -51,6 +54,10 @@ function UploadProblem() {
         else if(error.response.status === 500) {
           console.log(error);
           toast.error("Please Fill the required details.");
+        }
+        else {
+          toast.error("Server not reachable!");
+          console.error("Error:", error.message);
         }
       });
   };

@@ -5,6 +5,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
 function Signup() {
+  // const backendAPI = 'https://onlinecodingplatform.onrender.com';
+  const backendAPI = 'http://localhost:8000';
+
   const [state, setState] = React.useState({
     username: "",
     email: "",
@@ -26,7 +29,7 @@ function Signup() {
 
     const { username, email, password } = state;
 
-    axios.post('https://onlinecodingplatform.onrender.com/signup', state)
+    axios.post(`${backendAPI}/signup`, state)
       .then((response) => { 
         toast.success('registered successfully')
       })

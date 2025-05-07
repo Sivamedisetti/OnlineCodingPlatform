@@ -11,6 +11,7 @@
   justify-content: space-between;
   border-bottom: 2px solid var(--color-border);
   height: 70px;
+  position: relative;
 }
 
 .navbar-brand {
@@ -108,8 +109,39 @@
     background-color: var(--color-secondary-light-blue);
   }
 }
-.profile_picture{
-  width: 40px;
-  height: 40px;
-  padding: 0%;
+.profile-overlay {
+  position: absolute;
+  right: 10px;
+  top: 60px;
+  width: 150px;
+  background-color: #fff;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  z-index: 1000;
+  padding: 10px;
+  border: 1px solid #ccc;
+}
+
+.profile-overlay ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.profile-option {
+  padding: 8px 15px;
+  cursor: pointer;
+  color: #333;
+}
+
+.profile-option:hover {
+  background-color: #f1f1f1;
+}
+
+.profile-option:first-child {
+  color: #007bff;
+}
+
+.profile-option:last-child {
+  color: red;
 }

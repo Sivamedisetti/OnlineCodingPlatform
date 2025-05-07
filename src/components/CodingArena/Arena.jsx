@@ -4,6 +4,8 @@ import axios from "axios";
 import DataTable from 'react-data-table-component';
 import { useNavigate } from 'react-router-dom';
 import { waveform } from 'ldrs'
+import { ToastContainer, toast } from 'react-toastify';
+// import 'react-toastify/dist/ReactToastify.css';
 
 waveform.register();
 
@@ -12,14 +14,42 @@ var myIdObj = {
 };
 
 function Arena() {
-  const columns = [
+  // const backendAPI = 'https://onlinecodingplatform.onrender.com';
+  const backendAPI = 'http://localhost:8000';
+  const access = localStorage.getItem('access');
+
+  let columns = [
     { name: 'S.No', selector: row => row.key, sortable: false, width: "80px" },
     { name: 'Question Name', selector: row => row.title, sortable: false, width: "400px" },
     { name: 'Difficulty', selector: row => row.Topic_difficulty, sortable: true, width: "150px" },
     { name: 'Slove', selector: row => row.URL, sortable: false },
   ];
 
+  if (access === '"admin"') {
+    columns.push({
+      name: 'Delete',
+      selector: row => row.Delete,
+      cell: row => <div onClick={() => RemoveProblem(row._id)} style={{ cursor: 'pointer' }}>❌</div>,
+      width: "100px"
+    });
+  }
+
   const navigate = useNavigate();
+
+  const RemoveProblem = (val) => {
+    if (window.confirm("Are you sure you want to delete this problem?")){
+      axios
+        .delete(`${backendAPI}/delete_problem/${val}`)
+        .then(() => {
+          APICalling();
+          toast.success("Deleted Successfully")
+        })
+        .catch(err => {
+          console.error("Delete failed", err);
+          toast.error("Failed to delete problem");
+        });
+    }
+  }
 
   function changeId(val) {
     myIdObj.id = val;
@@ -27,13 +57,11 @@ function Arena() {
     navigate('/ProblemDetail');
   }
 
-  // const [selectedProblem, setSelectedProblem] = useState(null);
-  // const [view, setView] = useState("list");
   const [GetData, setGetData] = useState(undefined);
 
   const APICalling = () => {
     axios
-      .get("https://onlinecodingplatform.onrender.com/getcodesheet")
+      .get(`${backendAPI}/getcodesheet`)
       .then((res) => {
         res.data.forEach((ele, key) => {
           ele.key = key + 1;
@@ -69,6 +97,19 @@ function Arena() {
             color="#0187fc" 
           />
         }
+      />
+
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
       />
     </div>
   );

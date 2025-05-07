@@ -6,6 +6,9 @@ import CustomDropdown from "../CodingPlayground/DropDown";
 import { FaGear } from "react-icons/fa6";
 
 export default function ProblemDetail(props) {
+  // const backendAPI = 'https://onlinecodingplatform.onrender.com';
+  const backendAPI = 'http://localhost:8000';
+
   const [code, setCode] = useState(`# write python code here...
 print('Hello World!')`);
   const [input, setInput] = useState("");
@@ -23,7 +26,7 @@ print('Hello World!')`);
 
     if (obj) {
       axios
-        .get(`https://onlinecodingplatform.onrender.com/get_problemdata/${ob.id}`)
+        .get(`${backendAPI}/get_problemdata/${ob.id}`)
         .then((response) => {
           setProblem(response.data);
           console.log(response.data);

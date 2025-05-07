@@ -5,6 +5,9 @@ import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
 function Signin({onLogin}) {
+  // const backendAPI = 'https://onlinecodingplatform.onrender.com';
+  const backendAPI = 'http://localhost:8000';
+
   const [state, setState] = React.useState({
     email: "",
     password: ""
@@ -30,11 +33,13 @@ function Signin({onLogin}) {
     }
 
     console.log(email , password);
-    axios.post("https://onlinecodingplatform.onrender.com/login", state)
+    axios.post(`${backendAPI}/login`, state)
       .then((response) => {
         if (response.status === 200) {
           toast.success("Login successful!");
           localStorage.setItem('isAuthenticated', 'true');
+          localStorage.setItem('username' , JSON.stringify(response.data.username));
+          localStorage.setItem('access', JSON.stringify(response.data.access));
           onLogin();
           navigate("/home")
         }
