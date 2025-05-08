@@ -8,6 +8,9 @@ Router.post('/post_problem', controller.AddProblem);
 
 Router.get('/get_problemdata/:id', controller.GetProblem);
 Router.get('/getcodesheet', controller.GetAllProblems);
+Router.get('/getPendingList', controller.GetPendingList);
+
+Router.put('/update_status', controller.UpdateStatus);
 
 Router.delete('/delete_problem/:id', controller.DeleteProblem);
 

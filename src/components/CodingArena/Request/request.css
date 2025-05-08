@@ -1,0 +1,28 @@
+.request-container {
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    background-color: var(--color-background-light);
+    border-radius: 10px;
+    box-shadow: 0 2px 10px var(--color-shadow);
+    overflow:0;
+}
+  
+.request-container h1 {
+    color: var(--color-primary-blue);
+    background-color: var(--color-shadow);
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 2rem;
+    font-weight: 600;
+}
+
+@media (max-width: 768px) {
+    .request-container {
+      padding: 15px;
+    }
+  
+    .request-container h1 {
+      font-size: 1.5rem;
+    }
+}

@@ -43,6 +43,15 @@ function Navbar({ onLogout }) {
               <p>Compiler</p>
             </Link>
           </li>
+          {
+            localStorage.getItem('access') === '"admin"' && 
+            <li>
+              <Link
+                to="/request" className={`nav-link ${activeLink === "/request" ? "active" : ""}`} onClick={() => handleLinkClick("/request")}>
+                <p>Request</p>
+              </Link>
+            </li>
+          }
           <li>
             <Link
               to="/uploadProblem"

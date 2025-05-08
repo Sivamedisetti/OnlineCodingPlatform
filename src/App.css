@@ -69,3 +69,16 @@
   align-items: end;
   position: relative;
 }
+
+.hello-user {
+  font-size: 2rem;
+  font-weight: 500;
+  margin-bottom: 10px;
+  color: #2c3e50;
+}
+
+.username {
+  font-weight: 700;
+  color: #0c4685;
+  margin-left: 5px;
+}
