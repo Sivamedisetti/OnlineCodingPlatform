@@ -14,7 +14,7 @@ const server = http.createServer(app);
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
-  origin: ['https://codeforge-dyvj.onrender.com/'],
+  origin: ['https://codeforge-dyvj.onrender.com'],
   credentials: true
 }));
 app.use(session({
@@ -26,7 +26,7 @@ app.use(session({
     ttl: 75 * 60 * 60 
   }),
   cookie: {
-    httpOnly: false,
+    httpOnly: true,
     secure: true,
     maxAge: 2 * 24 * 60 * 60 * 1000
   }
