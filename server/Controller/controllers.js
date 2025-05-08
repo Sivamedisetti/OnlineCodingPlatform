@@ -4,11 +4,38 @@ const bcrypt = require('bcryptjs')
 const { nanoid } = require('nanoid');
 
 const GetAllProblems = async(req , res) => {
-    await Questions_Table.find()
+    await Questions_Table.find({ status: "Accepted"})
     .then((data) => res.send(data))
     .catch((err) => console.log(err));
 }
 
+const GetPendingList = async(req , res) => {
+    await Questions_Table.find({ status: "pending" })
+    .then((data) => res.send(data))
+    .catch((err) => console.log(err))
+}
+
+const UpdateStatus = async (req, res) => {
+    const { status , id } = req.body;
+  
+    try {
+      const updated = await Questions_Table.findOneAndUpdate(
+        { _id: id },
+        { status: status },
+        { new: true } 
+      );
+  
+      if (!updated) {
+        return res.status(404).json({ message: "Question not found" });
+      }
+  
+      res.status(200).json({ message: "Status updated", data: updated });
+    } 
+    catch (err) {
+      res.status(500).json({ message: "Error updating status", error: err.message });
+    }
+};
+  
 const SignUp = async(req , res) => {
     try {
         const { username, password, email } = req.body;
@@ -21,7 +48,7 @@ const SignUp = async(req , res) => {
         const newUser = new register({
           userid,
           access,
-          username,
+          username: username.charAt(0).toUpperCase() + username.slice(1).toLowerCase(),
           email,
           password: hashed_password,
         });
@@ -41,19 +68,24 @@ const SignIn = async(req , res) => {
 
     if(user)
     {
-    const match = await bcrypt.compare(password , user.password);
-    if(match) {
-        req.session.user = { id: user.userid, username: user.username };
-        res.status(200).json({username: user.username , access: user.access});
-    }
-    else res.status(400).json({message: 'Invalid Password'});
+        const match = await bcrypt.compare(password , user.password);
+        if(match) {
+            req.session.user = { id: user.userid, username: user.username , access: user.access };
+            res.status(200).json({username: user.username , access: user.access});
+        }
+        else res.status(400).json({message: 'Invalid Password'});
     }
     else res.status(404).json({message: "User Not Found"});
 }
 
 const AddProblem = async(req , res) => {
+    const user = req.session.user;
+    if(user === undefined){
+        return res.status(401).json({message: "navigate to logout"});
+    }
     const newProblem = new Questions_Table({
-        user: req.session.id,
+        userId: user.id,
+        username: user.username,
         title: req.body.title,
         description: req.body.description,
         sample_input: req.body.sample_input,
@@ -62,7 +94,7 @@ const AddProblem = async(req , res) => {
         test_cases: req.body.test_cases,
         URL: req.body.URL,
         Topic_difficulty: req.body.Topic_difficulty,
-        status: "pending"
+        status: user.access === "admin" ? "accepted" : "pending"
     });
     
     await newProblem
@@ -125,5 +157,7 @@ module.exports = {
     SignUp,
     AddProblem,
     GetProblem,
-    DeleteProblem
+    DeleteProblem,
+    GetPendingList,
+    UpdateStatus
 }

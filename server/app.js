@@ -1,5 +1,6 @@
 const express = require("express");
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const mongoose = require("mongoose");
 const http = require("http");
 const cors = require("cors");
@@ -12,15 +13,22 @@ const server = http.createServer(app);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors());
+app.use(cors({
+  origin: ['https://codeforge-dyvj.onrender.com/'],
+  credentials: true
+}));
 app.use(session({
   secret: 'my-secret',
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.Database_URL,
+    ttl: 75 * 60 * 60 
+  }),
   cookie: {
-    httpOnly: true,
+    httpOnly: false,
     secure: true,
-    maxAge: 1000 * 60 * 60
+    maxAge: 2 * 24 * 60 * 60 * 1000
   }
 }));
 app.use("/", Router);

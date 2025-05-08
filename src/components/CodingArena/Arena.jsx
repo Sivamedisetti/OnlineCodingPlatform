@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import "./ArenaStyle.css";
 import axios from "axios";
 import DataTable from 'react-data-table-component';
-import { useNavigate } from 'react-router-dom';
+import { json, useNavigate } from 'react-router-dom';
 import { waveform } from 'ldrs'
 import { ToastContainer, toast } from 'react-toastify';
 // import 'react-toastify/dist/ReactToastify.css';
@@ -19,10 +19,10 @@ function Arena() {
   const access = localStorage.getItem('access');
 
   let columns = [
-    { name: 'S.No', selector: row => row.key, sortable: false, width: "80px" },
+    { name: 'S.No', selector: row => row.key, sortable: false, width: "100px" },
     { name: 'Question Name', selector: row => row.title, sortable: false, width: "400px" },
-    { name: 'Difficulty', selector: row => row.Topic_difficulty, sortable: true, width: "150px" },
-    { name: 'Slove', selector: row => row.URL, sortable: false },
+    { name: 'Difficulty', selector: row => row.Topic_difficulty, sortable: true, width: "200px" },
+    { name: 'Slove', selector: row => row.URL, sortable: false , width: "200px"},
   ];
 
   if (access === '"admin"') {
@@ -89,15 +89,14 @@ function Arena() {
   return (
     <div className="arena-container">
       <h1>Coding Arena</h1>
-      <DataTable columns={columns} data={GetData} noDataComponent={
-          <l-waveform
-            size="35"
-            stroke="3.5"
-            speed="1" 
-            color="#0187fc" 
-          />
-        }
-      />
+      {
+        GetData === undefined ? 
+          <div style={{ display: 'flex', justifyContent: 'center', marginTop: '50px' }}>
+            <l-waveform size="35" stroke="3.5" speed="1" color="#0187fc" />
+          </div> : GetData.length === 0 ? 
+            <p style={{ textAlign: 'center', fontSize: '18px', color: '#666' }}>No Problems available</p> :
+            <DataTable columns={columns} data={GetData} />
+      }
 
       <ToastContainer
         position="top-center"

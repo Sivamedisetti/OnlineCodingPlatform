@@ -6,9 +6,10 @@ import Arena from './components/CodingArena/Arena';
 import ProblemDetail from './components/CodingArena/ProblemDetail';
 import UploadProblem from './components/CodingArena/UploadProblem';
 import Login from './components/loginForm/login';
+import Request from './components/CodingArena/Request/request';
+import NotFound from './components/CodingArena/NotFound';
 import './styles/variables.css';
 import './App.css';
-// import ProfilePage from './components/profile/profilePage';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(
@@ -43,7 +44,9 @@ function App() {
               <Route path="/playground" element={<Playground />} />
               <Route path="/arena" element={<Arena />} />
               <Route path="/problemDetail" element={<ProblemDetail />} />
-              <Route path="/uploadProblem" element={<UploadProblem />} />
+              <Route path="/uploadProblem" element={<UploadProblem setIsAuthenticated={setIsAuthenticated}/>} />
+              {localStorage.getItem('access') === '"admin"' && <Route path='/request' element={<Request/>}/>}
+              <Route path="*" element={<NotFound />} />
             </>
           ) : (
             <>
@@ -70,6 +73,9 @@ function Home() {
     <>
     <div className="home-container">
       <div className="welcome-section">
+        <p className="hello-user">
+          Hello, <span className="username">{JSON.parse(localStorage.getItem('username'))} </span>
+        </p>
         <h1>
           <span className="outline">Welcome</span> to CodeForge
         </h1>

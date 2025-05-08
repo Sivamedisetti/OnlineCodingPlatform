@@ -33,7 +33,9 @@ function Signin({onLogin}) {
     }
 
     console.log(email , password);
-    axios.post(`${backendAPI}/login`, state)
+    axios.post(`${backendAPI}/login`, state , {
+      withCredentials: true
+    })
       .then((response) => {
         if (response.status === 200) {
           toast.success("Login successful!");

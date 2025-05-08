@@ -3,8 +3,9 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import "./UploadProblem.css";
+import { useNavigate } from "react-router-dom";
 
-function UploadProblem() {
+function UploadProblem({setIsAuthenticated}) {
   const backendAPI = 'https://onlinecodingplatform.onrender.com';
   // const backendAPI = 'http://localhost:8000';
 
@@ -25,11 +26,22 @@ function UploadProblem() {
     sample_output,
     Topic_difficulty,
   };
+  const navigate = useNavigate();
+
+  const logout = () =>{
+    localStorage.removeItem('isAuthenticated');
+    localStorage.removeItem('username');
+    localStorage.removeItem('access');
+    setIsAuthenticated(false);
+    navigate('/login')
+  }
 
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .post(`${backendAPI}/post_problem`, ProblemDetails)
+      .post(`${backendAPI}/post_problem`, ProblemDetails, {
+        withCredentials: true
+      })
       .then((response) => {
         if (response.status === 201) {
           toast.success("Problem uploaded successfully!", {
@@ -50,6 +62,9 @@ function UploadProblem() {
           toast.error("This problem already exists!", {
             // position: "top-center",
           });
+        }
+        else if (error.response && error.response.status === 401) {
+          logout()
         }
         else if(error.response.status === 500) {
           console.log(error);
