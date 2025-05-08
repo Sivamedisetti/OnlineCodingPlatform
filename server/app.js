@@ -28,6 +28,10 @@ app.use("/", Router);
 mongoose
   .connect(
     process.env.Database_URL,
+    { 
+      useNewUrlParser: true, 
+      useUnifiedTopology: true 
+    }
   )
   .then(() => {
     console.log("Connected to Mongo DB");
