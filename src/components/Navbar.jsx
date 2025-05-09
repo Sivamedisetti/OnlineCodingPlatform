@@ -43,7 +43,7 @@ function Navbar({ onLogout }) {
               <p>Compiler</p>
             </Link>
           </li>
-          {
+          {/* {
             localStorage.getItem('access') === '"admin"' && 
             <li>
               <Link
@@ -51,7 +51,7 @@ function Navbar({ onLogout }) {
                 <p>Request</p>
               </Link>
             </li>
-          }
+          } */}
           <li>
             <Link
               to="/uploadProblem"
@@ -77,6 +77,8 @@ function Navbar({ onLogout }) {
         <div className="profile-overlay">
           <ul>
             <li className="profile-option">Profile</li>
+            <li className="profile-option" onClick={() => {setIsvisible(!isvisible); navigate('/request')}}>Requests</li>
+            <li className="profile-option" onClick={() => {setIsvisible(!isvisible); navigate('/users')}}> Users</li>
             <li className="profile-option" onClick={()=> {setIsvisible(!isvisible); islogin ? onLogout() :  navigate('/login')}}>Logout</li>
           </ul>
         </div>

@@ -5,7 +5,7 @@ import DataTable from 'react-data-table-component';
 import { json, useNavigate } from 'react-router-dom';
 import { waveform } from 'ldrs'
 import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import deleted from '../../assets/delete.png'
 
 waveform.register();
 
@@ -29,7 +29,9 @@ function Arena() {
     columns.push({
       name: 'Delete',
       selector: row => row.Delete,
-      cell: row => <div onClick={() => RemoveProblem(row._id)} style={{ cursor: 'pointer' }}>❌</div>,
+      cell: row => <div>
+              <img onClick={() => RemoveProblem(row._id)} src={deleted} alt="delete" style={{marginLeft: '10px' ,height: "17px", width: "17px", cursor: 'pointer'}}/>
+            </div>,
       width: "100px"
     });
   }

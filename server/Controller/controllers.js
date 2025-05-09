@@ -9,6 +9,12 @@ const GetAllProblems = async(req , res) => {
     .catch((err) => console.log(err));
 }
 
+const GetAllUsers = async(req , res) => {
+    await register.find()
+    .then((data) => res.send(data))
+    .catch((err) => console.log(err))
+}
+
 const GetPendingList = async(req , res) => {
     await Questions_Table.find({ status: "pending" })
     .then((data) => res.send(data))
@@ -35,6 +41,26 @@ const UpdateStatus = async (req, res) => {
       res.status(500).json({ message: "Error updating status", error: err.message });
     }
 };
+
+const UpdateAccess = async(req , res) => {
+    const {userid , role} = req.body;
+    try {
+      const updated = await register.findOneAndUpdate(
+        { userid: userid },
+        { access: role },
+        { new: true } 
+      );
+  
+      if (!updated) {
+        return res.status(404).json({ message: "Question not found" });
+      }
+  
+      res.status(200).json({ message: "Status updated", data: updated });
+    } 
+    catch (err) {
+      res.status(500).json({ message: "Error updating status", error: err.message });
+    }
+}
   
 const SignUp = async(req , res) => {
     try {
@@ -151,6 +177,18 @@ const DeleteProblem = async (req , res) => {
   }
 }
 
+const DeleteUser = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    await register.findByIdAndDelete(id);
+    res.status(200).json({ message: "User deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Failed to delete user" });
+  }
+};
+
 module.exports = {
     GetAllProblems,
     SignIn,
@@ -159,5 +197,8 @@ module.exports = {
     GetProblem,
     DeleteProblem,
     GetPendingList,
-    UpdateStatus
+    UpdateStatus,
+    GetAllUsers,
+    UpdateAccess,
+    DeleteUser
 }

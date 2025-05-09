@@ -138,9 +138,9 @@
   background-color: #f1f1f1;
 }
 
-.profile-option:first-child {
+/* .profile-option:first-child {
   color: #007bff;
-}
+} */
 
 .profile-option:last-child {
   color: red;
