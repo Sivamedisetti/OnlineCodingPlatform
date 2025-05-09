@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link , useNavigate } from "react-router-dom";
 import "./Navbar.css";
 import profile from "../assets/profile.svg"
-// import {Code2, Upload , LogOut } from 'lucide-react';
 
 function Navbar({ onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
@@ -66,7 +65,7 @@ function Navbar({ onLogout }) {
               {
                 islogin ? 
                   <img src={profile} alt="profile" style={{cursor: "pointer"}} onClick={() => {setIsvisible(!isvisible)}}/> : 
-                  <span>Login</span>
+                  <span onClick={() => navigate('/login')}>Login</span>
               }
             </a>
             

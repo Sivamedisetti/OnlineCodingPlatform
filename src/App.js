@@ -79,9 +79,12 @@ function Home() {
     <>
     <div className="home-container">
       <div className="welcome-section">
-        <p className="hello-user">
-          Hello, <span className="username">{JSON.parse(localStorage.getItem('username'))} </span>
-        </p>
+        {
+          localStorage.getItem('isAuthenticated') === 'true' &&
+          <p className="hello-user">
+            Hello, <span className="username">{JSON.parse(localStorage.getItem('username'))} </span>
+          </p>
+        }
         <h1>
           <span className="outline">Welcome</span> to CodeForge
         </h1>
