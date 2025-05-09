@@ -10,6 +10,7 @@ import Request from './components/CodingArena/Request/request';
 import NotFound from './components/CodingArena/NotFound';
 import './styles/variables.css';
 import './App.css';
+import User from './components/CodingArena/Users/User';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(
@@ -45,7 +46,12 @@ function App() {
               <Route path="/arena" element={<Arena />} />
               <Route path="/problemDetail" element={<ProblemDetail />} />
               <Route path="/uploadProblem" element={<UploadProblem setIsAuthenticated={setIsAuthenticated}/>} />
-              {localStorage.getItem('access') === '"admin"' && <Route path='/request' element={<Request/>}/>}
+              {localStorage.getItem('access') === '"admin"' && 
+                <>
+                  <Route path='/request' element={<Request/>}/>
+                  <Route path='/users' element={<User/>} />
+                </>
+              }
               <Route path="*" element={<NotFound />} />
             </>
           ) : (
