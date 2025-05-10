@@ -27,7 +27,16 @@ const Request = () => {
                     <span>/</span>
                     <p style={{ cursor: 'pointer', color: 'red', fontWeight: 400 }} onClick={() => change_Status('Rejected' , row._id)}>Reject</p>
                 </div>,
-            width: "300px"
+            width: "200px"
+        },
+        { name: '', 
+          selector: row => row.view, 
+          cell: row => 
+            <div style={{color: 'blue', cursor: 'pointer'}} onClick={() => changeId(row._id)}>
+              View
+            </div>,
+          sortable: false, 
+          width: "100px" 
         }
     ];
 
@@ -50,11 +59,6 @@ const Request = () => {
           .then((res) => {
             res.data.forEach((ele, key) => {
               ele.key = key + 1;
-              ele.title = (
-                <p style={{cursor: 'pointer'}} onClick={() => changeId(ele._id)}>
-                    {ele['title']}
-                </p>
-              );
               ele.Topic_difficulty = (
                 <p
                   style={{

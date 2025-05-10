@@ -6,8 +6,8 @@ import CustomDropdown from "../CodingPlayground/DropDown";
 import { FaGear } from "react-icons/fa6";
 
 export default function ProblemDetail(props) {
-  const backendAPI = 'https://onlinecodingplatform.onrender.com';
-  // const backendAPI = 'http://localhost:8000';
+  // const backendAPI = 'https://onlinecodingplatform.onrender.com';
+  const backendAPI = 'http://localhost:8000';
 
   const [code, setCode] = useState(`# write python code here...
 print('Hello World!')`);
