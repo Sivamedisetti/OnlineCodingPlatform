@@ -2,7 +2,6 @@
 
 .navbar {
   background-color: var(--color-primary-blue);
-  height: 70px;
   padding: 10px 20px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   font-family: "Montserrat", sans-serif;
@@ -10,8 +9,6 @@
   align-items: center;
   justify-content: space-between;
   border-bottom: 2px solid var(--color-border);
-  height: 70px;
-  position: relative;
 }
 
 .navbar-brand {
@@ -26,8 +23,6 @@
   font: weight 200px;;
   text-decoration: none;
   margin-left: 10px;
-  display: flex;
-  flex-direction: row;
 }
 
 .navbar-toggle {
@@ -71,11 +66,64 @@
   box-shadow: inset 0 -2px 0 var(--color-background-light);
 }
 
+.profile-btn {
+  padding: 5px;
+  border: none;
+  background: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.profile-btn:hover {
+  box-shadow: 0 0 0 2px #60a5fa; /* Tailwind's blue-400 */
+}
+
+.profile-img {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.profile_picture{
+  width: 40px;
+  height: 40px;
+  padding: 0%;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 45px;
+  right: 0;
+  background-color: white;
+  border-radius: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  padding: 8px 0;
+  min-width: 150px;
+  z-index: 10;
+}
+
+.dropdown-item {
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 10px 15px;
+  width: 100%;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.dropdown-item:hover {
+  background-color: var(--color-secondary-light-blue);
+}
+
 /* Responsive Styles */
 @media (max-width: 768px) {
   .navbar-toggle {
     display: block;
   }
+
   .navbar-tittle{
     font-size: large;
   }
@@ -108,40 +156,17 @@
   .nav-link.active {
     background-color: var(--color-secondary-light-blue);
   }
-}
-.profile-overlay {
-  position: absolute;
-  right: 10px;
-  top: 60px;
-  width: 150px;
-  background-color: #fff;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
-  z-index: 1000;
-  padding: 10px;
-  border: 1px solid #ccc;
-}
 
-.profile-overlay ul {
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
+  .profile-btn {
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
 
-.profile-option {
-  padding: 8px 15px;
-  cursor: pointer;
-  color: #333;
-}
-
-.profile-option:hover {
-  background-color: #f1f1f1;
-}
-
-/* .profile-option:first-child {
-  color: #007bff;
-} */
-
-.profile-option:last-child {
-  color: red;
+  .profile-img {
+    width: 28px;
+    height: 28px;
+  }
 }

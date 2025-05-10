@@ -6,6 +6,7 @@
     "start": "node ./app.js"
   },
   "dependencies": {
+    "@testing-library/dom": "^10.4.0",
     "@testing-library/user-event": "^14.5.2",
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",

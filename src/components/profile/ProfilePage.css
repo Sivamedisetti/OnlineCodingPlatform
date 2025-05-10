@@ -1,0 +1,15 @@
+.contain {
+    display: flex;
+}
+
+.left-card {
+    height: 100vh;
+    width: 20%;
+    background-color: aquamarine;
+}
+
+.right-card {
+    height: 100vh;
+    width: 80%;
+    background-color: blueviolet;
+}

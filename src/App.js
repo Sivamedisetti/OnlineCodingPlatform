@@ -11,6 +11,7 @@ import NotFound from './components/CodingArena/NotFound';
 import './styles/variables.css';
 import './App.css';
 import User from './components/CodingArena/Users/User';
+import ProfilePage from './components/profile/ProfilePage';
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(
@@ -45,7 +46,9 @@ function App() {
               <Route path="/playground" element={<Playground />} />
               <Route path="/arena" element={<Arena />} />
               <Route path="/problemDetail" element={<ProblemDetail />} />
+              <Route path="/profile" element={<ProfilePage/>}/>
               <Route path="/uploadProblem" element={<UploadProblem setIsAuthenticated={setIsAuthenticated}/>} />
+
               {localStorage.getItem('access') === '"admin"' && 
                 <>
                   <Route path='/request' element={<Request/>}/>

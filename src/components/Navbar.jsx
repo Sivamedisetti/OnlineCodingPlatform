@@ -1,88 +1,99 @@
 import React, { useState } from "react";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import profile from "../assets/profile.svg"
 
 function Navbar({ onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
-  const [isvisible , setIsvisible] = useState(false);
-  
+  const [dropdownOpen, setDropdownOpen] = useState(false);
+
   const toggleMenu = () => setIsOpen(!isOpen);
-  const islogin = localStorage.getItem('isAuthenticated');
+  const toggleDropdown = () => setDropdownOpen(!dropdownOpen);
+
+  const isLogin = localStorage.getItem("isAuthenticated");
   const navigate = useNavigate();
 
   const handleLinkClick = (path) => {
-    setIsOpen(false); // Close the menu
-    setActiveLink(path); // Update the active link
+    setIsOpen(false);
+    setActiveLink(path);
+  };
+
+  const handleProfileAction = () => {
+    if (isLogin) {
+      navigate("/profile");
+    } else {
+      navigate("/login");
+    }
+    setDropdownOpen(false);
   };
 
   return (
-    <>
-      <nav className="navbar">
-        <div className="navbar-brand">
-          <span className="navbar-toggle" onClick={toggleMenu}>☰</span>
-          <Link to="/" className="navbar-tittle" onClick={() => handleLinkClick("/")}> 
-            <h1>CodeForge</h1>
+    <nav className="navbar">
+      <div className="navbar-brand">
+        <span className="navbar-toggle" onClick={toggleMenu}>☰</span>
+        <Link to="/" className="navbar-tittle" onClick={() => handleLinkClick("/")}>
+          <h1>CodeForge</h1>
+        </Link>
+      </div>
+      <ul className={`nav-links ${isOpen ? "open" : ""}`}>
+        <li>
+          <Link
+            to="/arena"
+            className={`nav-link ${activeLink === "/arena" ? "active" : ""}`}
+            onClick={() => handleLinkClick("/arena")}
+          >
+            <p>Coding Arena</p>
           </Link>
-        </div>
-        <ul className={`nav-links ${isOpen ? "open" : ""}`}>
-          <li>
-            <Link
-              to="/arena" className={`nav-link ${activeLink === "/arena" ? "active" : ""}`} onClick={() => handleLinkClick("/arena")}>
-              <p>Coding Arena</p>
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/playground"
-              className={`nav-link ${activeLink === "/playground" ? "active" : ""}`}
-              onClick={() => handleLinkClick("/playground")}
-            >
-              <p>Compiler</p>
-            </Link>
-          </li>
-          {/* {
-            localStorage.getItem('access') === '"admin"' && 
-            <li>
-              <Link
-                to="/request" className={`nav-link ${activeLink === "/request" ? "active" : ""}`} onClick={() => handleLinkClick("/request")}>
-                <p>Request</p>
-              </Link>
-            </li>
-          } */}
-          <li>
-            <Link
-              to="/uploadProblem"
-              className={`nav-link ${activeLink === "/uploadProblem" ? "active" : ""}`}
-              onClick={() => handleLinkClick("/uploadProblem")}
-            >
-              <span>Upload Problem</span>
-            </Link>
-          </li>
-          <li>
-            <a style={{ textDecoration: 'none', cursor: 'pointer' }} className={!islogin && `nav-link ${activeLink === "" ? "active" : ""}`}>
-              {
-                islogin ? 
-                  <img src={profile} alt="profile" style={{cursor: "pointer"}} onClick={() => {setIsvisible(!isvisible)}}/> : 
-                  <span onClick={() => navigate('/login')}>Login</span>
-              }
-            </a>
-            
-          </li>
-        </ul>
-      </nav>
-      {isvisible && (
-        <div className="profile-overlay">
-          <ul>
-            <li className="profile-option">Profile</li>
-            <li className="profile-option" onClick={() => {setIsvisible(!isvisible); navigate('/request')}}>Requests</li>
-            <li className="profile-option" onClick={() => {setIsvisible(!isvisible); navigate('/users')}}> Users</li>
-            <li className="profile-option" onClick={()=> {setIsvisible(!isvisible); islogin ? onLogout() :  navigate('/login')}}>Logout</li>
-          </ul>
-        </div>
-      )}
-    </>
+        </li>
+        <li>
+          <Link
+            to="/playground"
+            className={`nav-link ${activeLink === "/playground" ? "active" : ""}`}
+            onClick={() => handleLinkClick("/playground")}
+          >
+            <p>Compiler</p>
+          </Link>
+        </li>
+        <li>
+          <Link
+            to="/uploadProblem"
+            className={`nav-link ${activeLink === "/uploadProblem" ? "active" : ""}`}
+            onClick={() => handleLinkClick("/uploadProblem")}
+          >
+            <span>Upload Problem</span>
+          </Link>
+        </li>
+        <li style={{ position: "relative" }}>
+        <button className="profile-btn" onClick={toggleDropdown}>
+          <img
+            src="https://raw.githubusercontent.com/Abhiramgopi1/portfolio-assets/refs/heads/main/user-circles-set_78370-4704.avif"
+            alt="User Icon"
+            className="profile-img"
+          />
+        </button>
+
+        {dropdownOpen && (
+          <div className="dropdown-menu">
+            {isLogin ? (
+              <>
+                <button onClick={() => { navigate("/profile"); setDropdownOpen(false); }} className="dropdown-item">
+                  View Profile
+                </button>
+                <button onClick={() => { onLogout(); setDropdownOpen(false); }} className="dropdown-item">
+                  Logout
+                </button>
+              </>
+            ) : (
+              <button onClick={() => { navigate("/login"); setDropdownOpen(false); }} className="dropdown-item">
+                Login / Signup
+              </button>
+            )}
+          </div>
+        )}
+      </li>
+
+      </ul>
+    </nav>
   );
 }
 
