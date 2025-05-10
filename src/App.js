@@ -11,7 +11,7 @@ import NotFound from './components/CodingArena/NotFound';
 import './styles/variables.css';
 import './App.css';
 import User from './components/CodingArena/Users/User';
-import ProfilePage from './components/profile/ProfilePage';
+import ProfilePage from './components/profile/ProfilePage';````````````
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(
