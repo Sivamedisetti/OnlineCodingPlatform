@@ -15,6 +15,6 @@ Router.put('/update_status', controller.UpdateStatus);
 Router.put('/update_access', controller.UpdateAccess);
 
 Router.delete('/delete_problem/:id', controller.DeleteProblem);
-Router.delete('/delete_user/:id', controller.DeleteUser)
+Router.delete('/delete_user', controller.DeleteUser)
 
 module.exports = Router;

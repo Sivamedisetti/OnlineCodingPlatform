@@ -40,7 +40,7 @@ function Signin({onLogin , setShowForgot}) {
         if (response.status === 200) {
           toast.success("Login successful!");
           localStorage.setItem('isAuthenticated', 'true');
-          localStorage.setItem('username' , JSON.stringify(response.data.username));
+          localStorage.setItem('username' , JSON.stringify(response.data.name));
           localStorage.setItem('access', JSON.stringify(response.data.access));
           onLogin();
           navigate("/home")

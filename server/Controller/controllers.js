@@ -2,6 +2,9 @@ const {Questions_Table , register} = require('../Model/models');
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs')
 const { nanoid } = require('nanoid');
+const { auth } = require('./firebase');
+const admin = require('./firebase_admin')
+const { signInWithEmailAndPassword , createUserWithEmailAndPassword } = require("firebase/auth");
 
 const GetAllProblems = async(req , res) => {
     await Questions_Table.find({ status: "Accepted"})
@@ -63,10 +66,14 @@ const UpdateAccess = async(req , res) => {
 }
   
 const SignUp = async(req , res) => {
+  const { password, email } = req.body;
     try {
-        const { username, password, email } = req.body;
-        const hashed_password = await bcrypt.hash(password, 10);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const idToken = await userCredential.user.getIdToken();
+        const decodedToken = await admin.auth().verifyIdToken(idToken);
+        
         let access = 'user';
+        let username = email.split('@')[0]
         if(email == 'admin@codeforge.com'){
           access = 'admin';
         }
@@ -76,33 +83,44 @@ const SignUp = async(req , res) => {
           access,
           username: username.charAt(0).toUpperCase() + username.slice(1).toLowerCase(),
           email,
-          password: hashed_password,
+          password: "firebase"
         });
     
         await newUser.save();
-        res.status(201).json({ message: "User registered successfully!" });
+        res.json({ name: username, uid: decodedToken.uid });
     } 
     catch (err) {
         if(err.code === 11000) res.status(400).json({error: "Username already exists."});
-        else res.status(500).json({ error: "Failed to register user. Please try again."});
+        else res.status(500).json({ error: err.message });
     }
 }
 
-const SignIn = async(req , res) => {
-    const {email , password} = req.body;
-    const user = await register.findOne({email});
+const SignIn = async (req, res) => {
+  const { email, password } = req.body;
 
-    if(user)
-    {
-        const match = await bcrypt.compare(password , user.password);
-        if(match) {
-            req.session.user = { id: user.userid, username: user.username , access: user.access };
-            res.status(200).json({username: user.username , access: user.access});
-        }
-        else res.status(400).json({message: 'Invalid Password'});
+  try {
+    const user = await register.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
     }
-    else res.status(404).json({message: "User Not Found"});
-}
+
+    const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const idToken = await userCredential.user.getIdToken();
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+
+    req.session.user = {
+      id: user.userid,
+      username: user.username,
+      access: user.access
+    };
+
+    res.json({ name: user.username, uid: decodedToken.uid, access: user.access });
+
+  } catch (error) {
+    res.status(401).json({ error: error.message });
+  }
+};
+
 
 const AddProblem = async(req , res) => {
     const user = req.session.user;
@@ -178,16 +196,25 @@ const DeleteProblem = async (req , res) => {
 }
 
 const DeleteUser = async (req, res) => {
-  const id = req.params.id;
+  const { id, email } = req.body;
 
   try {
+    const user = await register.findOne({ email });
+    if (!user) {
+      return res.status(404).json({ message: "User not found in database" });
+    }
+
+    const firebaseUser = await admin.auth().getUserByEmail(email);
+    await admin.auth().deleteUser(firebaseUser.uid);
+
     await register.findByIdAndDelete(id);
     res.status(200).json({ message: "User deleted successfully" });
   } catch (error) {
     console.error(error);
-    res.status(500).json({ message: "Failed to delete user" });
+    res.status(500).json({ message: error.message });
   }
 };
+
 
 module.exports = {
     GetAllProblems,
