@@ -9,9 +9,9 @@ function Signup() {
   // const backendAPI = 'http://localhost:8000';
 
   const [state, setState] = React.useState({
-    username: "",
     email: "",
-    password: ""
+    password: "",
+    confirm_password: ""
   });
 
   const navigate = useNavigate();
@@ -27,9 +27,9 @@ function Signup() {
   const handleOnSubmit = async (evt) => {
     evt.preventDefault();
 
-    const { username, email, password } = state;
+    const { email, password , confirm_password } = state;
 
-    axios.post(`${backendAPI}/signup`, state)
+    if(password === confirm_password) axios.post(`${backendAPI}/signup`, state)
       .then((response) => { 
         toast.success('registered successfully')
       })
@@ -44,7 +44,7 @@ function Signup() {
       })
       .finally(() => {
         setState({
-          username: "",
+          confirm_password: "",
           email: "",
           password: ""
         });
@@ -57,15 +57,6 @@ function Signup() {
         <form onSubmit={handleOnSubmit} className="form">
           <h1 className="h1">Create Account</h1>
           
-          <input
-            type="text"
-            name="username"
-            value={state.username}
-            onChange={handleChange}
-            placeholder="Name"
-            className="input"
-            required
-          />
           <input
             type="email"
             name="email"
@@ -81,6 +72,15 @@ function Signup() {
             value={state.password}
             onChange={handleChange}
             placeholder="Password"
+            className="input"
+            required
+          />
+          <input
+            type="password"
+            name="confirm_password"
+            value={state.confirm_password}
+            onChange={handleChange}
+            placeholder="Confirm Password"
             className="input"
             required
           />

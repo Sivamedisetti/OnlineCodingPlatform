@@ -40,13 +40,14 @@ const User = () => {
           selector: row => row.Delete, 
           cell: row => 
             <div>
-              <img onClick={() => deleteuser(row._id)} src={deleted} alt="delete" style={{marginLeft: '10px' ,height: "17px", width: "17px", cursor: 'pointer'}}/>
+              {/* {console.log("delete : " + row._id + " = "+row.email)} */}
+              <img onClick={() => deleteuser(row._id , row.email)} src={deleted} alt="delete" style={{marginLeft: '10px' ,height: "17px", width: "17px", cursor: 'pointer'}}/>
             </div>
         }
     ];
 
-    function deleteuser(id){
-      axios.delete(`${backendAPI}/delete_user/${id}`,)
+    function deleteuser(id , email){
+      axios.delete(`${backendAPI}/delete_user`,{ data: {id , email}})
         .then(() => {
           APICalling();
           toast.success("Deleted Successfully")
