@@ -2,9 +2,11 @@ import React, { useState } from 'react';
 import './loginstyle.css';
 import Signin from './signin';
 import Signup from './signup';
+import Forgot from './forgot/Forgot';
 
 function Login({onLogin}) {
   const [type, setType] = useState("signin");
+    const [showForgot, setShowForgot] = useState(false);
 
   const handleOnClick = (text) => {
     if (text !== type) {
@@ -18,7 +20,7 @@ function Login({onLogin}) {
     <div className="loginApp">
       <div className={containerClass} id="container">
         <Signup />
-        <Signin onLogin={onLogin}/>
+        <Signin onLogin={onLogin} setShowForgot={setShowForgot}/>
         <div className="overlay-container">
           <div className="overlay">
             {/* shown in signup page left-side */}
@@ -48,6 +50,11 @@ function Login({onLogin}) {
           </div>
         </div>
       </div>
+      {showForgot && (
+        <div className="forgot-overlay">
+          <Forgot onClose={() => setShowForgot(false)} />
+        </div>
+      )}
     </div>
   );
 }

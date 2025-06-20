@@ -4,7 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
 
-function Signin({onLogin}) {
+function Signin({onLogin , setShowForgot}) {
   const backendAPI = 'https://onlinecodingplatform.onrender.com';
   // const backendAPI = 'http://localhost:8000';
 
@@ -33,7 +33,7 @@ function Signin({onLogin}) {
     }
 
     console.log(email , password);
-    axios.post(`${backendAPI}/login`, state , {
+    axios.post(`${backendAPI}/login`, {email , password} , {
       withCredentials: true
     })
       .then((response) => {
@@ -77,7 +77,7 @@ function Signin({onLogin}) {
           onChange={handleChange}
           className="input"
         />
-        <a className="a" href="#">Forgot your password?</a>
+        <a className="a" onClick={() => setShowForgot(true)} >Forgot password?</a>
         <button type="submit" className="button">Sign In</button>
       </form>
       <ToastContainer
