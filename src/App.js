@@ -85,8 +85,8 @@ function Home() {
           localStorage.getItem('isAuthenticated') === 'true' &&
           <p className="hello-user">
             Hello, <span className="username">
-              {/* {JSON.parse(localStorage.getItem('username') || "null")}  */}
-              </span>
+              {JSON.parse(localStorage.getItem('username') || '"Guest"')}
+            </span>
           </p>
         }
         <h1>
