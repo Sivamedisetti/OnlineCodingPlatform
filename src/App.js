@@ -8,6 +8,7 @@ import UploadProblem from './components/CodingArena/UploadProblem';
 import Login from './components/loginForm/login';
 import Request from './components/CodingArena/Request/request';
 import NotFound from './components/CodingArena/NotFound';
+import Forgot from './components/loginForm/forgot/Forgot';
 import './styles/variables.css';
 import './App.css';
 import User from './components/CodingArena/Users/User';
@@ -60,6 +61,7 @@ function App() {
                   <Login onLogin={ () => setIsAuthenticated(true) } />
                 }
               />
+              <Route path="/forgot" element={<Forgot />} />
               <Route path="/" element={<Home />} />
               <Route path='/home' element={ <Navigate to='/'/>} />
               <Route path="/playground" element={<Playground/>} />

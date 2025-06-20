@@ -1,0 +1,71 @@
+.forgot-wrapper {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 9999;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.forgot-box {
+  background-color: white;
+  padding: 40px;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.forgot-title {
+  margin-bottom: 20px;
+  font-size: 22px;
+  color: #333;
+}
+
+.forgot-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+.forgot-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.forgot-submit,
+.forgot-close {
+  flex: 1;
+  padding: 10px 0;
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.forgot-submit {
+  background-color: #007bff;
+  color: white;
+}
+
+.forgot-submit:hover {
+  background-color: #0056b3;
+}
+
+.forgot-close {
+  background-color: #ccc;
+  color: #333;
+}
+
+.forgot-close:hover {
+  background-color: #999;
+}
