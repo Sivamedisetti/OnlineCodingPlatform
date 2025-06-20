@@ -107,14 +107,16 @@ const SignIn = async (req, res) => {
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
     const idToken = await userCredential.user.getIdToken();
     const decodedToken = await admin.auth().verifyIdToken(idToken);
+    let username = email.split('@')[0]
 
+    const name = username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()
     req.session.user = {
       id: user.userid,
       username: user.username,
       access: user.access
     };
 
-    res.json({ name: user.username, uid: decodedToken.uid, access: user.access });
+    res.json({ name: name, uid: decodedToken.uid, access: user.access });
 
   } catch (error) {
     res.status(401).json({ error: error.message });
