@@ -41,6 +41,7 @@ function Signin({onLogin , setShowForgot}) {
           toast.success("Login successful!");
           localStorage.setItem('isAuthenticated', 'true');
           localStorage.setItem('username' , JSON.stringify(response.data.name));
+          console.log('username: '+response.data.name)
           localStorage.setItem('access', JSON.stringify(response.data.access));
           onLogin();
           navigate("/home")
