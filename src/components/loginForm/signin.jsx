@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -15,8 +15,12 @@ function Signin({onLogin , setShowForgot}) {
     email: "",
     password: ""
   });
+  const [is_auth , setIs_auth] = useState(false);
   const navigate = useNavigate();
 
+  const Authentication = () => {
+    
+  }
   const handleChange = (evt) => {
     const value = evt.target.value;
     setState({
@@ -83,10 +87,10 @@ function Signin({onLogin , setShowForgot}) {
         />
         <a className="a" onClick={() => setShowForgot(true)} >Forgot password?</a>
         <div className="social-button">
-            <button type="button" className="google" onClick={() => googleLogin(onLogin)}>
+            <button type="button" className="google" onClick={() => googleLogin(onLogin , navigate)}>
               <img src={google} alt="google" className="social-img"/> &nbsp; Google
             </button>
-            <button type="button" className="github" onClick={() => githubLogin(onLogin)}>
+            <button type="button" className="github" onClick={() => githubLogin(onLogin , navigate)}>
               <img src={github} alt="github" className="social-img"/> &nbsp; Github
             </button>
         </div>
