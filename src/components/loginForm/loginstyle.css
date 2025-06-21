@@ -249,3 +249,41 @@
   justify-content: center;
   z-index: 9999;
 }
+
+.social-button{
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 1rem;
+}
+
+.social-img{
+  height: 20px;
+  width: 20px;
+}
+
+.google{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: #ffffff;
+  color: #444;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600
+}
+
+.github{
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  background-color: #616161;
+  color: #f8f7f7;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600
+}

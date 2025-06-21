@@ -5,6 +5,8 @@ const controller = require('../Controller/controllers');
 Router.post('/signup', controller.SignUp);
 Router.post('/login', controller.SignIn);
 Router.post('/post_problem', controller.AddProblem);
+Router.post('/auth/google', controller.Social);
+Router.post('/auth/github', controller.Social);
 
 Router.get('/get_problemdata/:id', controller.GetProblem);
 Router.get('/getcodesheet', controller.GetAllProblems);

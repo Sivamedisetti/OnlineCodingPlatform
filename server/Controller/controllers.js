@@ -123,6 +123,34 @@ const SignIn = async (req, res) => {
   }
 };
 
+const Social = async (req , res) => {
+  const { idToken } = req.body;
+  try {
+    const idToken = req.body.idToken;
+    const decodedToken = await admin.auth().verifyIdToken(idToken);
+    const email = decodedToken.email || "";
+    const name = email.split("@")[0];
+    const user = await register.findOne({email});
+
+    if(!user){
+      const userid = nanoid();
+      const newUser = new register({
+        userid,
+        access: 'user',
+        username: name.charAt(0).toUpperCase() + name.slice(1).toLowerCase(),
+        email,
+        password: "firebase"
+      });
+      await newUser.save();
+      return res.status(200).json({ name, uid: decodedToken.uid, access: 'user'});
+    }
+    
+    else return res.status(200).json({ name: user.username, uid: decodedToken.uid ,  access: user.access});
+  } catch (err) {
+    console.error("Social Auth Error:", err);
+    return res.status(401).json({ message: err });
+  }
+}
 
 const AddProblem = async(req , res) => {
     const user = req.session.user;
@@ -229,5 +257,6 @@ module.exports = {
     UpdateStatus,
     GetAllUsers,
     UpdateAccess,
-    DeleteUser
+    DeleteUser,
+    Social
 }
