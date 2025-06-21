@@ -83,10 +83,10 @@ function Signin({onLogin , setShowForgot}) {
         />
         <a className="a" onClick={() => setShowForgot(true)} >Forgot password?</a>
         <div className="social-button">
-            <button className="google" onClick={() => googleLogin(onLogin)}>
+            <button type="button" className="google" onClick={() => googleLogin(onLogin)}>
               <img src={google} alt="google" className="social-img"/> &nbsp; Google
             </button>
-            <button className="github" onClick={() => githubLogin(onLogin)}>
+            <button type="button" className="github" onClick={() => githubLogin(onLogin)}>
               <img src={github} alt="github" className="social-img"/> &nbsp; Github
             </button>
         </div>
