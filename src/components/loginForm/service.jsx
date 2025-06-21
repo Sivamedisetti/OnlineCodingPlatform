@@ -19,6 +19,7 @@ export const googleLogin = async (onLogin) => {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
     const idToken = await result.user.getIdToken();
+    console.log('id token : '+idToken)
 
     const res = await axios.post(`${backendUrl}/auth/google`, { idToken });
     localStorage.setItem('isAuthenticated', 'true');
@@ -36,6 +37,7 @@ export const githubLogin = async (onLogin) => {
     const provider = new GithubAuthProvider();
     const result = await signInWithPopup(auth, provider);
     const idToken = await result.user.getIdToken();
+    console.log('id token : '+idToken)
 
     const res = await axios.post(`${backendUrl}/auth/github`, { idToken });
     localStorage.setItem('isAuthenticated', 'true');
