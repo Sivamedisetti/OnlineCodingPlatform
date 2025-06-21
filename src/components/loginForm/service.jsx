@@ -2,7 +2,7 @@ import { GoogleAuthProvider, GithubAuthProvider, signInWithPopup, sendPasswordRe
 import axios from "axios";
 import { auth } from "./firebase";
 
-const backendUrl = "https://groundreactionforce.onrender.com";
+const backendUrl = "https://onlinecodingplatform.onrender.com";
 // const backendUrl = "http://localhost:8000";
 
 export const sendResetPassword = async (email) => {
@@ -19,7 +19,6 @@ export const googleLogin = async (onLogin) => {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
     const idToken = await result.user.getIdToken();
-    // console.log('id token : '+idToken)
 
     const res = await axios.post(`${backendUrl}/auth/google`, { idToken });
     // console.log(JSON.stringify(res))
