@@ -3,8 +3,11 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import github from '../../assets/github.svg';
+import google from '../../assets/google.svg';
+import { googleLogin , githubLogin } from "./service";
 
-function Signup() {
+function Signup({ onLogin }) {
   const backendAPI = 'https://onlinecodingplatform.onrender.com';
   // const backendAPI = 'http://localhost:8000';
 
@@ -84,6 +87,14 @@ function Signup() {
             className="input"
             required
           />
+          <div className="social-button" style={{marginTop: '0.5rem'}}>
+            <button className="google" onClick={() => googleLogin(onLogin)}>
+              <img src={google} alt="google" className="social-img"/> &nbsp; Google
+            </button>
+            <button className="github" onClick={() => githubLogin(onLogin)}>
+              <img src={github} alt="github" className="social-img"/> &nbsp; Github
+            </button>
+          </div>
           <button type="submit" className="button">Sign Up</button>
         </form>
       </div>

@@ -3,6 +3,7 @@ import axios from "axios";
 import { auth } from "./firebase";
 
 const backendUrl = "https://groundreactionforce.onrender.com";
+// const backendUrl = "http://localhost:8000";
 
 export const sendResetPassword = async (email) => {
   try {
@@ -10,5 +11,39 @@ export const sendResetPassword = async (email) => {
     alert("✅ Password reset email sent!");
   } catch (err) {
     console.error("Reset Password Error:", err);
+  }
+};
+
+export const googleLogin = async (onLogin) => {
+  try {
+    const provider = new GoogleAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    const idToken = await result.user.getIdToken();
+
+    const res = await axios.post(`${backendUrl}/auth/google`, { idToken });
+    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('username' , JSON.stringify(res.data.name));
+    localStorage.setItem('access', JSON.stringify(res.data.access));
+    onLogin();
+    window.location.href = "/home";
+  } catch (err) {
+    console.error("Google Login Failed:", err);
+  }
+};
+
+export const githubLogin = async (onLogin) => {
+  try {
+    const provider = new GithubAuthProvider();
+    const result = await signInWithPopup(auth, provider);
+    const idToken = await result.user.getIdToken();
+
+    const res = await axios.post(`${backendUrl}/auth/github`, { idToken });
+    localStorage.setItem('isAuthenticated', 'true');
+    localStorage.setItem('username' , JSON.stringify(res.data.name));
+    localStorage.setItem('access', JSON.stringify(res.data.access));
+    onLogin();
+    window.location.href = "/home";
+  } catch (err) {
+    console.error("GitHub Login Failed:", err);
   }
 };

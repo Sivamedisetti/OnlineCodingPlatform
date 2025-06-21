@@ -3,6 +3,9 @@ import axios from "axios";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useNavigate } from 'react-router-dom';
+import github from '../../assets/github.svg';
+import google from '../../assets/google.svg';
+import { googleLogin , githubLogin} from './service'
 
 function Signin({onLogin , setShowForgot}) {
   const backendAPI = 'https://onlinecodingplatform.onrender.com';
@@ -79,7 +82,16 @@ function Signin({onLogin , setShowForgot}) {
           className="input"
         />
         <a className="a" onClick={() => setShowForgot(true)} >Forgot password?</a>
+        <div className="social-button">
+            <button className="google" onClick={() => googleLogin(onLogin)}>
+              <img src={google} alt="google" className="social-img"/> &nbsp; Google
+            </button>
+            <button className="github" onClick={() => githubLogin(onLogin)}>
+              <img src={github} alt="github" className="social-img"/> &nbsp; Github
+            </button>
+        </div>
         <button type="submit" className="button">Sign In</button>
+
       </form>
       <ToastContainer
         position="top-center"

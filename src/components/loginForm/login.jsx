@@ -19,7 +19,7 @@ function Login({onLogin}) {
   return (
     <div className="loginApp">
       <div className={containerClass} id="container">
-        <Signup />
+        <Signup onLogin={onLogin}/>
         <Signin onLogin={onLogin} setShowForgot={setShowForgot}/>
         <div className="overlay-container">
           <div className="overlay">
