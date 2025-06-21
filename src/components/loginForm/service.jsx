@@ -14,7 +14,7 @@ export const sendResetPassword = async (email) => {
   }
 };
 
-export const googleLogin = async (onLogin) => {
+export const googleLogin = async ({onLogin , navigate}) => {
   try {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
@@ -26,13 +26,13 @@ export const googleLogin = async (onLogin) => {
     localStorage.setItem('username' , JSON.stringify(res.data.name));
     localStorage.setItem('access', JSON.stringify(res.data.access));
     onLogin();
-    window.location.href = "/home";
+    navigate('/home')
   } catch (err) {
     console.error("Google Login Failed:", err);
   }
 };
 
-export const githubLogin = async (onLogin) => {
+export const githubLogin = async ({onLogin , navigate}) => {
   try {
     const provider = new GithubAuthProvider();
     const result = await signInWithPopup(auth, provider);
@@ -45,7 +45,7 @@ export const githubLogin = async (onLogin) => {
     localStorage.setItem('username' , JSON.stringify(res.data.name));
     localStorage.setItem('access', JSON.stringify(res.data.access));
     onLogin();
-    window.location.href = "/home";
+    navigate('/home')
   } catch (err) {
     console.error("GitHub Login Failed:", err);
   }
