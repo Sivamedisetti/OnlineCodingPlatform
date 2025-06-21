@@ -126,7 +126,9 @@ const SignIn = async (req, res) => {
 const Social = async (req , res) => {
   const { idToken } = req.body;
   try {
+    console.log('idToken', idToken);
     const decodedToken = await admin.auth().verifyIdToken(idToken);
+    console.log('decodeToken',decodedToken)
     const email = decodedToken.email || "";
     const name = email.split("@")[0];
     const user = await register.findOne({email});
