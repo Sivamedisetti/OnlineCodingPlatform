@@ -14,7 +14,7 @@ export const sendResetPassword = async (email) => {
   }
 };
 
-export const googleLogin = async ({onLogin , navigate}) => {
+export const googleLogin = async (onLogin , navigate) => {
   try {
     const provider = new GoogleAuthProvider();
     const result = await signInWithPopup(auth, provider);
@@ -32,7 +32,7 @@ export const googleLogin = async ({onLogin , navigate}) => {
   }
 };
 
-export const githubLogin = async ({onLogin , navigate}) => {
+export const githubLogin = async (onLogin , navigate) => {
   try {
     const provider = new GithubAuthProvider();
     const result = await signInWithPopup(auth, provider);
