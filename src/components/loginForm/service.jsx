@@ -22,7 +22,7 @@ export const googleLogin = async (onLogin) => {
     // console.log('id token : '+idToken)
 
     const res = await axios.post(`${backendUrl}/auth/google`, { idToken });
-    console.log(JSON.stringify(res))
+    // console.log(JSON.stringify(res))
     localStorage.setItem('isAuthenticated', 'true');
     localStorage.setItem('username' , JSON.stringify(res.data.name));
     localStorage.setItem('access', JSON.stringify(res.data.access));
@@ -41,7 +41,7 @@ export const githubLogin = async (onLogin) => {
     // console.log('id token : '+idToken)
 
     const res = await axios.post(`${backendUrl}/auth/github`, { idToken });
-    console.log(JSON.stringify(res))
+    // console.log(JSON.stringify(res))
     localStorage.setItem('isAuthenticated', 'true');
     localStorage.setItem('username' , JSON.stringify(res.data.name));
     localStorage.setItem('access', JSON.stringify(res.data.access));
