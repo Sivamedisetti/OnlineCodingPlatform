@@ -89,9 +89,17 @@ print('Hello World!')`);
           {problem ? (
             <>
               <h1>{problem.title}</h1>
-              <p>{problem.description}</p> <br/> <h4>Example</h4>
-              <p>{problem.sample_input}</p> <br/>
-              <p>{problem.sample_output}</p> <br/>
+              <div dangerouslySetInnerHTML={{ __html: problem.description }} />
+              <h3>Example:</h3>
+              <p> 
+                <h4>Input</h4> 
+                {problem.sample_input}
+              </p> <br/>
+              <p>
+                <h4>Output</h4>
+                {problem.sample_output}
+              </p> <br/>
+              <div dangerouslySetInnerHTML={{ __html: problem.explaination }} />
               <h5>Execution Time : {problem.constraints / 1000}s</h5>
             </>
             ) : (

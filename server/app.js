@@ -6,11 +6,12 @@ const http = require("http");
 const cors = require("cors");
 const Router = require("./Routes/routes")
 const dotenv = require('dotenv').config();
+const cookieParser = require('cookie-parser');
 
 const app = express();
 const server = http.createServer(app);
 
-
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
@@ -28,9 +29,15 @@ app.use(session({
   cookie: {
     httpOnly: true,
     secure: true,
+    sameSite: 'lax',
     maxAge: 2 * 24 * 60 * 60 * 1000
   }
 }));
+app.use((req, res, next) => {
+  console.log("SESSION DEBUG:", req.session);
+  next();
+});
+
 app.use("/", Router);
 
 mongoose
@@ -43,12 +50,13 @@ mongoose
   )
   .then(() => {
     console.log("Connected to Mongo DB");
-    server.listen(8000, () => {
-      console.log(`App running on port: 8000`);
-    });
   })
   .catch((err) => {
     console.error(err);
   });
 
+
+server.listen(8000, () => {
+  console.log(`App running on port: 8000`);
+});
 module.exports = app;

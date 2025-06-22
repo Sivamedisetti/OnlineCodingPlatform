@@ -112,9 +112,11 @@ const SignIn = async (req, res) => {
     const name = username.charAt(0).toUpperCase() + username.slice(1).toLowerCase()
     req.session.user = {
       id: user.userid,
-      username: user.username,
+      username: name,
       access: user.access
     };
+
+    console.log("Session after login:", req.session);
 
     res.json({ name: name, uid: decodedToken.uid, access: user.access });
 
@@ -155,6 +157,7 @@ const Social = async (req , res) => {
 
 const AddProblem = async(req , res) => {
     const user = req.session.user;
+    console.log(req.session.user);
     if(user === undefined){
         return res.status(401).json({message: "navigate to logout"});
     }
@@ -165,11 +168,12 @@ const AddProblem = async(req , res) => {
         description: req.body.description,
         sample_input: req.body.sample_input,
         sample_output: req.body.sample_output,
+        explaination: req.body.explaination,
         constraints: req.body.constraints,
         test_cases: req.body.test_cases,
         URL: req.body.URL,
         Topic_difficulty: req.body.Topic_difficulty,
-        status: user.access === "admin" ? "accepted" : "pending"
+        status: user.access === "admin" ? "Accepted" : "pending"
     });
     
     await newProblem

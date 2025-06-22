@@ -80,6 +80,31 @@
     min-height: 80px;
   }
   
+  .full-row{
+    grid-column: span 2;
+  }
+
+  .delete-button{
+    margin-left: 10px;
+    color: red;
+    border: none;
+    height: 4vh;
+    width: 4vh;
+    border-radius: 3px;
+    font-size: x-large;
+    cursor: pointer;
+  }
+
+  .Add-button{
+    margin-top: 5px;
+    border: none;
+    border-radius: 5px;
+    height: 5vh;
+    width: 25%;
+    font-size: medium;
+    cursor: pointer;
+  }
+
   @media (max-width: 768px) {
     .upload-problem form {
       grid-template-columns: 1fr;
