@@ -13,6 +13,7 @@ const server = http.createServer(app);
 
 app.use(cookieParser());
 app.use(express.json());
+app.set('trust proxy', 1);
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
   origin: [
@@ -21,8 +22,6 @@ app.use(cors({
   ],
   credentials: true
 }));
-
-app.set('trust proxy', 1);
 
 app.use(session({
   name: 'codeforge.sid',
