@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
   origin: [
-    'http://localhost:3000',
+    // 'http://localhost:3000',
     'https://codeforge-dyvj.onrender.com'
   ],
   credentials: true
