@@ -22,12 +22,13 @@ app.use(cors({
   credentials: true
 }));
 app.use(session({
+  name: 'codeforge.sid',
   secret: 'my-secret',
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
     mongoUrl: process.env.Database_URL,
-    ttl: 75 * 60 * 60 
+    ttl: 2 * 24 * 60 * 60 
   }),
   cookie: {
     httpOnly: true,
