@@ -78,15 +78,22 @@ const SignUp = async(req , res) => {
           access = 'admin';
         }
         const userid = nanoid();
+        const name = username.charAt(0).toUpperCase() + username.slice(1).toLowerCase();
         const newUser = new register({
           userid,
           access,
-          username: username.charAt(0).toUpperCase() + username.slice(1).toLowerCase(),
+          username: name,
           email,
           password: "firebase"
         });
     
         await newUser.save();
+
+        req.session.user = {
+          id: userid,
+          username: name,
+          access: access
+        };
         res.json({ name: username, uid: decodedToken.uid });
     } 
     catch (err) {
