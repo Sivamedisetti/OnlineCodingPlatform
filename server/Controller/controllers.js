@@ -141,7 +141,7 @@ const Social = async (req , res) => {
     const email = decodedToken.email || "";
     const name = email.split("@")[0];
     const user = await register.findOne({email});
-
+    
     if(!user){
       const userid = nanoid();
       const newUser = new register({
@@ -161,7 +161,14 @@ const Social = async (req , res) => {
       return res.status(200).json({ name, uid: decodedToken.uid, access: 'user'});
     }
     
-    else return res.status(200).json({ name: user.username, uid: decodedToken.uid ,  access: user.access});
+    else {
+      req.session.user = {
+        id: user.userid,
+        username: name,
+        access: user.access
+      };
+      return res.status(200).json({ name: user.username, uid: decodedToken.uid ,  access: user.access});
+    }
   } catch (err) {
     console.error("Social Auth Error:", err);
     return res.status(401).json({ message: err });
