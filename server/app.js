@@ -15,10 +15,7 @@ app.use(cookieParser());
 app.set('trust proxy', 1);
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
-  origin: [
-    'http://localhost:3000',
-    'https://codeforge-dyvj.onrender.com'
-  ],
+  origin:'https://codeforge-dyvj.onrender.com',
   credentials: true
 }));
 
