@@ -176,7 +176,7 @@ const Social = async (req , res) => {
 }
 
 const AddProblem = async(req , res) => {
-    const user = req.session.user;
+    const user = req.session;
     console.log('topic difficulty',req.body.Topic_difficulty);
     console.log('user : ', user)
     if(user === undefined){
