@@ -94,6 +94,7 @@ const SignUp = async(req , res) => {
           username: name,
           access: access
         };
+        req.session.save();
         res.json({ name: username, uid: decodedToken.uid });
     } 
     catch (err) {
@@ -122,7 +123,7 @@ const SignIn = async (req, res) => {
       username: name,
       access: user.access
     };
-
+    req.session.save();
     // console.log("Session after login:", req.session);
 
     res.json({ name: name, uid: decodedToken.uid, access: user.access });
@@ -158,6 +159,7 @@ const Social = async (req , res) => {
         username: name.charAt(0).toUpperCase() + name.slice(1).toLowerCase(),
         access: 'user'
       };
+      req.session.save();
       return res.status(200).json({ name, uid: decodedToken.uid, access: 'user'});
     }
     
@@ -167,6 +169,7 @@ const Social = async (req , res) => {
         username: name,
         access: user.access
       };
+      req.session.save();
       return res.status(200).json({ name: user.username, uid: decodedToken.uid ,  access: user.access});
     }
   } catch (err) {
