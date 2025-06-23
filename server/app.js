@@ -38,10 +38,10 @@ app.use(session({
   }
 }));
 
-app.use((req,res)=> {
-  console.log('session',req.session)
+app.use((req, res, next) => {
+  console.log('session', req.session);
   next();
-})
+});
 
 app.use("/", Router);
 
