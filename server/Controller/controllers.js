@@ -165,6 +165,7 @@ const Social = async (req , res) => {
 const AddProblem = async(req , res) => {
     const user = req.session.user;
     console.log('topic difficulty',req.body.Topic_difficulty);
+    console.log('user : ', user)
     if(user === undefined){
         return res.status(401).json({message: "navigate to logout"});
     }
