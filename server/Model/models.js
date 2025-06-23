@@ -32,9 +32,12 @@ const Questions_table = new mongoose.Schema({
     progress: {
         type: String
     },
-    test_cases : {
-        type :String,
-    },
+    test_cases: [
+        {
+            input: { type: String},
+            output: { type: String}
+        }
+    ],
     title : { 
         type: String,
         unique :true,
@@ -60,11 +63,14 @@ const Questions_table = new mongoose.Schema({
     sample_output:{
         type:String, 
     },
+    explaination:{
+        type: String,
+    },
     status:{
         type:String,
         default:"pending"
     },
-    user:{
+    username:{
         type: String
     }
 });

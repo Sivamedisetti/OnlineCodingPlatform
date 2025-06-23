@@ -84,6 +84,15 @@ function Arena() {
       });
   };
 
+  const customStyles = {
+    pagination: {
+      style: {
+        fontSize: '2vh',
+        justifyContent: 'center',
+      },
+    },
+  };
+
   useEffect(() => {
     APICalling();
   },[]);
@@ -97,7 +106,14 @@ function Arena() {
             <l-waveform size="35" stroke="3.5" speed="1" color="#0187fc" />
           </div> : GetData.length === 0 ? 
             <p style={{ textAlign: 'center', fontSize: '18px', color: '#666' }}>No Problems available</p> :
-            <DataTable columns={columns} data={GetData} />
+            <DataTable 
+              columns={columns} 
+              data={GetData} 
+              customStyles={customStyles} 
+              pagination 
+              highlightOnHover 
+              responsive
+            />
       }
 
       <ToastContainer

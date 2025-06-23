@@ -63,9 +63,8 @@ const Request = () => {
                 <p
                   style={{
                     backgroundColor: 
-                      ele['Topic_difficulty'] === 'Easy' ? 'var(--color-primary-green)' :
-                      ele['Topic_difficulty'] === 'Medium' ? 'orange' :
-                      'red',
+                      ele['Topic_difficulty'] === 'Easy' || ele['Topic_difficulty'] === 'easy' ? 'var(--color-primary-green)' :
+                      ele['Topic_difficulty'] === 'Medium' || ele['Topic_difficulty'] === 'medium' ? 'orange' : 'red',
                     color: 'white', 
                     padding: '5px 10px',
                     borderRadius: '10px',

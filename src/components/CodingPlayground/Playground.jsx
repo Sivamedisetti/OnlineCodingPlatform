@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
-import CodeEditor from './Editor'; // Correctly import your CodeEditor component
+import CodeEditor from './Editor';
 import axios from 'axios';
-import './EditorStyle.css'; // Import CSS for consistent styling
+import './EditorStyle.css'; 
 import CustomDropdown from './DropDown';
 
 function Playground() {
   const [code, setCode] = useState(`# write python code here...
 print('Hello World!')`);
-  const [input, setInput] = useState('');  // Store the multiline input as a string
+  const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [executionTime, setExecutionTime] = useState(0);
  
@@ -41,7 +41,6 @@ print('Hello World!')`);
     data.language = codelang;
     data.version = versions[codelang];
     data.stdin = input;
-    // console.log(data)
 
     const start = Date.now(); // Upto 283 iterations
     axios.post('https://emkc.org/api/v2/piston/execute', data , /*{timeout: 3*(runtime + compiletime)}*/)
