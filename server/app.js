@@ -21,6 +21,9 @@ app.use(cors({
   ],
   credentials: true
 }));
+
+app.set('trust proxy', 1);
+
 app.use(session({
   name: 'codeforge.sid',
   secret: 'my-secret',
@@ -32,8 +35,8 @@ app.use(session({
   }),
   cookie: {
     httpOnly: true,
-    secure: false,
-    sameSite: "lax",
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     maxAge: 2 * 24 * 60 * 60 * 1000
   }
 }));
