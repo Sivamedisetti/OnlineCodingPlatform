@@ -9,10 +9,9 @@ const dotenv = require('dotenv').config();
 const cookieParser = require('cookie-parser');
 
 const app = express();
-const server = http.createServer(app);
-
-app.use(cookieParser());
 app.use(express.json());
+const server = http.createServer(app);
+app.use(cookieParser());
 app.set('trust proxy', 1);
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
@@ -24,10 +23,10 @@ app.use(cors({
 }));
 
 app.use(session({
-  name: 'codeforge.sid',
-  secret: 'my-secret',
+  secret: process.env.SECERT,
   resave: false,
   saveUninitialized: false,
+  proxy: true,
   store: MongoStore.create({
     mongoUrl: process.env.Database_URL,
     ttl: 2 * 24 * 60 * 60 
