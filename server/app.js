@@ -38,6 +38,10 @@ app.use(session({
   }
 }));
 
+app.use((req,res)=> {
+  console.log('session',req.session)
+})
+
 app.use("/", Router);
 
 mongoose

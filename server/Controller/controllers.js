@@ -152,6 +152,12 @@ const Social = async (req , res) => {
         password: "firebase"
       });
       await newUser.save();
+
+      req.session.user = {
+        id: userid,
+        username: name.charAt(0).toUpperCase() + name.slice(1).toLowerCase(),
+        access: 'user'
+      };
       return res.status(200).json({ name, uid: decodedToken.uid, access: 'user'});
     }
     
