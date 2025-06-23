@@ -116,7 +116,7 @@ const SignIn = async (req, res) => {
       access: user.access
     };
 
-    console.log("Session after login:", req.session);
+    // console.log("Session after login:", req.session);
 
     res.json({ name: name, uid: decodedToken.uid, access: user.access });
 
@@ -157,7 +157,7 @@ const Social = async (req , res) => {
 
 const AddProblem = async(req , res) => {
     const user = req.session.user;
-    console.log(req.session.user);
+    console.log('topic difficulty',req.body.Topic_difficulty);
     if(user === undefined){
         return res.status(401).json({message: "navigate to logout"});
     }

@@ -34,8 +34,8 @@ const Questions_table = new mongoose.Schema({
     },
     test_cases: [
         {
-            input: { type: String, required: true },
-            output: { type: String, required: true }
+            input: { type: String},
+            output: { type: String}
         }
     ],
     title : { 
@@ -70,7 +70,7 @@ const Questions_table = new mongoose.Schema({
         type:String,
         default:"pending"
     },
-    user:{
+    username:{
         type: String
     }
 });

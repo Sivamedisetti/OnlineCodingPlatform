@@ -41,6 +41,7 @@ function UploadProblem({ setIsAuthenticated }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('problemdetails',ProblemDetails)
     axios
       .post(`${backendAPI}/post_problem`, ProblemDetails, {
         withCredentials: true
