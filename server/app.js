@@ -15,7 +15,10 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
-  origin: ['https://codeforge-dyvj.onrender.com'],
+  origin: [
+    'http://localhost:3000',
+    'https://codeforge-dyvj.onrender.com'
+  ],
   credentials: true
 }));
 app.use(session({
@@ -28,15 +31,11 @@ app.use(session({
   }),
   cookie: {
     httpOnly: true,
-    secure: true,
-    sameSite: 'lax',
+    secure: process.env.NODE_ENV === 'production',
+    sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
     maxAge: 2 * 24 * 60 * 60 * 1000
   }
 }));
-app.use((req, res, next) => {
-  console.log("SESSION DEBUG:", req.session);
-  next();
-});
 
 app.use("/", Router);
 
