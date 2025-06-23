@@ -15,7 +15,10 @@ app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors({
-  origin:'https://codeforge-dyvj.onrender.com',
+  origin: [
+    'http://localhost:3000',
+    'https://codeforge-dyvj.onrender.com'
+  ],
   credentials: true
 }));
 app.use(session({
@@ -37,6 +40,7 @@ app.use(session({
 
 app.use((req,res)=> {
   console.log('session',req.session)
+  next();
 })
 
 app.use("/", Router);
