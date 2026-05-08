@@ -20,12 +20,12 @@ app.use(cors({
 }));
 
 app.use(session({
-  secret: process.env.SECERT,
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: false,
   proxy: true,
   store: MongoStore.create({
-    mongoUrl: process.env.Database_URL,
+    mongoUrl: process.env.DATABASE_URL,
     ttl: 2 * 24 * 60 * 60 
   }),
   cookie: {
@@ -40,7 +40,7 @@ app.use("/", Router);
 
 mongoose
   .connect(
-    process.env.Database_URL,
+    process.env.DATABASE_URL
     { 
       useNewUrlParser: true, 
       useUnifiedTopology: true 
