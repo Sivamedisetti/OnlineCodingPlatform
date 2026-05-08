@@ -1,15 +1,13 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./UploadProblem.css";
 import { useNavigate } from "react-router-dom";
-import ReactQuill from 'react-quill';
-import 'react-quill/dist/quill.snow.css';
+import ReactQuill from "react-quill";
+import "react-quill/dist/quill.snow.css";
+import api from "../../config/api";
 
 function UploadProblem({ setIsAuthenticated }) {
-  const backendAPI = 'https://onlinecodingplatform.onrender.com';
-  // const backendAPI = 'http://localhost:8000';
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [constraints, setConstraints] = useState("");
@@ -28,24 +26,22 @@ function UploadProblem({ setIsAuthenticated }) {
     sample_input,
     sample_output,
     Topic_difficulty,
-    explaination
+    explaination,
   };
 
   const logout = () => {
-    localStorage.removeItem('isAuthenticated');
-    localStorage.removeItem('username');
-    localStorage.removeItem('access');
+    localStorage.removeItem("isAuthenticated");
+    localStorage.removeItem("username");
+    localStorage.removeItem("access");
     setIsAuthenticated(false);
-    navigate('/login');
-  }
+    navigate("/login");
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log('problemdetails',ProblemDetails)
-    axios
-      .post(`${backendAPI}/post_problem`, ProblemDetails, {
-        withCredentials: true
-      })
+    console.log("problemdetails", ProblemDetails);
+    api
+      .post("/post_problem", ProblemDetails)
       .then((response) => {
         if (response.status === 201) {
           toast.success("Problem uploaded successfully!", {
@@ -56,7 +52,7 @@ function UploadProblem({ setIsAuthenticated }) {
         setTitle("");
         setDescription("");
         setConstraints("");
-        setTestCases([{ input: "", output: "" }])
+        setTestCases([{ input: "", output: "" }]);
         setSample_input("");
         setSample_output("");
         setTopic_difficulty("Easy");
@@ -78,19 +74,17 @@ function UploadProblem({ setIsAuthenticated }) {
 
   const quillModules = {
     toolbar: [
-      [{ 'header': [1, 2, 3, false] }],
-      ['bold', 'italic', 'underline', 'strike'],
-      ['blockquote', 'code-block'],
-      [{ 'list': 'ordered' }, { 'list': 'bullet' }],
-      [{ 'indent': '-1' }, { 'indent': '+1' }],
-      [{ 'align': [] }],
-      [{ 'color': [] }, { 'background': [] }],
-      ['link', 'image', 'video'],
-      ['clean']
-    ]
+      [{ header: [1, 2, 3, false] }],
+      ["bold", "italic", "underline", "strike"],
+      ["blockquote", "code-block"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      [{ indent: "-1" }, { indent: "+1" }],
+      [{ align: [] }],
+      [{ color: [] }, { background: [] }],
+      ["link", "image", "video"],
+      ["clean"],
+    ],
   };
-
-
 
   return (
     <div className="upload-problem">
@@ -107,7 +101,11 @@ function UploadProblem({ setIsAuthenticated }) {
         </label>
         <label>
           Topic Difficulty:
-          <select className="difficulty" value={Topic_difficulty} onChange={(e) => setTopic_difficulty(e.target.value)}>
+          <select
+            className="difficulty"
+            value={Topic_difficulty}
+            onChange={(e) => setTopic_difficulty(e.target.value)}
+          >
             <option value="Easy">Easy</option>
             <option value="Medium">Medium</option>
             <option value="Hard">Hard</option>
@@ -121,7 +119,10 @@ function UploadProblem({ setIsAuthenticated }) {
               value={description}
               onChange={setDescription}
               modules={quillModules}
-              style={{ backgroundColor: "var(--color-background-light)", marginBottom: "1rem" }}
+              style={{
+                backgroundColor: "var(--color-background-light)",
+                marginBottom: "1rem",
+              }}
             />
           </label>
         </div>
@@ -158,7 +159,10 @@ function UploadProblem({ setIsAuthenticated }) {
               value={explaination}
               onChange={setExplaination}
               modules={quillModules}
-              style={{ backgroundColor: "var(--color-background-light)", marginBottom: "1rem" }}
+              style={{
+                backgroundColor: "var(--color-background-light)",
+                marginBottom: "1rem",
+              }}
             />
           </label>
         </div>
@@ -192,12 +196,11 @@ function UploadProblem({ setIsAuthenticated }) {
                 className="delete-button"
                 type="button"
                 onClick={() => {
-                  if(testCases.length >= 2){
+                  if (testCases.length >= 2) {
                     const updated = testCases.filter((_, i) => i !== index);
                     setTestCases(updated);
                   }
                 }}
-                
               >
                 ✖
               </button>
@@ -206,13 +209,17 @@ function UploadProblem({ setIsAuthenticated }) {
           <button
             type="button"
             className="Add-button"
-            onClick={() => setTestCases([...testCases, { input: "", output: "" }])}
+            onClick={() =>
+              setTestCases([...testCases, { input: "", output: "" }])
+            }
           >
             ➕ Add Test Case
           </button>
         </div>
 
-        <button className="btn" onClick={handleSubmit}>Upload Problem</button>
+        <button className="btn" onClick={handleSubmit}>
+          Upload Problem
+        </button>
       </form>
       <ToastContainer
         position="top-center"

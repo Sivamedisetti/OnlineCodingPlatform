@@ -1,114 +1,144 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
-import DataTable from 'react-data-table-component';
-import { ToastContainer, toast } from 'react-toastify';
-import './User.css'
-import deleted from '../../../assets/delete.png';
+import DataTable from "react-data-table-component";
+import { ToastContainer, toast } from "react-toastify";
+import "./User.css";
+import deleted from "../../../assets/delete.png";
+import api from "../../../config/api";
 
 const User = () => {
-    const backendAPI = 'https://onlinecodingplatform.onrender.com';
-  // const backendAPI = 'http://localhost:8000';
-    const [GetData, setGetData] = useState(undefined);
-    const [editId , setEditId] = useState(null);
+  const [GetData, setGetData] = useState(undefined);
+  const [editId, setEditId] = useState(null);
 
-    let columns = [
-        { name: 'S.No', selector: row => row.key, sortable: false, width: "200px" },
-        { name: 'User', selector: row => row.username, sortable: false, width: "200px" },
-        { name: 'Email', selector: row => row.email, sortable: false, width: "350px" },
-        {
-          name: 'Role',
-          cell: row => (
-            editId === row.userid ? (
-              <select
-                value={row.access}
-                onChange={(e) => handleRoleChange(row.userid, e.target.value)}
-                style={{ width: "100px", height: "30px" }}
-              >
-                <option value="user">user</option>
-                <option value="admin">admin</option>
-              </select>
-            ) : (
-              <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <span style={{ cursor: 'pointer' }} onClick={() => setEditId(row.userid)}>🖊️</span>
-                <p style={{ margin: 0 }}>{row.access}</p>
-              </div>
-            )
-          ),
-          width: "200px"
-        },
-        { name: 'Delete', 
-          selector: row => row.Delete, 
-          cell: row => 
-            <div>
-              {/* {console.log("delete : " + row._id + " = "+row.email)} */}
-              <img onClick={() => deleteuser(row._id , row.email)} src={deleted} alt="delete" style={{marginLeft: '10px' ,height: "17px", width: "17px", cursor: 'pointer'}}/>
-            </div>
-        }
-    ];
+  let columns = [
+    {
+      name: "S.No",
+      selector: (row) => row.key,
+      sortable: false,
+      width: "200px",
+    },
+    {
+      name: "User",
+      selector: (row) => row.username,
+      sortable: false,
+      width: "200px",
+    },
+    {
+      name: "Email",
+      selector: (row) => row.email,
+      sortable: false,
+      width: "350px",
+    },
+    {
+      name: "Role",
+      cell: (row) =>
+        editId === row.userid ? (
+          <select
+            value={row.access}
+            onChange={(e) => handleRoleChange(row.userid, e.target.value)}
+            style={{ width: "100px", height: "30px" }}
+          >
+            <option value="user">user</option>
+            <option value="admin">admin</option>
+          </select>
+        ) : (
+          <div style={{ display: "flex", alignItems: "center", gap: "5px" }}>
+            <span
+              style={{ cursor: "pointer" }}
+              onClick={() => setEditId(row.userid)}
+            >
+              🖊️
+            </span>
+            <p style={{ margin: 0 }}>{row.access}</p>
+          </div>
+        ),
+      width: "200px",
+    },
+    {
+      name: "Delete",
+      selector: (row) => row.Delete,
+      cell: (row) => (
+        <div>
+          {/* {console.log("delete : " + row._id + " = "+row.email)} */}
+          <img
+            onClick={() => deleteuser(row._id, row.email)}
+            src={deleted}
+            alt="delete"
+            style={{
+              marginLeft: "10px",
+              height: "17px",
+              width: "17px",
+              cursor: "pointer",
+            }}
+          />
+        </div>
+      ),
+    },
+  ];
 
-    function deleteuser(id , email){
-      axios.delete(`${backendAPI}/delete_user`,{ data: {id , email}})
-        .then(() => {
-          APICalling();
-          toast.success("Deleted Successfully")
-        })
-        .catch(err => {
-          console.error("Delete failed", err);
-          toast.error("Failed to delete problem");
-        });
-    }
+  function deleteuser(id, email) {
+    api
+      .delete("/delete_user", { data: { id, email } })
+      .then(() => {
+        APICalling();
+        toast.success("Deleted Successfully");
+      })
+      .catch((err) => {
+        console.error("Delete failed", err);
+        toast.error("Failed to delete problem");
+      });
+  }
 
-    function handleRoleChange(userid , role){
-      axios.put(`${backendAPI}/update_access`, { userid, role })
-      .then(res => {
+  function handleRoleChange(userid, role) {
+    api
+      .put("/update_access", { userid, role })
+      .then((res) => {
         toast.success("Role updated");
         APICalling();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
         toast.error("Failed to update role");
       });
-      setEditId(null)
-    }
+    setEditId(null);
+  }
 
-    const APICalling = () => {
-        axios
-          .get(`${backendAPI}/getUsers`)
-          .then((res) => {
-            res.data.forEach((ele, key) => {
-              ele.key = key + 1;
-            });
-            setGetData(res.data);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-    };
+  const APICalling = () => {
+    api
+      .get("/getUsers")
+      .then((res) => {
+        res.data.forEach((ele, key) => {
+          ele.key = key + 1;
+        });
+        setGetData(res.data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
-    useEffect(() => {
-        APICalling();
-    },[]);
+  useEffect(() => {
+    APICalling();
+  }, []);
 
-    return (
-        <div className="user-container">
-            <h1>Users</h1>
-            <DataTable columns={columns} data={GetData} 
-            />
+  return (
+    <div className="user-container">
+      <h1>Users</h1>
+      <DataTable columns={columns} data={GetData} />
 
-            <ToastContainer
-                position="top-center"
-                autoClose={2000}
-                hideProgressBar={false}
-                newestOnTop={false}
-                closeOnClick
-                rtl={false}
-                pauseOnFocusLoss
-                draggable
-                pauseOnHover
-                theme="light"
-            />
-        </div>
-    )
-}
+      <ToastContainer
+        position="top-center"
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </div>
+  );
+};
 
-export default User
+export default User;

@@ -1,20 +1,17 @@
 import React from "react";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
-import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
-import github from '../../assets/github.svg';
-import google from '../../assets/google.svg';
-import { googleLogin , githubLogin } from "./service";
+import github from "../../assets/github.svg";
+import google from "../../assets/google.svg";
+import { googleLogin, githubLogin } from "./service";
+import api from "../../config/api";
 
 function Signup({ onLogin }) {
-  const backendAPI = 'https://onlinecodingplatform.onrender.com';
-  // const backendAPI = 'http://localhost:8000';
-
   const [state, setState] = React.useState({
     email: "",
     password: "",
-    confirm_password: ""
+    confirm_password: "",
   });
 
   const navigate = useNavigate();
@@ -30,36 +27,36 @@ function Signup({ onLogin }) {
   const handleOnSubmit = async (evt) => {
     evt.preventDefault();
 
-    const { email, password , confirm_password } = state;
+    const { email, password, confirm_password } = state;
 
-    if(password === confirm_password) axios.post(`${backendAPI}/signup`, state)
-      .then((response) => { 
-        toast.success('registered successfully')
-      })
-      .catch((err) => {
-        if(err.response?.status === 400)
-        {
-          toast.error('The username already exists.')
-        }
-        else{
-          toast.error('unable to register.Please try again')
-        }
-      })
-      .finally(() => {
-        setState({
-          confirm_password: "",
-          email: "",
-          password: ""
+    if (password === confirm_password)
+      api
+        .post("/signup", state)
+        .then((response) => {
+          toast.success("registered successfully");
+        })
+        .catch((err) => {
+          if (err.response?.status === 400) {
+            toast.error("The username already exists.");
+          } else {
+            toast.error("unable to register.Please try again");
+          }
+        })
+        .finally(() => {
+          setState({
+            confirm_password: "",
+            email: "",
+            password: "",
+          });
         });
-      });
-    };
+  };
 
   return (
     <>
       <div className="form-container sign-up-container">
         <form onSubmit={handleOnSubmit} className="form">
           <h1 className="h1">Create Account</h1>
-          
+
           <input
             type="email"
             name="email"
@@ -87,15 +84,27 @@ function Signup({ onLogin }) {
             className="input"
             required
           />
-          <div className="social-button" style={{marginTop: '0.5rem'}}>
-            <button type="button" className="google" onClick={() => googleLogin(onLogin , navigate)}>
-              <img src={google} alt="google" className="social-img"/> &nbsp; Google
+          <div className="social-button" style={{ marginTop: "0.5rem" }}>
+            <button
+              type="button"
+              className="google"
+              onClick={() => googleLogin(onLogin, navigate)}
+            >
+              <img src={google} alt="google" className="social-img" /> &nbsp;
+              Google
             </button>
-            <button type="button" className="github" onClick={() => githubLogin(onLogin , navigate)}>
-              <img src={github} alt="github" className="social-img"/> &nbsp; Github
+            <button
+              type="button"
+              className="github"
+              onClick={() => githubLogin(onLogin, navigate)}
+            >
+              <img src={github} alt="github" className="social-img" /> &nbsp;
+              Github
             </button>
           </div>
-          <button type="submit" className="button">Sign Up</button>
+          <button type="submit" className="button">
+            Sign Up
+          </button>
         </form>
       </div>
 

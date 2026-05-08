@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import api from "../../config/api";
 import CodeEditor from "../CodingPlayground/Editor";
 import "./ProblemDetail.css";
 import CustomDropdown from "../CodingPlayground/DropDown";
 import { FaGear } from "react-icons/fa6";
 
 export default function ProblemDetail() {
-  const backendAPI = 'https://onlinecodingplatform.onrender.com';
-  // const backendAPI = 'http://localhost:8000'
-
   const [code, setCode] = useState(`# write python code here...
 print('Hello World!')`);
   const [input, setInput] = useState("");
@@ -21,7 +19,8 @@ print('Hello World!')`);
     const obj = sessionStorage.getItem("obj");
     const ob = JSON.parse(obj);
     if (obj) {
-      axios.get(`${backendAPI}/get_problemdata/${ob.id}`)
+      api
+        .get(`/get_problemdata/${ob.id}`)
         .then((response) => {
           setProblem(response.data);
         })
@@ -59,13 +58,14 @@ print('Hello World!')`);
 
     const test = problem.sample_output;
     const start = Date.now();
-    axios.post('https://emkc.org/api/v2/piston/execute', data)
-      .then(response => {
+    axios
+      .post("https://emkc.org/api/v2/piston/execute", data)
+      .then((response) => {
         const end = Date.now();
-        setOutput(response.data.run.output || 'TimeLimit Exceed');
+        setOutput(response.data.run.output || "TimeLimit Exceed");
         setExecutionTime((end - start) / 1000);
       })
-      .catch(error => {
+      .catch((error) => {
         setOutput(`Error: ${error.message}`);
       });
   };
@@ -81,24 +81,27 @@ print('Hello World!')`);
         files: [{ name: "main", content: code }],
         language: codelang,
         version: versions[codelang],
-        stdin: test.input
+        stdin: test.input,
       };
 
       const start = Date.now();
       try {
-        const res = await axios.post("https://emkc.org/api/v2/piston/execute", testData);
+        const res = await axios.post(
+          "https://emkc.org/api/v2/piston/execute",
+          testData,
+        );
         const end = Date.now();
         const actualOutput = res.data.run.output.trim();
         const expectedOutput = test.output.trim();
         results.push({
           passed: actualOutput === expectedOutput,
-          time: (end - start) / 1000
+          time: (end - start) / 1000,
         });
       } catch (err) {
         results.push({
           actual: err,
           passed: false,
-          time: 0
+          time: 0,
         });
       }
     }
@@ -114,8 +117,16 @@ print('Hello World!')`);
             <h1>{problem.title}</h1>
             <div dangerouslySetInnerHTML={{ __html: problem.description }} />
             <h3>Example:</h3>
-            <p><h4>Input</h4>{problem.sample_input}</p><br />
-            <p><h4>Output</h4>{problem.sample_output}</p><br />
+            <p>
+              <h4>Input</h4>
+              {problem.sample_input}
+            </p>
+            <br />
+            <p>
+              <h4>Output</h4>
+              {problem.sample_output}
+            </p>
+            <br />
             <div dangerouslySetInnerHTML={{ __html: problem.explaination }} />
             <h5>Execution Time : {problem.constraints / 1000}s</h5>
           </>
@@ -128,7 +139,11 @@ print('Hello World!')`);
         <div className="problem-detail-right-top">
           <div className="compiler-top-header">
             <div className="dropDown">
-              <CustomDropdown codelang={codelang} setCodelang={setCodelang} setCode={setCode} />
+              <CustomDropdown
+                codelang={codelang}
+                setCodelang={setCodelang}
+                setCode={setCode}
+              />
             </div>
             <div className="settings-icon">
               <FaGear className="gear-icon" />
@@ -138,8 +153,12 @@ print('Hello World!')`);
         </div>
 
         <div className="btn-group">
-          <button className="execute-btn" onClick={executeCode}>Execute</button>
-          <button className="execute-btn" onClick={runAllTestCases}>Run All Test Cases</button>
+          <button className="execute-btn" onClick={executeCode}>
+            Execute
+          </button>
+          <button className="execute-btn" onClick={runAllTestCases}>
+            Run All Test Cases
+          </button>
         </div>
 
         <div className="problem-detail-right-bottom">
@@ -155,17 +174,29 @@ print('Hello World!')`);
           <div className="output-container">
             <h2>Output</h2>
             <pre>{output}</pre>
-            {executionTime !== undefined && <p>Execution Time: {executionTime}s</p>}
+            {executionTime !== undefined && (
+              <p>Execution Time: {executionTime}s</p>
+            )}
           </div>
 
           {testResults.length > 0 && (
             <div className="testcase-results">
               <h2>Test Case Results</h2>
               {testResults.map((result, index) => (
-                <div key={index} className={`testcase-box ${result.passed ? "pass" : "fail"}`}>
-                  <p><strong>Test Case {index + 1}</strong></p>
-                  <p><strong>Status:</strong> {result.passed ? "✅ Passed" : "❌ Failed"}</p>
-                  <p><strong>Time:</strong> {result.time}s</p>
+                <div
+                  key={index}
+                  className={`testcase-box ${result.passed ? "pass" : "fail"}`}
+                >
+                  <p>
+                    <strong>Test Case {index + 1}</strong>
+                  </p>
+                  <p>
+                    <strong>Status:</strong>{" "}
+                    {result.passed ? "✅ Passed" : "❌ Failed"}
+                  </p>
+                  <p>
+                    <strong>Time:</strong> {result.time}s
+                  </p>
                 </div>
               ))}
             </div>
