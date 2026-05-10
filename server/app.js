@@ -16,7 +16,7 @@ app.set("trust proxy", 1);
 app.use(express.urlencoded({ extended: false }));
 app.use(
   cors({
-    origin: "https://codeforge-dyvj.onrender.com",
+    origin: [process.env.FRONTEND_URL, "http://localhost:3000"],
     credentials: true,
   }),
 );

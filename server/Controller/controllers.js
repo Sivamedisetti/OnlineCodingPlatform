@@ -274,6 +274,36 @@ const DeleteUser = async (req, res) => {
   }
 };
 
+const ExecuteCode = async (req, res) => {
+  const { script, language, versionIndex, stdin } = req.body;
+
+  if (!process.env.JDOODLE_CLIENT_ID || !process.env.JDOODLE_CLIENT_SECRET) {
+    return res.status(500).json({ error: "JDoodle credentials are not configured on the server" });
+  }
+
+  try {
+    const jdoodleResponse = await fetch("https://api.jdoodle.com/v1/execute", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        clientId: process.env.JDOODLE_CLIENT_ID,
+        clientSecret: process.env.JDOODLE_CLIENT_SECRET,
+        script,
+        language,
+        versionIndex: versionIndex || "0",
+        stdin: stdin || "",
+      }),
+    });
+
+    const data = await jdoodleResponse.json();
+    return res.status(jdoodleResponse.status).json(data);
+  } catch (error) {
+    return res.status(500).json({ error: error.message });
+  }
+};
+
 
 module.exports = {
     GetAllProblems,
@@ -287,5 +317,6 @@ module.exports = {
     GetAllUsers,
     UpdateAccess,
     DeleteUser,
-    Social
+    Social,
+    ExecuteCode
 }
