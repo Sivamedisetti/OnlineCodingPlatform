@@ -10,47 +10,43 @@ print('Hello World!')`);
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
   const [executionTime, setExecutionTime] = useState(0);
- 
-  const data = {
-    language: "",
-    version: "",
-    files: [
-      {
-        name: "my_cool_code.js",
-        content: code,
-      },
-    ],
-    stdin: "",
-    args: ["1", "2", "3"],
-    compile_timeout: 10000,
-    run_timeout: 3000,
-    compile_memory_limit: -1,
-    run_memory_limit: -1,
-  };
-  // console.log(data)
+
   const [codelang , setCodelang] = useState('python');
 
-  const versions = {
-    python: '3.10.0',
-    cpp: '10.2.0',
-    c: '10.2.0',
-    java: '15.0.2'
+  const jdoodleLanguages = {
+    python: 'python3',
+    cpp: 'cpp17',
+    c: 'c',
+    java: 'java'
   };
+
   const executeCode = () => {
-    data.files[0].content = code;
-    data.language = codelang;
-    data.version = versions[codelang];
-    data.stdin = input;
+    if (!process.env.REACT_APP_JDOODLE_CLIENT_ID || !process.env.REACT_APP_JDOODLE_CLIENT_SECRET) {
+      setOutput('Error: JDoodle client ID or client secret is missing.');
+      return;
+    }
+
+    const data = {
+      clientId: process.env.REACT_APP_JDOODLE_CLIENT_ID,
+      clientSecret: process.env.REACT_APP_JDOODLE_CLIENT_SECRET,
+      script: code,
+      language: jdoodleLanguages[codelang],
+      versionIndex: '0',
+      stdin: input
+    };
 
     const start = Date.now(); // Upto 283 iterations
-    axios.post('https://emkc.org/api/v2/piston/execute', data , /*{timeout: 3*(runtime + compiletime)}*/)
+    axios.post('https://api.jdoodle.com/v1/execute', data)
       .then(response => {
         const end = Date.now();
-        setOutput(response.data.run.output);
-        setExecutionTime((end - start)/1000);
+        const result = response.data;
+        const displayOutput = result.error || result.output || result.compilationStatus || '';
+
+        setOutput(displayOutput);
+        setExecutionTime(result.cpuTime || ((end - start) / 1000));
       })
       .catch(error => {
-        setOutput(`Error: ${error.message}`);
+        setOutput(`Error: ${error.response?.data?.error || error.message}`);
       });
   };
 
