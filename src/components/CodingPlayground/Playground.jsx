@@ -20,7 +20,7 @@ print('Hello World!')`);
     java: 'java'
   };
 
-  const executeCode = () => {
+  const executeCode = async () => {
     const data = {
       script: code,
       language: jdoodleLanguages[codelang],
@@ -29,18 +29,29 @@ print('Hello World!')`);
     };
 
     const start = Date.now(); // Upto 283 iterations
-    api.post('/execute_code', data)
-      .then(response => {
-        const end = Date.now();
-        const result = response.data;
-        const displayOutput = result.error || result.output || result.compilationStatus || '';
+    setOutput('Running...');
+    setExecutionTime(0);
 
-        setOutput(displayOutput);
-        setExecutionTime(result.cpuTime || ((end - start) / 1000));
-      })
-      .catch(error => {
-        setOutput(`Error: ${error.response?.data?.error || error.message}`);
+    try {
+      const response = await api.post('/execute_code', data, {
+        withCredentials: false,
       });
+      const end = Date.now();
+      const result = response.data;
+      console.log('Execution response:', result);
+
+      const displayOutput =
+        result.output ??
+        result.error ??
+        result.compilationStatus ??
+        JSON.stringify(result, null, 2);
+
+      setOutput(String(displayOutput));
+      setExecutionTime(result.cpuTime || ((end - start) / 1000));
+    } catch (error) {
+      console.error('Execution error:', error.response?.data || error.message);
+      setOutput(`Error: ${error.response?.data?.error || error.message}`);
+    }
   };
 
   return (

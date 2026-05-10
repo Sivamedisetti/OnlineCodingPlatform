@@ -14,10 +14,28 @@ const server = http.createServer(app);
 app.use(cookieParser());
 app.set("trust proxy", 1);
 app.use(express.urlencoded({ extended: false }));
+
+const allowedOrigins = [
+  "http://localhost:3000",
+  "https://codeforge-dyvj.onrender.com",
+  ...(process.env.FRONTEND_URL || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean),
+];
+
 app.use(
   cors({
-    origin: [process.env.FRONTEND_URL, "http://localhost:3000"],
+    origin(origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        return callback(null, true);
+      }
+
+      return callback(new Error(`CORS blocked origin: ${origin}`));
+    },
     credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
   }),
 );
 
