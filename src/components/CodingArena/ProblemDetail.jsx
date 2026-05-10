@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import api from "../../config/api";
 import CodeEditor from "../CodingPlayground/Editor";
 import "./ProblemDetail.css";
@@ -31,43 +30,48 @@ print('Hello World!')`);
   }, []);
 
   const [codelang, setCodelang] = useState("python");
-  const versions = {
-    python: "3.10.0",
-    cpp: "10.2.0",
-    c: "10.2.0",
-    java: "15.0.2",
+  const jdoodleLanguages = {
+    python: "python3",
+    cpp: "cpp17",
+    c: "c",
+    java: "java",
   };
 
-  const data = {
-    language: "",
-    version: "",
-    files: [{ name: "main", content: code }],
-    stdin: "",
-    args: [],
-    compile_timeout: 600000,
-    run_timeout: 600000,
-    compile_memory_limit: -1,
-    run_memory_limit: -1,
+  const getExecutionOutput = (result) => {
+    return (
+      result.output ??
+      result.error ??
+      result.compilationStatus ??
+      JSON.stringify(result, null, 2)
+    );
   };
 
-  const executeCode = () => {
-    data.files[0].content = code;
-    data.language = codelang;
-    data.version = versions[codelang];
-    data.stdin = input;
+  const executeCode = async () => {
+    const data = {
+      script: code,
+      language: jdoodleLanguages[codelang],
+      versionIndex: "0",
+      stdin: input,
+    };
 
-    const test = problem.sample_output;
     const start = Date.now();
-    axios
-      .post("https://emkc.org/api/v2/piston/execute", data)
-      .then((response) => {
-        const end = Date.now();
-        setOutput(response.data.run.output || "TimeLimit Exceed");
-        setExecutionTime((end - start) / 1000);
-      })
-      .catch((error) => {
-        setOutput(`Error: ${error.message}`);
+    setOutput("Running...");
+    setExecutionTime(0);
+
+    try {
+      const response = await api.post("/execute_code", data, {
+        withCredentials: true,
       });
+      const end = Date.now();
+      const result = response.data;
+      console.log("Execution response:", result);
+
+      setOutput(String(getExecutionOutput(result)));
+      setExecutionTime(result.cpuTime || (end - start) / 1000);
+    } catch (error) {
+      console.error("Execution error:", error.response?.data || error.message);
+      setOutput(`Error: ${error.response?.data?.error || error.message}`);
+    }
   };
 
   const runAllTestCases = async () => {
@@ -77,22 +81,20 @@ print('Hello World!')`);
     for (let i = 0; i < problem.test_cases.length; i++) {
       const test = problem.test_cases[i];
       const testData = {
-        ...data,
-        files: [{ name: "main", content: code }],
-        language: codelang,
-        version: versions[codelang],
+        script: code,
+        language: jdoodleLanguages[codelang],
+        versionIndex: "0",
         stdin: test.input,
       };
 
       const start = Date.now();
       try {
-        const res = await axios.post(
-          "https://emkc.org/api/v2/piston/execute",
-          testData,
-        );
+        const res = await api.post("/execute_code", testData, {
+          withCredentials: true,
+        });
         const end = Date.now();
-        const actualOutput = res.data.run.output.trim();
-        const expectedOutput = test.output.trim();
+        const actualOutput = String(getExecutionOutput(res.data)).trim();
+        const expectedOutput = String(test.output).trim();
         results.push({
           passed: actualOutput === expectedOutput,
           time: (end - start) / 1000,
