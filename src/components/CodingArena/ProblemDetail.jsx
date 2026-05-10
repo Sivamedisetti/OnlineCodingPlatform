@@ -4,6 +4,7 @@ import CodeEditor from "../CodingPlayground/Editor";
 import "./ProblemDetail.css";
 import CustomDropdown from "../CodingPlayground/DropDown";
 import { FaGear } from "react-icons/fa6";
+import { useParams } from "react-router-dom";
 
 export default function ProblemDetail() {
   const [code, setCode] = useState(`# write python code here...
@@ -14,20 +15,18 @@ print('Hello World!')`);
   const [executionTime, setExecutionTime] = useState(0);
   const [testResults, setTestResults] = useState([]);
 
+  const { id } = useParams();
+
   useEffect(() => {
-    const obj = sessionStorage.getItem("obj");
-    const ob = JSON.parse(obj);
-    if (obj) {
-      api
-        .get(`/get_problemdata/${ob.id}`)
-        .then((response) => {
-          setProblem(response.data);
-        })
-        .catch((error) => {
-          console.error("Error fetching problem details:", error);
-        });
-    }
-  }, []);
+    api
+      .get(`/get_problemdata/${id}`)
+      .then((response) => {
+        setProblem(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching problem details:", error);
+      });
+  }, [id]);
 
   const [codelang, setCodelang] = useState("python");
   const jdoodleLanguages = {

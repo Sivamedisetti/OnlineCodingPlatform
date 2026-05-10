@@ -57,7 +57,8 @@ function App() {
               <Route path="/home" element={<Navigate to="/" />} />
               <Route path="/playground" element={<Playground />} />
               <Route path="/arena" element={<Arena />} />
-              <Route path="/problemDetail" element={<ProblemDetail />} />
+              <Route path="/problemDetail/:id" element={<ProblemDetail />} />
+
               <Route
                 path="/uploadProblem"
                 element={

@@ -36,7 +36,7 @@ function Arena() {
       width: "200px",
     },
     {
-      name: "Slove",
+      name: "Solve",
       selector: (row) => row.URL,
       sortable: false,
       width: "200px",
@@ -83,10 +83,8 @@ function Arena() {
     }
   };
 
-  function changeId(val) {
-    myIdObj.id = val;
-    sessionStorage.setItem("obj", JSON.stringify(myIdObj));
-    navigate("/ProblemDetail");
+  function changeId(id) {
+    navigate(`/ProblemDetail/${id}`);
   }
 
   const [GetData, setGetData] = useState(undefined);

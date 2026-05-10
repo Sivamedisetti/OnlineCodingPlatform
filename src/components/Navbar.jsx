@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { Link , useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import "./Navbar.css";
-import profile from "../assets/profile.svg"
+import profile from "../assets/profile.svg";
 
 function Navbar({ onLogout }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeLink, setActiveLink] = useState("/");
-  const [isvisible , setIsvisible] = useState(false);
-  
+  const [isvisible, setIsvisible] = useState(false);
+
   const toggleMenu = () => setIsOpen(!isOpen);
-  const islogin = localStorage.getItem('isAuthenticated');
+  const islogin = localStorage.getItem("isAuthenticated");
   const navigate = useNavigate();
 
   const handleLinkClick = (path) => {
@@ -21,15 +21,24 @@ function Navbar({ onLogout }) {
     <>
       <nav className="navbar">
         <div className="navbar-brand">
-          <span className="navbar-toggle" onClick={toggleMenu}>☰</span>
-          <Link to="/" className="navbar-tittle" onClick={() => handleLinkClick("/")}> 
+          <span className="navbar-toggle" onClick={toggleMenu}>
+            ☰
+          </span>
+          <Link
+            to="/"
+            className="navbar-tittle"
+            onClick={() => handleLinkClick("/")}
+          >
             <h1>CodeForge</h1>
           </Link>
         </div>
         <ul className={`nav-links ${isOpen ? "open" : ""}`}>
           <li>
             <Link
-              to="/arena" className={`nav-link ${activeLink === "/arena" ? "active" : ""}`} onClick={() => handleLinkClick("/arena")}>
+              to="/arena"
+              className={`nav-link ${activeLink === "/arena" ? "active" : ""}`}
+              onClick={() => handleLinkClick("/arena")}
+            >
               <p>Coding Arena</p>
             </Link>
           </li>
@@ -42,15 +51,17 @@ function Navbar({ onLogout }) {
               <p>Compiler</p>
             </Link>
           </li>
-          {/* {
-            localStorage.getItem('access') === '"admin"' && 
+          {localStorage.getItem("access") === '"admin"' && (
             <li>
               <Link
-                to="/request" className={`nav-link ${activeLink === "/request" ? "active" : ""}`} onClick={() => handleLinkClick("/request")}>
+                to="/request"
+                className={`nav-link ${activeLink === "/request" ? "active" : ""}`}
+                onClick={() => handleLinkClick("/request")}
+              >
                 <p>Request</p>
               </Link>
             </li>
-          } */}
+          )}
           <li>
             <Link
               to="/uploadProblem"
@@ -61,14 +72,25 @@ function Navbar({ onLogout }) {
             </Link>
           </li>
           <li>
-            <a style={{ textDecoration: 'none', cursor: 'pointer' }} className={!islogin && `nav-link ${activeLink === "" ? "active" : ""}`}>
-              {
-                islogin ? 
-                  <img src={profile} alt="profile" style={{cursor: "pointer"}} onClick={() => {setIsvisible(!isvisible)}}/> : 
-                  <span onClick={() => navigate('/login')}>Login</span>
+            <a
+              style={{ textDecoration: "none", cursor: "pointer" }}
+              className={
+                !islogin && `nav-link ${activeLink === "" ? "active" : ""}`
               }
+            >
+              {islogin ? (
+                <img
+                  src={profile}
+                  alt="profile"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => {
+                    setIsvisible(!isvisible);
+                  }}
+                />
+              ) : (
+                <span onClick={() => navigate("/login")}>Login</span>
+              )}
             </a>
-            
           </li>
         </ul>
       </nav>
@@ -76,9 +98,34 @@ function Navbar({ onLogout }) {
         <div className="profile-overlay">
           <ul>
             <li className="profile-option">Profile</li>
-            <li className="profile-option" onClick={() => {setIsvisible(!isvisible); navigate('/request')}}>Requests</li>
-            <li className="profile-option" onClick={() => {setIsvisible(!isvisible); navigate('/users')}}> Users</li>
-            <li className="profile-option" onClick={()=> {setIsvisible(!isvisible); islogin ? onLogout() :  navigate('/login')}}>Logout</li>
+            <li
+              className="profile-option"
+              onClick={() => {
+                setIsvisible(!isvisible);
+                navigate("/request");
+              }}
+            >
+              Requests
+            </li>
+            <li
+              className="profile-option"
+              onClick={() => {
+                setIsvisible(!isvisible);
+                navigate("/users");
+              }}
+            >
+              {" "}
+              Users
+            </li>
+            <li
+              className="profile-option"
+              onClick={() => {
+                setIsvisible(!isvisible);
+                islogin ? onLogout() : navigate("/login");
+              }}
+            >
+              Logout
+            </li>
           </ul>
         </div>
       )}
