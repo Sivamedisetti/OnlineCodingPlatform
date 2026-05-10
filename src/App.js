@@ -19,6 +19,7 @@ import Forgot from "./components/loginForm/forgot/Forgot";
 import "./styles/variables.css";
 import "./App.css";
 import User from "./components/CodingArena/Users/User";
+import { appSpecLog } from "./config/buildInfo";
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = React.useState(
@@ -26,6 +27,10 @@ function App() {
   );
 
   const navigate = useNavigate();
+
+  React.useEffect(() => {
+    console.info(appSpecLog);
+  }, []);
 
   // Function to handle logout
   const handleLogout = () => {
